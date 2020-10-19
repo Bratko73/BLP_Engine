@@ -1,5 +1,7 @@
 #include <iostream>
-void Superreturn()
+
+template<class T>
+T Superreturn(T s)
 {
-	return 0;
+	return s;
 }
