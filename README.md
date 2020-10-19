@@ -12,6 +12,7 @@ This project was created in order to pass the discipline of applied programming 
 **What are we going to do?**
 ------------------
 Based on the SFML graphics library, create an engine that makes it easier to create games like Mario, Undertale, Deltarune, etc.
+
 **Trello**
 ------------------
 https://trello.com/b/wgXnBs5T/stankintalebmlaps-engine
