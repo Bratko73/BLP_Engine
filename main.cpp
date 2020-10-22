@@ -7,6 +7,7 @@ int main()
     sf::CircleShape shape2(50.f);
     shape.setFillColor(sf::Color::Red);
 
+
     while (window.isOpen())
     {
         sf::Event event;
