@@ -8,7 +8,9 @@ private:
 	bool down_pressed;
 	bool upper_pressed;
 
-	float dx, dy;
+	bool gravitationCheck; //в будующем планируется сделать массив со всеми остальными параметрами
+	float dx;
+	float dy;
 	sf::FloatRect rect;
 	bool onGround;
 	sf::Sprite sprite;
@@ -16,10 +18,11 @@ private:
 	//Необходима доработка класса, данная часть кода - набросок.
 public:
 	Person();
-	Person(sf::Texture& image);
-	void moveright();
-	void moveleft();
-	//void movedown();
+	Person(std::string pathToFile);
+	void moveRight();
+	void moveLeft();
+	void moveDown();
+	void moveUp();
 	void Jump();
 	void update(float time);
 	void Collision(int flag);

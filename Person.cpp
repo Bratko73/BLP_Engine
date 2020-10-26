@@ -4,26 +4,31 @@ Person::Person()
 {
 }
 
-Person::Person(sf::Texture& image)
+Person::Person(std::string pathToFile)
 {
-	sprite.setTexture(image);
-	//ещё сюда можно задать текущее положение и текущий кадр, если это не нарушает абстракцию)
+	sf::Texture texture;
+	texture.loadFromFile(pathToFile);
 }
 
-void Person::moveright()
+void Person::moveRight()
 {
 	Person::dx = 0.1;
 }
 
-void Person::moveleft()
+void Person::moveLeft()
 {
 	Person::dx = -0.1;
 }
 
-//void Person::movedown()
-//{
-//	down_pressed = true;
-//}
+void Person::moveDown()
+{
+	Person::dy = 0.1;
+}
+
+void Person::moveUp()
+{
+	Person::dy = -0.1;
+}
 
 void Person::Jump()
 {
@@ -38,8 +43,10 @@ void Person::update(float time)
 	rect.left += dx * time;
 	Collision(0);
 
-	if (!onGround) 
-		dy = dy + 0.0005 * time;
+	if (!gravitationCheck) {
+		if (!onGround)
+			dy = dy + 0.0005 * time;
+	}
 
 	rect.top += dy * time;
 	onGround = false;
@@ -54,8 +61,12 @@ void Person::update(float time)
 	if (dx < 0) 
 		sprite.setTextureRect(sf::IntRect(1 * int(currentFrame) + 1, 1, -1, 1));  //размер персонажа пока неизвестен
 
-	sprite.setPosition(rect.left - offsetX, rect.top - offsetY);
+	sprite.setPosition(rect.left, rect.top);
+
 	dx = 0;
+
+	if (gravitationCheck)
+		dy = 0;
 }
 
 
