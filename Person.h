@@ -10,7 +10,6 @@ private:
 	sf::FloatRect rect;
 	bool onGround;
 	sf::Sprite sprite;
-	float currentFrame;
 	//Необходима доработка класса, данная часть кода - набросок.
 public:
 	Person();

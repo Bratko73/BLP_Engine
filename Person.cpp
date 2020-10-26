@@ -50,16 +50,10 @@ void Person::update(float time)
 
 	rect.top += dy * time;
 	onGround = false;
-
 	Collision(1);
 
-	currentFrame += 0.005 * time;
-	if (currentFrame > 6) currentFrame -= 6;
-
 	if (dx > 0) 
-		sprite.setTextureRect(sf::IntRect(1 * int(currentFrame), 1, 1, 1));       //размер персонажа пока неизвестен
-	if (dx < 0) 
-		sprite.setTextureRect(sf::IntRect(1 * int(currentFrame) + 1, 1, -1, 1));  //размер персонажа пока неизвестен
+		sprite.setTextureRect(sf::IntRect(1, 1, 1, 1));       //размер персонажа пока неизвестен
 
 	sprite.setPosition(rect.left, rect.top);
 
