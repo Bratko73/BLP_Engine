@@ -58,6 +58,8 @@ void Person::update(float time)
 	dx = 0;
 }
 
+
+// пока не добавили модуль коллизий пусть лежит тут
 void Person::Collision(int flag)
 {
 	for (int i = rect.top / 32; i < (rect.top + rect.height) / 32; i++)
