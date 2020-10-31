@@ -10,62 +10,49 @@ Person::Person(std::string pathToFile)
 	texture.loadFromFile(pathToFile);
 }
 
-void Person::moveRight()
+void Person::move()
 {
-	Person::dx = 0.1;
-}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		coordinates.x = -0.1;
 
-void Person::moveLeft()
-{
-	Person::dx = -0.1;
-}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		coordinates.x = 0.1;
 
-void Person::moveDown()
-{
-	Person::dy = 0.1;
-}
-
-void Person::moveUp()
-{
-	Person::dy = -0.1;
-}
-
-void Person::Jump()
-{
-	if (Person::onGround) { 
-		Person::dy = -0.35; 
-		Person::onGround = false; 
-	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (onGround) {
+			coordinates.y = -0.27;
+			onGround = false;
+		}
 }
 
 void Person::update(float time)
 {
-	rect.left += dx * time;
-	Collision(0);
+	rect.left += coordinates.x * time;
+	//Collision(0);
 
 	if (!gravitationCheck) {
 		if (!onGround)
-			dy = dy + 0.0005 * time;
+			coordinates.y = coordinates.y + 0.0005 * time;
 	}
 
-	rect.top += dy * time;
+	rect.top += coordinates.y * time;
 	onGround = false;
-	Collision(1);
+	//Collision(1);
 
-	if (dx > 0) 
+	if (coordinates.x > 0)
 		sprite.setTextureRect(sf::IntRect(1, 1, 1, 1));       //размер персонажа пока неизвестен
 
 	sprite.setPosition(rect.left, rect.top);
 
-	dx = 0;
+	coordinates.x = 0;
 
 	if (gravitationCheck)
-		dy = 0;
+		coordinates.y = 0;
 }
 
 
 // пока не добавили модуль коллизий пусть лежит тут
-void Person::Collision(int flag)
+/*void Person::Collision(int flag)
 {
 	for (int i = rect.top / 32; i < (rect.top + rect.height) / 32; i++)
 		for (int j = rect.left / 32; j < (rect.left + rect.width) / 32; j++)
@@ -87,4 +74,4 @@ void Person::Collision(int flag)
 				}
 			}
 		}
-}
+}*/
