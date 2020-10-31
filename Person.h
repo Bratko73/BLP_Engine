@@ -22,7 +22,6 @@ public:
 	void Jump();
 	void update(float time);
 	// пока не добавили модуль коллизий пусть лежит тут
-	void Collision(int flag);
-	//подумать самим или спросить преподователя, про то, где должна лежать Collision
+	//void Collision(int flag);
 };
 
