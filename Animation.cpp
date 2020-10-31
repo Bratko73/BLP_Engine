@@ -1,6 +1,7 @@
 #include "Animation.h"
 #include<SFML/Graphics/Image.hpp>
-Animation::Animation(std::string pathToFile)
+
+/*Animation::Animation(std::string pathToFile)
 {
 	currentFrame = 0;
 	sf::Texture texture;
@@ -10,7 +11,7 @@ Animation::Animation(std::string pathToFile)
 
 void Animation::setFrameSize(sf::Vector2i size)
 {
-}
+}*/
 
 
 
