@@ -28,7 +28,6 @@ void Person::move()
 void Person::update(float time)
 {
 	rect.left += coordinates.x * time;
-	//Collision(0);
 
 	if (!gravitationCheck) {
 		if (!onGround)
@@ -37,7 +36,6 @@ void Person::update(float time)
 
 	rect.top += coordinates.y * time;
 	onGround = false;
-	//Collision(1);
 
 	if (coordinates.x > 0)
 		sprite.setTextureRect(sf::IntRect(1, 1, 1, 1));       //размер персонажа пока неизвестен
