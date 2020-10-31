@@ -1,4 +1,5 @@
 #include "SFML/include/SFML/Graphics.hpp"
+#include "Tile.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
@@ -20,6 +21,6 @@ int main()
         window.draw(shape2);
         window.display();
     }
-
+ 
     return 0;
 }
