@@ -21,6 +21,6 @@ int main()
         window.draw(shape2);
         window.display();
     }
- 
+   
     return 0;
 }
