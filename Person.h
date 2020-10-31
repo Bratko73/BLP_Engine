@@ -5,8 +5,7 @@ class Person
 {
 private:
 	bool gravitationCheck; //в будующем планируется сделать массив со всеми остальными параметрами
-	float dx;
-	float dy;
+	sf::Vector2f coordinates;
 	sf::FloatRect rect;
 	bool onGround;
 	sf::Sprite sprite;
@@ -14,15 +13,9 @@ private:
 public:
 	Person();
 	Person(std::string pathToFile);
-	// в каждый метод движения будет передаваться разрешённость этого движения
-	void moveRight();
-	void moveLeft();
-	void moveDown();
-	void moveUp();
-	void Jump();
+	void move();
 	void update(float time);
 	// пока не добавили модуль коллизий пусть лежит тут
-	void Collision(int flag);
-	//подумать самим или спросить преподователя, про то, где должна лежать Collision
+	//void Collision(int flag);
 };
 
