@@ -2,10 +2,19 @@
 #include<SFML/Graphics/Image.hpp>
 Animation::Animation(std::string pathToFile)
 {
+	currentFrame = 0;
 	sf::Texture texture;
 	texture.loadFromFile(pathToFile);
 	sprite.setTexture(texture);
 
+}
+
+void Animation::setCountOfFrames(Direction, int count)
+{
+}
+
+void Animation::setFirstFrameCoordinates(Direction, sf::Vector2f coordinates)
+{
 }
 
 void Animation::update(Direction, float time)
