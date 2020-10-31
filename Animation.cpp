@@ -6,20 +6,18 @@ Animation::Animation(std::string pathToFile)
 	sf::Texture texture;
 	texture.loadFromFile(pathToFile);
 	sprite.setTexture(texture);
-
 }
 
-void Animation::setCountOfFrames(Direction, int count)
+void Animation::setFrameSize(sf::Vector2i size)
 {
 }
 
-void Animation::setFirstFrameCoordinates(Direction, sf::Vector2f coordinates)
-{
-}
 
-void Animation::update(Direction, float time)
+
+
+/*void Animation::update(Direction, float time)
 {
-/*	if (LEFT) {
+	if (LEFT) {
 		p.dir = 1; p.speed = 0.1;//dir =1 - направление вверх, speed =0.1 - скорость движения. Заметьте - время мы уже здесь ни на что не умножаем и нигде не используем каждый раз
 		currentFrame += 0.005 * time;
 		if (currentFrame > 3) currentFrame -= 3;
@@ -47,5 +45,5 @@ void Animation::update(Direction, float time)
 		if (currentFrame > 3) currentFrame -= 3; //проходимся по кадрам с первого по третий включительно. если пришли к третьему кадру - откидываемся назад.
 		p.sprite.setTextureRect(sf::IntRect(96 * int(currentFrame), 0, 96, 96)); //проходимся по координатам Х. получается 96,96*2,96*3 и опять 96
 
-	}*/
-}
+	}
+} */
