@@ -1,26 +1,90 @@
 #include "Person.h"
 
-void Person::moveright()
+Person::Person()
 {
-	right_pressed = true;
 }
 
-void Person::moveleft()
+Person::Person(std::string pathToFile)
 {
-	left_pressed = true;
+	sf::Texture texture;
+	texture.loadFromFile(pathToFile);
 }
 
-void Person::movedown()
+void Person::moveRight()
 {
-	down_pressed = true;
+	Person::dx = 0.1;
 }
 
-void Person::moveupper()
+void Person::moveLeft()
 {
-	upper_pressed = true;
+	Person::dx = -0.1;
 }
 
-void Person::update()
+void Person::moveDown()
 {
-	// необходимо написать функцию задания позиции.
+	Person::dy = 0.1;
+}
+
+void Person::moveUp()
+{
+	Person::dy = -0.1;
+}
+
+void Person::Jump()
+{
+	if (Person::onGround) { 
+		Person::dy = -0.35; 
+		Person::onGround = false; 
+	}
+}
+
+void Person::update(float time)
+{
+	rect.left += dx * time;
+	Collision(0);
+
+	if (!gravitationCheck) {
+		if (!onGround)
+			dy = dy + 0.0005 * time;
+	}
+
+	rect.top += dy * time;
+	onGround = false;
+	Collision(1);
+
+	if (dx > 0) 
+		sprite.setTextureRect(sf::IntRect(1, 1, 1, 1));       //размер персонажа пока неизвестен
+
+	sprite.setPosition(rect.left, rect.top);
+
+	dx = 0;
+
+	if (gravitationCheck)
+		dy = 0;
+}
+
+
+// пока не добавили модуль коллизий пусть лежит тут
+void Person::Collision(int flag)
+{
+	for (int i = rect.top / 32; i < (rect.top + rect.height) / 32; i++)
+		for (int j = rect.left / 32; j < (rect.left + rect.width) / 32; j++)
+		{
+			if (Map[i][j] == '|') //стена 
+			{
+				if ((dx > 0) && (flag == 0)) 
+					rect.left = j * 32 - rect.width;
+				if ((dx < 0) && (flag == 0)) 
+					rect.left = j * 32 + 32;
+				if ((dy > 0) && (flag == 1)) { 
+					rect.top = i * 32 - rect.height;  
+					dy = 0;   
+					onGround = true; 
+				}
+				if ((dy < 0) && (flag == 1)) { 
+					rect.top = i * 32 + 32;   
+					dy = 0; 
+				}
+			}
+		}
 }
