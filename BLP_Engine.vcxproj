@@ -155,12 +155,12 @@
     <ClCompile Include="main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Person.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="Person.h" />
   </ItemGroup>
   <ItemGroup>
