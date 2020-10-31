@@ -1,7 +1,7 @@
 #pragma once
 class Person
 {
-private:
+protected:
 	bool left_pressed;
 	bool right_pressed;
 	bool down_pressed;
