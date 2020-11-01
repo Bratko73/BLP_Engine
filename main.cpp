@@ -1,6 +1,8 @@
 #include "SFML/include/SFML/Graphics.hpp"
 #include "Tile.h"
 #include "Animation.h"
+#include"Person.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
@@ -16,6 +18,9 @@ int main()
     Animation Megaman("D:/Git/BLP_Engine/Sourse/MEGAMAN.png");
     Megaman.setAnimationParametres(sf::Vector2i(37, 40), sf::Vector2i(0, 50), 8, 0.001);
     Megaman.setPosition(0, 45);
+
+    Person player("Ваша реклама(путь к картинке");
+
     sf::Clock clock;
     int move = 0;
     while (window.isOpen())
@@ -35,10 +40,18 @@ int main()
         move += 0.5;
         anim2.mirrorUpdate(time);
         Megaman.update(time);
+
+        player.move();
+        player.update(time);
+        if (player.getRectLeft() > 200/2)
+            player.setOffsetX(player.getRectLeft - 200 / 2);
+
+
         window.clear();
         window.draw(anim.getSprite());
         window.draw(anim2.getSprite());
         window.draw(Megaman.getSprite());
+        window.draw(player.getSprite());
         window.display();
     }
    

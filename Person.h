@@ -22,6 +22,8 @@ public:
 	float getOffsetX();
 	float getOffsetY();
 	void setOffsetX(float x);
+	float getRectLeft();
+	sf::Sprite getSprite();
 	// пока не добавили модуль коллизий пусть лежит тут
 	//void Collision(int flag);
 };

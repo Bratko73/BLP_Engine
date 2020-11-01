@@ -81,6 +81,16 @@ void Person::setOffsetX(float x)
 	offset.x = x;
 }
 
+float Person::getRectLeft()
+{
+	return rect.left;
+}
+
+sf::Sprite Person::getSprite()
+{
+	return sprite;
+}
+
 
 // пока не добавили модуль коллизий пусть лежит тут
 /*void Person::Collision(int flag)
