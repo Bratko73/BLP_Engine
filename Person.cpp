@@ -2,6 +2,12 @@
 
 Person::Person()
 {
+	//надо инициализировать animation
+	offset.x = 0;
+	offset.y = 0;
+	//rect = sf::FloatRect(100, 180, 16, 16); //пока не знаем размеры(а надо бы)
+	coordinates.x = 0.1;
+	coordinates.y = 0.1;
 }
 
 Person::Person(std::string pathToFile)
@@ -29,23 +35,50 @@ void Person::update(float time)
 {
 	rect.left += coordinates.x * time;
 
-	if (!gravitationCheck) {
-		if (!onGround)
-			coordinates.y = coordinates.y + 0.0005 * time;
-	}
+	if (!onGround)
+		coordinates.y = coordinates.y + 0.0005 * time;
 
 	rect.top += coordinates.y * time;
 	onGround = false;
 
-	if (coordinates.x > 0)
-		sprite.setTextureRect(sf::IntRect(1, 1, 1, 1));       //размер персонажа пока неизвестен
+	/*currentFrame += time * 0.005;
+		if (currentFrame > 3)
+			currentFrame -= 3;*/ 
 
-	sprite.setPosition(rect.left, rect.top);
+	/*if (coordinates.x > 0)
+			sprite.setTextureRect(sf::IntRect(112 + 31 * int(currentFrame), 144, 16, 16));
+		if (coordinates.x < 0)
+			sprite.setTextureRect(sf::IntRect(112 + 31 * int(currentFrame) + 16, 144, -16, 16));*/ // Тема Сани
+
+	sprite.setPosition(rect.left - offset.x, rect.top - offset.y); 
 
 	coordinates.x = 0;
 
-	if (gravitationCheck)
-		coordinates.y = 0;
+}
+
+float Person::getX()
+{
+	return coordinates.x;
+}
+
+float Person::getY()
+{
+	return coordinates.y;
+}
+
+float Person::getOffsetX()
+{
+	return offset.x;
+}
+
+float Person::getOffsetY()
+{
+	return offset.y;
+}
+
+void Person::setOffsetX(float x)
+{
+	offset.x = x;
 }
 
 
