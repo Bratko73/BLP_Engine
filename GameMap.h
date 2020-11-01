@@ -7,13 +7,14 @@ private:
 	int m_y;
 	Tile** Map;
 public:
-	GameMap(int x, int y);
+	GameMap(unsigned int x, unsigned int y);
 	~GameMap();
-	void SetCell(int x, int y, Tile tile);
-	const Tile& GetCell(int x, int y);
-	void ClearMap(Tile tile());
+	void SetCell(unsigned int x,unsigned int y, Tile tile);
+	const Tile& GetCell(unsigned int x, unsigned int y);
+	void ClearMap(Tile tile = Tile());
 	const int& GetSizeX();
 	const int& GetSizeY();
+	void CreateRect(unsigned int x1, unsigned int y1, unsigned int widht, unsigned int height, Tile tile);
 	
 };
 
