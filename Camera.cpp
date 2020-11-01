@@ -1,10 +1,17 @@
 #include "Camera.h"
-/*
+
 Camera::Camera()
 {
+	offSetX = 0;
+	offsetY = 0;
 }
 
-void Camera::setPosition(sf::Vector2f v)
+float& Camera::getOffSetX()
 {
+	return offSetX;
 }
-*/
+
+float& Camera::getOffSetY()
+{
+	return offsetY;
+}
