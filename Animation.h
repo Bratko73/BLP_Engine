@@ -12,9 +12,10 @@ private:
 	int countOfFrames;
 	int currentFrame;
 	float speed;
+	int distanceBetweenSprites;
 public:
 	Animation(std::string pathToFile);
-	void setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.005);
+	void setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.005,int distanceBetweenSprites = 0);
 	sf::Sprite update(float time);
 	sf::Sprite mirrorUpdate(float time);
 	void startOver();

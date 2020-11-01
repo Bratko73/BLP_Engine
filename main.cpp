@@ -14,7 +14,7 @@ int main()
     anim2.setAnimationParametres(sf::Vector2i(45, 45), sf::Vector2i(1, 1), 12, 0.002);
     anim2.setPosition(45, 45);
     Animation Megaman("D:/Git/BLP_Engine/Sourse/MEGAMAN.png");
-    Megaman.setAnimationParametres(sf::Vector2i(37, 40), sf::Vector2i(0, 50), 9, 0.002);
+    Megaman.setAnimationParametres(sf::Vector2i(37, 40), sf::Vector2i(0, 50), 8, 0.002);
     Megaman.setPosition(0, 45);
     sf::Clock clock;
     int move = 0;
