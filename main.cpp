@@ -1,6 +1,8 @@
 #include "SFML/include/SFML/Graphics.hpp"
 #include "Animation.h"
 #include"GameMap.h"
+#include"Person.h"
+
 int main()
 {
     sf::Vector2f size_of_field(300, 300);
