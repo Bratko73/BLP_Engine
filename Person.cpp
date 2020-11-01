@@ -90,11 +90,6 @@ float Person::getRectLeft()
 {
 	return rect.left;
 }
-
-float Person::getRectLeft()
-{
-	return rect.left;
-}
 float Person::getRectTop()
 {
 	return rect.top;

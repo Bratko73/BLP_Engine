@@ -25,7 +25,6 @@ public:
 	float getOffsetX();
 	float getOffsetY();
 	float getRectLeft();
-	float getRectLeft();
 	float getRectTop();
 	float getRectHeight();
 	float getRectWidth();
