@@ -1,50 +1,43 @@
 #include "Animation.h"
 #include<SFML/Graphics/Image.hpp>
 
-/*Animation::Animation(std::string pathToFile)
+Animation::Animation(std::string pathToFile)
 {
-	currentFrame = 0;
-	sf::Texture texture;
-	texture.loadFromFile(pathToFile);
-	sprite.setTexture(texture);
+	this->texture.loadFromFile(pathToFile);
+	this->sprite.setTexture(this->texture);
+	this->speed = 0.1;
+	this->currentFrame = 0;
+	this->firstFrameCoordinates.x = 0;
+	this->firstFrameCoordinates.y = 0;
+	this->countOfFrames = 0;
+	this->frameSize.x = 0;
+	this->frameSize.y = 0;
 }
 
-void Animation::setFrameSize(sf::Vector2i size)
+void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.1)
 {
-}*/
+	this->frameSize = size;
+	this->firstFrameCoordinates = firstFrameCoordinates;
+	this->countOfFrames = countOfFrames;
+	this->speed = speed;
+}
 
-
-
-
-/*void Animation::update(Direction, float time)
+sf::Sprite Animation::update(float time)
 {
-	if (LEFT) {
-		p.dir = 1; p.speed = 0.1;//dir =1 - направление вверх, speed =0.1 - скорость движения. Заметьте - время мы уже здесь ни на что не умножаем и нигде не используем каждый раз
-		currentFrame += 0.005 * time;
-		if (currentFrame > 3) currentFrame -= 3;
-		p.sprite.setTextureRect(sf::IntRect(96 * int(currentFrame), 96, 96, 96)); //через объект p класса player меняем спрайт, делая анимацию (используя оператор точку)
-	}
+	int line = 1;
+	int framesInLine = texture.getSize().x / frameSize.x;
+	currentFrame += 0.005 * time;
+	if (currentFrame > countOfFrames) 
+		currentFrame -= countOfFrames;
+	if (framesInLine < countOfFrames)
+		line = currentFrame / framesInLine;
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x * int(currentFrame), firstFrameCoordinates.y*line, frameSize.x, frameSize.y));
+	return sprite;
+}
 
-	if (RIGHT) {
-		p.dir = 0; p.speed = 0.1;//направление вправо, см выше
-		currentFrame += 0.005 * time;
-		if (currentFrame > 3) currentFrame -= 3;
-		p.sprite.setTextureRect(sf::IntRect(96 * int(currentFrame), 192, 96, 96)); //через объект p класса player меняем спрайт, делая анимацию (используя оператор точку)
-	}
-
-	if (UP) {
-		p.dir = 3; p.speed = 0.1;//направление вниз, см выше
-		currentFrame += 0.005 * time;
-		if (currentFrame > 3) currentFrame -= 3;
-		p.sprite.setTextureRect(sf:: IntRect(96 * int(currentFrame), 288, 96, 96)); //через объект p класса player меняем спрайт, делая анимацию (используя оператор точку)
-
-	}
-
-	if (DOWN) { //если нажата клавиша стрелка влево или англ буква А
-		p.dir = 2; p.speed = 0.1;//направление вверх, см выше
-		currentFrame += 0.005 * time; //служит для прохождения по "кадрам". переменная доходит до трех суммируя произведение времени и скорости. изменив 0.005 можно изменить скорость анимации
-		if (currentFrame > 3) currentFrame -= 3; //проходимся по кадрам с первого по третий включительно. если пришли к третьему кадру - откидываемся назад.
-		p.sprite.setTextureRect(sf::IntRect(96 * int(currentFrame), 0, 96, 96)); //проходимся по координатам Х. получается 96,96*2,96*3 и опять 96
-
-	}
-} */
+void Animation::startOver()
+{
+	int line = 1;
+	currentFrame = 0;
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x * int(currentFrame), firstFrameCoordinates.y * line, frameSize.x, frameSize.y));
+}
