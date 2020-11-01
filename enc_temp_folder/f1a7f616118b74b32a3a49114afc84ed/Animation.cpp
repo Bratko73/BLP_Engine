@@ -3,7 +3,9 @@
 
 Animation::Animation(std::string pathToFile)
 {
-	this->texture.loadFromFile(pathToFile);
+	//this->texture.loadFromFile(pathToFile);
+	sf::Texture texture;
+	texture.loadFromFile(pathToFile);
 	this->sprite.setTexture(texture);
 	this->speed = 0.1f;
 	this->currentFrame = 0;
@@ -25,13 +27,13 @@ void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFram
 
 sf::Sprite Animation::update(float time)
 {
-	int line = 1;
-	int framesInLine = texture.getSize().x / frameSize.x;
+//	int line = 1;
+//	int framesInLine = texture.getSize().x / frameSize.x;
 	currentFrame += speed * time;
 	if (currentFrame > countOfFrames) 
 		currentFrame -= countOfFrames;
-	if (framesInLine < countOfFrames)
-		line = (currentFrame / framesInLine) + 1;
+//	if (framesInLine < countOfFrames)
+//		line = (currentFrame / framesInLine) + 1;
 	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame), firstFrameCoordinates.y  , frameSize.x, frameSize.y));
 	return sprite;
 }
