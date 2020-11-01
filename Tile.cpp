@@ -18,6 +18,17 @@ Tile::Tile(bool hardness, std::string path_to_texture, unsigned int x, unsigned 
 	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
 }
 
+Tile::Tile(bool hardness, std::string path_to_texture, sf::Vector2u size)
+{
+	this->SizeOfTile.x = size.x;
+	this->SizeOfTile.y = size.y;
+	this->hardness = hardness;
+	PathToTexture = path_to_texture;
+	this->texture.loadFromFile(PathToTexture);
+	this->sprite.setTexture(texture);
+	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
+}
+
 Tile::Tile(const Tile& obj)
 {
 	this->SizeOfTile.x = obj.SizeOfTile.x;

@@ -11,7 +11,7 @@ protected:
 public:
 	Tile();
 	Tile(bool hardness, std::string path_to_texture, unsigned int x, unsigned int y);
-	Tile(bool hardness, std::string path_to_texture, sf::Vector2u);
+	Tile(bool hardness, std::string path_to_texture, sf::Vector2u size);
 	Tile(const Tile& obj);
 	sf::Sprite Get_Sprite();
 	/*void Set_Position(float xPos, float yPos);
