@@ -22,19 +22,14 @@ void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFram
 	this->speed = speed;
 	this->distanceBetweenSprites = distanceBetweenSprites;
 	update(0);
-	texture.
 }
 
 sf::Sprite Animation::update(float time)
 {
-	int line = 1;
-	int framesInLine = texture.getSize().x / frameSize.x;
 	currentFrame += speed * time;
 	if (currentFrame > countOfFrames) 
 		currentFrame -= countOfFrames;
-	if (framesInLine < countOfFrames)
-		line = (currentFrame / framesInLine) + 1;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame), firstFrameCoordinates.y * line , frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame), firstFrameCoordinates.y , frameSize.x, frameSize.y));
 	return sprite;
 }
 
