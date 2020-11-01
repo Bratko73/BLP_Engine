@@ -1,27 +1,29 @@
 #include "Tile.h"
-
 Tile::Tile()
 {
 	hardness = 0;
-	size_x = 0;
-	size_y = 0;
+	SizeOfTile.x = 0;
+	SizeOfTile.y = 0;
+	PathToTexture = nullptr;
 }
 
-Tile::Tile(bool hardness, std::string path_to_texture, int x, int y)
+Tile::Tile(bool hardness, std::string path_to_texture, unsigned int x, unsigned int y)
 {
-	this->size_x = x;
-	this->size_y = y;
+	this->SizeOfTile.x = x;
+	this->SizeOfTile.y = y;
 	this->hardness = hardness;
-	this->texture.loadFromFile(path_to_texture);
+	PathToTexture = path_to_texture;
+	this->texture.loadFromFile(PathToTexture);
 	this->sprite.setTexture(texture);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, this->size_x, this->size_y));
+	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
 }
 
 Tile::Tile(const Tile& obj)
 {
-	this->size_x = obj.size_x;
-	this->size_y = obj.size_y;
+	this->SizeOfTile.x = obj.SizeOfTile.x;
+	this->SizeOfTile.y = obj.SizeOfTile.y;
 	this->hardness = obj.hardness;
+	this->PathToTexture = obj.PathToTexture;
 }
 
 sf::Sprite Tile::Get_Sprite()
@@ -29,7 +31,7 @@ sf::Sprite Tile::Get_Sprite()
 	return sprite;
 }
 
-void Tile::Set_Position(float xPos, float yPos)
+/*void Tile::Set_Position(float xPos, float yPos)
 {
 	this->sprite.setPosition(xPos, yPos);
 }
@@ -38,5 +40,5 @@ void Tile::Set_Position(sf::Vector2f Pos)
 {
 	this->sprite.setPosition(Pos);
 }
-
+*/
 
