@@ -14,10 +14,12 @@ private:
 	float speed;
 public:
 	Animation(std::string pathToFile);
-	void setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.1);
+	void setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.005);
 	sf::Sprite update(float time);
+	sf::Sprite mirrorUpdate(float time);
 	void startOver();
 	void setPosition(sf::Vector2f position);
 	void setPosition(float x, float y);
+	sf::Sprite getSprite();
 };
 
