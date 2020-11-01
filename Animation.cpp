@@ -14,46 +14,38 @@ Animation::Animation(std::string pathToFile)
 	this->frameSize.y = 0;
 }
 
-void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed)
+void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed, int distanceBetweenSprites)
 {
 	this->frameSize = size;
 	this->firstFrameCoordinates = firstFrameCoordinates;
 	this->countOfFrames = countOfFrames - 1;
 	this->speed = speed;
+	this->distanceBetweenSprites = distanceBetweenSprites;
 	update(0);
 }
 
 sf::Sprite Animation::update(float time)
 {
-	int line = 1;
-	int framesInLine = texture.getSize().x / frameSize.x;
 	currentFrame += speed * time;
 	if (currentFrame > countOfFrames) 
 		currentFrame -= countOfFrames;
-	if (framesInLine < countOfFrames)
-		line = (currentFrame / framesInLine) + 1;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame), firstFrameCoordinates.y  , frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame), firstFrameCoordinates.y , frameSize.x, frameSize.y));
 	return sprite;
 }
 
 sf::Sprite Animation::mirrorUpdate(float time)
 {
-//	int line = 1;
-//	int framesInLine = texture.getSize().x / frameSize.x;
 	currentFrame += speed * time;
 	if (currentFrame > countOfFrames)
 		currentFrame -= countOfFrames;
-//	if (framesInLine < countOfFrames)
-//		line = currentFrame / framesInLine;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame)+frameSize.x, firstFrameCoordinates.y , -frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame)+frameSize.x, firstFrameCoordinates.y, -frameSize.x, frameSize.y));
 	return sprite;
 }
 
 void Animation::startOver()
 {
-	int line = 1;
 	currentFrame = 0;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x * int(currentFrame), firstFrameCoordinates.y * line, frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x * int(currentFrame), firstFrameCoordinates.y, frameSize.x, frameSize.y));
 }
 
 void Animation::setPosition(sf::Vector2f position)
