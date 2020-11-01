@@ -1,5 +1,6 @@
 #include "GameMap.h"
 #include "assert.h"
+
 GameMap::GameMap(unsigned int x,unsigned int y)
 {
 	m_x = x;
@@ -36,7 +37,7 @@ const Tile& GameMap::GetCell(unsigned int x, unsigned int y)
 	return Map[x][y];
 }
 
-void GameMap::ClearMap(Tile tile = Tile())
+void GameMap::ClearMap(Tile tile)
 {
 	for (int i = 0; i < m_x; i++)
 	{
