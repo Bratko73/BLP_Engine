@@ -22,6 +22,7 @@ void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFram
 	this->speed = speed;
 	this->distanceBetweenSprites = distanceBetweenSprites;
 	update(0);
+	texture.
 }
 
 sf::Sprite Animation::update(float time)
