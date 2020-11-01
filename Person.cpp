@@ -81,38 +81,51 @@ void Person::setOffsetX(float x)
 	offset.x = x;
 }
 
+void Person::setOffsetY(float y)
+{
+	offset.y = y;
+}
+
 float Person::getRectLeft()
 {
 	return rect.left;
 }
 
-sf::Sprite Person::getSprite()
+float Person::getRectLeft()
 {
-	return sprite;
+	return rect.left;
 }
-
-
-// пока не добавили модуль коллизий пусть лежит тут
-/*void Person::Collision(int flag)
+float Person::getRectTop()
 {
-	for (int i = rect.top / 32; i < (rect.top + rect.height) / 32; i++)
-		for (int j = rect.left / 32; j < (rect.left + rect.width) / 32; j++)
-		{
-			if (Map[i][j] == '|') //стена 
-			{
-				if ((dx > 0) && (flag == 0)) 
-					rect.left = j * 32 - rect.width;
-				if ((dx < 0) && (flag == 0)) 
-					rect.left = j * 32 + 32;
-				if ((dy > 0) && (flag == 1)) { 
-					rect.top = i * 32 - rect.height;  
-					dy = 0;   
-					onGround = true; 
-				}
-				if ((dy < 0) && (flag == 1)) { 
-					rect.top = i * 32 + 32;   
-					dy = 0; 
-				}
-			}
-		}
-}*/
+	return rect.top;
+}
+float Person::getRectHeight()
+{
+	return rect.height;
+}
+float Person::getRectWidth()
+{
+	return rect.width;
+}
+bool Person::getOnGround() {
+	return onGround;
+}
+void Person::setOnGround(bool val) {
+	onGround = val;
+}
+void Person::setRectLeft(float left)
+{
+	rect.left = left;
+}
+void Person::setRectTop(float top)
+{
+	rect.top = top;
+}
+void Person::setRectHeight(float height)
+{
+	rect.height = height;
+}
+void Person::setRectWidth(float width)
+{
+	rect.width = width;
+}
