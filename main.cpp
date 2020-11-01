@@ -1,44 +1,26 @@
 #include "SFML/include/SFML/Graphics.hpp"
-#include "Tile.h"
 #include "Animation.h"
+#include"GameMap.h"
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    sf::CircleShape shape2(50.f);
-    shape.setFillColor(sf::Color::Red);
-    Animation anim("D:/Git/BLP_Engine/Sourse/spritesheet.png");
-    anim.setAnimationParametres(sf::Vector2i(45, 45), sf::Vector2i(1, 1), 12, 0.002);
-    anim.setPosition(45, 0);
-    Animation anim2("D:/Git/BLP_Engine/Sourse/spritesheet.png");
-    anim2.setAnimationParametres(sf::Vector2i(45, 45), sf::Vector2i(1, 1), 12, 0.002);
-    anim2.setPosition(45, 45);
-    Animation Megaman("D:/Git/BLP_Engine/Sourse/MEGAMAN.png");
-    Megaman.setAnimationParametres(sf::Vector2i(37, 40), sf::Vector2i(0, 50), 8, 0.001);
-    Megaman.setPosition(0, 45);
-    sf::Clock clock;
-    int move = 0;
+    sf::Vector2f size_of_field(300, 300);
+    sf::RenderWindow window(sf::VideoMode(size_of_field.x, size_of_field.y), "MapTest");
+    sf::Vector2f Start(1, 1);
+    sf::Vector2f PosInFile(34, 68);
+    sf::Vector2u tileSize(15, 15);
+    sf::Vector2f Size_Of_Rect(10,10);
+    GameMap map(Start, "C:/Users/Марк/source/repos/Bratko73/BLP_Engine/Sourse/tileset.png" , PosInFile,  window,  tileSize);
+    map.SetRect(Start, Size_Of_Rect);
     while (window.isOpen())
     {
-        float time = clock.getElapsedTime().asMicroseconds();
-        clock.restart();
-        //time /= 4;
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-        }
-        anim.update(time);
-        
-        anim2.setPosition(45, 45);
-        move += 0.5;
-        anim2.mirrorUpdate(time);
-        Megaman.update(time);
+        } 
         window.clear();
-        window.draw(anim.getSprite());
-        window.draw(anim2.getSprite());
-        window.draw(Megaman.getSprite());
+        map.DrawMap(window);
         window.display();
     }
    

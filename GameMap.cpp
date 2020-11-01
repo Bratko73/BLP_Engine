@@ -1,104 +1,51 @@
 #include "GameMap.h"
 #include "assert.h"
 #include <fstream>
-GameMap::GameMap(unsigned int x,unsigned int y)
-{
-	Size.x = x;
-	Size.y = y;
 
-	Map = new Tile* [Size.x];
-	for (int i = 0; i < Size.x; i++)
+
+
+//TODO: LoadToFile, LoadFromFile, PathToTexture in Tile.h and Tile.cpp
+
+GameMap::GameMap(sf::Vector2f start, std::string TilefilePath, sf::Vector2f posInFile, sf::Window& window, sf::Vector2u tileSize)
+{
+	tile = Tile(posInFile, TilefilePath, tileSize);
+	this->TileStartPos = start;
+	this->MapSize.x = window.getSize().x / tile.Size.x;
+	this->MapSize.y = window.getSize().y / tile.Size.y;
+	
+	this->Map = new Tile* [MapSize.x];
+	for (int i = 0; i < MapSize.x; i++)
 	{
-		Map[i] = new Tile [Size.y];
-		for (int j = 0; j < Size.y; j++)
+		this->Map[i] = new Tile[this->MapSize.y];
+		for (int j = 0; j < MapSize.y; j++)
 		{
-			Map[i][j] = Tile();
+			this->Map[i][j] = tile;
 		}
 	}
+
+	
 }
 
-GameMap::GameMap(sf::Vector2u size)
+void GameMap::CreateCell(unsigned int xPos, unsigned int yPos, Tile& tile)
 {
-	Size.x = size.x;
-	Size.y = size.y;
-	Map = new Tile * [Size.x];
-	for (int i = 0; i < Size.x; i++)
-	{
-		Map[i] = new Tile[Size.y];
-		for (int j = 0; j < Size.y; j++)
-		{
-			Map[i][j] = Tile();
-		}
-	}
+	assert(xPos < MapSize.x&& yPos < MapSize.y);
+	Map[xPos][yPos] = tile;
 }
 
-GameMap::~GameMap()
+void GameMap::SetRect(sf::Vector2f start, sf::Vector2f size_of_rect)
 {
-	for (int i = 0; i < Size.x; i++)
-	{
-		delete[] Map[i];
-	}
-	delete Map;
-}
-
-void GameMap::SetCell(unsigned int x,unsigned int y, Tile tile)
-{
-	assert(x < Size.x&& y < Size.y);
-	Map[x][y] = tile;
-}
-
-const Tile& GameMap::GetCell(unsigned int x, unsigned int y)
-{
-	assert(x < Size.x&& y < Size.y);
-	return Map[x][y];
-}
-
-void GameMap::ClearMap(Tile tile)
-{
-	for (unsigned int i = 0; i < Size.x; i++)
-	{
-		for (unsigned int j = 0; j < Size.y; j++)
-		{
-			Map[i][j] = tile;
-		}
-	}
-}
-
-const int& GameMap::GetSizeX()
-{
-	return Size.x;
-}
-
-const int& GameMap::GetSizeY()
-{
-	return Size.y;
-}
-
-void GameMap::CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile)
-{
-	for (unsigned int i = startCoord.x; i < sizeOfRect.x + startCoord.x; i++)
-	{
-		for (unsigned int j = startCoord.y; j < startCoord.y + sizeOfRect.y; j++)
-		{
-			SetCell(i, j, tile);
-		}
-	}
+	for (int i = start.x; i < size_of_rect.x + start.x; i++)
+		for (int j = start.y; j < start.y + size_of_rect.y; j++)
+			CreateCell(i, j, this->tile);
 }
 
 void GameMap::DrawMap(sf::RenderWindow& window)
 {
-	if (this->Map != nullptr)
+	for (int i = 0; i < MapSize.x; i++)
 	{
-		for (int i = 0; i < Size.x; i++)
+		for (int j = 0; j < MapSize.y; j ++)
 		{
-			for (int j = 0; j < Size.y; j++)
-			{
-				window.draw(Map[i][j].Get_Sprite());
-			}
+			window.draw(Map[i][j].GetSprite());
 		}
 	}
-	else
-		throw std::runtime_error("Empty map");
 }
-
-//TODO: DrawMap, LoadToFile, LoadFromString, LoadFromFile, PathToTexture in Tile.h and Tile.cpp
