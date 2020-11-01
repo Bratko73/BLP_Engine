@@ -29,4 +29,14 @@ sf::Sprite Tile::Get_Sprite()
 	return sprite;
 }
 
+void Tile::Set_Position(float xPos, float yPos)
+{
+	this->sprite.setPosition(xPos, yPos);
+}
+
+void Tile::Set_Position(sf::Vector2f Pos)
+{
+	this->sprite.setPosition(Pos);
+}
+
 

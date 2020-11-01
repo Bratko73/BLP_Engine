@@ -13,5 +13,7 @@ public:
 	Tile(bool hardness, std::string path_to_texture, int x, int y);
 	Tile(const Tile& obj);
 	sf::Sprite Get_Sprite();
+	void Set_Position(float xPos, float yPos);
+	void Set_Position(sf::Vector2f Pos);
 };
 
