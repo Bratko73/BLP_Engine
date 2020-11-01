@@ -7,7 +7,7 @@ int main()
     sf::CircleShape shape(100.f);
     sf::CircleShape shape2(50.f);
     shape.setFillColor(sf::Color::Red);
-    Animation anim("D:/Git/BLP_Engine/Sourse/spritesheet.png");
+    Animation anim("C:/Users/Марк/source/repos/Bratko73/BLP_Engine/Sourse/spritesheet.png");
     anim.setAnimationParametres(sf::Vector2i(45, 45), sf::Vector2i(1, 1), 12, 0.002);
     anim.setPosition(45, 0);
     Animation anim2("D:/Git/BLP_Engine/Sourse/spritesheet.png");
@@ -22,7 +22,7 @@ int main()
     {
         float time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
-        time /= 2;
+       // time /= 10;
         sf::Event event;
         while (window.pollEvent(event))
         {
