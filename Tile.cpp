@@ -12,8 +12,7 @@ Tile::Tile(bool hardness, std::string path_to_texture, int x, int y)
 	this->size_x = x;
 	this->size_y = y;
 	this->hardness = hardness;
-	sf::Texture texture;
-	texture.loadFromFile(path_to_texture);
+	this->texture.loadFromFile(path_to_texture);
 	this->sprite.setTexture(texture);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, this->size_x, this->size_y));
 }

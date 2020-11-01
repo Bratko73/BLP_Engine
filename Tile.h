@@ -4,6 +4,7 @@ class Tile
 {
 protected:
 	bool hardness;
+	sf::Texture texture;
 	sf::Sprite sprite;
 	int size_x;
 	int size_y;
