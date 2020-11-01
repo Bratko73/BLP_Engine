@@ -41,3 +41,13 @@ void Animation::startOver()
 	currentFrame = 0;
 	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x * int(currentFrame), firstFrameCoordinates.y * line, frameSize.x, frameSize.y));
 }
+
+void Animation::setPosition(sf::Vector2f position)
+{
+	sprite.setPosition(position);
+}
+
+void Animation::setPosition(float x, float y)
+{
+	sprite.setPosition(x, y);
+}

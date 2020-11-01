@@ -17,5 +17,7 @@ public:
 	void setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.1);
 	sf::Sprite update(float time);
 	void startOver();
+	void setPosition(sf::Vector2f position);
+	void setPosition(float x, float y);
 };
 
