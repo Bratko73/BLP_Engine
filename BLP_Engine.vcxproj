@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Tile.h" />
