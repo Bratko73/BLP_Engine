@@ -3,7 +3,7 @@
 
 void Collision::collision(bool flag, Person& p, sf::String Map[])
 {
-	for (int i = p.getRectTop() / 16; i < (p.getRectTop() + p.getRectHeight()) / 16; i++)
+/*	for (int i = p.getRectTop() / 16; i < (p.getRectTop() + p.getRectHeight()) / 16; i++)
 		for (int j = p.getRectLeft() / 16; j < (p.getRectLeft() + p.getRectWidth()) / 16; j++)
 		{
 			if ((Map[i][j] == 'P') || (Map[i][j] == 'k') || (Map[i][j] == '0') || (Map[i][j] == 'r') || (Map[i][j] == 't')) //пока работает так, что надо вставить символ, который будет
@@ -28,5 +28,5 @@ void Collision::collision(bool flag, Person& p, sf::String Map[])
 					p.setRectLeft(j * 16 + 16);
 				}
 			}
-		}
+		}*/
 }

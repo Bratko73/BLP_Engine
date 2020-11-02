@@ -30,10 +30,14 @@ void Person::move()
 		coordinates.x = 0.1;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		if (onGround) {
-			coordinates.y = -0.27;
-			onGround = false;
-		}
+		coordinates.y = -0.1;
+		//if (onGround) {
+			//coordinates.y = -0.27;
+			//onGround = false;
+		//}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		coordinates.y = 0.1;
 }
 
 void Person::update(float time, Person p)
@@ -41,8 +45,8 @@ void Person::update(float time, Person p)
 	rect.left += coordinates.x * time;
 	Collision::collision(0, p, TileMap);
 
-	if (!onGround)
-		coordinates.y = coordinates.y + 0.0005 * time;
+	//if (!onGround)
+	//	coordinates.y = coordinates.y + 0.0005 * time;
 	rect.top += coordinates.y * time;
 	onGround = false;
 	Collision::collision(0, p, TileMap);
@@ -56,7 +60,7 @@ void Person::update(float time, Person p)
 	animation.setPosition(rect.left - offset.x, rect.top - offset.y); 
 
 	coordinates.x = 0;
-
+	coordinates.y = 0;
 }
 
 float& Person::getX()
