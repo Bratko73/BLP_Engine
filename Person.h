@@ -17,18 +17,18 @@ public:
 	Person(std::string pathToFile);
 
 	void move();
-	void update(float time);
+	void update(float time, Person p);
 
 
-	float getX();
-	float getY();
-	float getOffsetX();
-	float getOffsetY();
-	float getRectLeft();
-	float getRectTop();
-	float getRectHeight();
-	float getRectWidth();
-	bool getOnGround();
+	float& getX();
+	float& getY();
+	float& getOffsetX();
+	float& getOffsetY();
+	float& getRectLeft();
+	float& getRectTop();
+	float& getRectHeight();
+	float& getRectWidth();
+	bool& getOnGround();
 
 
 	void setOffsetX(float x);

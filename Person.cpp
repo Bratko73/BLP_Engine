@@ -1,4 +1,6 @@
 #include "Person.h"
+#include "Collision.h"
+#include "GameMap.h"
 
 Person::Person()
 {
@@ -31,15 +33,16 @@ void Person::move()
 		}
 }
 
-void Person::update(float time)
+void Person::update(float time, Person p)
 {
 	rect.left += coordinates.x * time;
+	Collision::collision(0, p, Map);
 
 	if (!onGround)
 		coordinates.y = coordinates.y + 0.0005 * time;
-
 	rect.top += coordinates.y * time;
 	onGround = false;
+	Collision::collision(0, p, Map);
 
 	/*currentFrame += time * 0.005;
 		if (currentFrame > 3)
@@ -56,22 +59,22 @@ void Person::update(float time)
 
 }
 
-float Person::getX()
+float& Person::getX()
 {
 	return coordinates.x;
 }
 
-float Person::getY()
+float& Person::getY()
 {
 	return coordinates.y;
 }
 
-float Person::getOffsetX()
+float& Person::getOffsetX()
 {
 	return offset.x;
 }
 
-float Person::getOffsetY()
+float& Person::getOffsetY()
 {
 	return offset.y;
 }
@@ -86,23 +89,23 @@ void Person::setOffsetY(float y)
 	offset.y = y;
 }
 
-float Person::getRectLeft()
+float& Person::getRectLeft()
 {
 	return rect.left;
 }
-float Person::getRectTop()
+float& Person::getRectTop()
 {
 	return rect.top;
 }
-float Person::getRectHeight()
+float& Person::getRectHeight()
 {
 	return rect.height;
 }
-float Person::getRectWidth()
+float& Person::getRectWidth()
 {
 	return rect.width;
 }
-bool Person::getOnGround() {
+bool& Person::getOnGround() {
 	return onGround;
 }
 void Person::setOnGround(bool val) {
