@@ -11,7 +11,7 @@ int main()
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario.jpg");
 
 	Person Player("D:/Libraries/sourses/Mario.jpg");
-	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(100, 180), 3);
+	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(100, 180), 3, 0.05);
 	sf::Sprite tile(tileSet);
 
 	sf::Clock clock;
