@@ -5,20 +5,17 @@
 
 Person::Person()
 {
-	//надо инициализировать animation
-	offset.x = 0;
-	offset.y = 0;
-	//rect = sf::FloatRect(100, 180, 16, 16); //пока не знаем размеры(а надо бы)
-	coordinates.x = 0.1;
-	coordinates.y = 0.1;
-	animation.setPosition(coordinates);
 }
 
 Person::Person(std::string pathToFile)
 {
+	coordinates.x = 0.1;
+	coordinates.y = 0.1;
+	rect = sf::FloatRect(100, 180, 16, 16);
+	animation.setPosition(coordinates);
+	offset.x = 0;
+	offset.y = 0;
 	animation.setSpriteSheet(pathToFile);
-	//sf::Texture texture;
-	//texture.loadFromFile(pathToFile);
 }
 
 void Person::move()
@@ -30,26 +27,22 @@ void Person::move()
 		coordinates.x = 0.1;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		coordinates.y = -0.1;
-		//if (onGround) {
-			//coordinates.y = -0.27;
-			//onGround = false;
-		//}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		coordinates.y = 0.1;
+		if (onGround) {
+			coordinates.y = -0.27;
+			onGround = false;
+		}
 }
 
-void Person::update(float time, Person p)
+void Person::update(float time, Person& p)
 {
 	rect.left += coordinates.x * time;
 	Collision::collision(0, p, TileMap);
 
-	//if (!onGround)
-	//	coordinates.y = coordinates.y + 0.0005 * time;
+	if (!onGround)
+		coordinates.y = coordinates.y + 0.0005 * time;
 	rect.top += coordinates.y * time;
 	onGround = false;
-	Collision::collision(0, p, TileMap);
+	Collision::collision(1, p, TileMap);
 
 
 	if (coordinates.x > 0)
@@ -60,7 +53,6 @@ void Person::update(float time, Person p)
 	animation.setPosition(rect.left - offset.x, rect.top - offset.y); 
 
 	coordinates.x = 0;
-	coordinates.y = 0;
 }
 
 float& Person::getX()
@@ -93,23 +85,23 @@ void Person::setOffsetY(float y)
 	offset.y = y;
 }
 
-float& Person::getRectLeft()
+float Person::getRectLeft()
 {
 	return rect.left;
 }
-float& Person::getRectTop()
+float Person::getRectTop()
 {
 	return rect.top;
 }
-float& Person::getRectHeight()
+float Person::getRectHeight()
 {
 	return rect.height;
 }
-float& Person::getRectWidth()
+float Person::getRectWidth()
 {
 	return rect.width;
 }
-bool& Person::getOnGround() {
+bool Person::getOnGround() {
 	return onGround;
 }
 sf::Sprite Person::getSprite()
