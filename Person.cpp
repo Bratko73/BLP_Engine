@@ -1,6 +1,7 @@
 #include "Person.h"
 #include "Collision.h"
 #include "GameMap.h"
+#include "TestMap.h"
 
 Person::Person()
 {
@@ -10,12 +11,14 @@ Person::Person()
 	//rect = sf::FloatRect(100, 180, 16, 16); //пока не знаем размеры(а надо бы)
 	coordinates.x = 0.1;
 	coordinates.y = 0.1;
+	animation.setPosition(coordinates);
 }
 
 Person::Person(std::string pathToFile)
 {
-	sf::Texture texture;
-	texture.loadFromFile(pathToFile);
+	animation.setSpriteSheet(pathToFile);
+	//sf::Texture texture;
+	//texture.loadFromFile(pathToFile);
 }
 
 void Person::move()
@@ -36,24 +39,21 @@ void Person::move()
 void Person::update(float time, Person p)
 {
 	rect.left += coordinates.x * time;
-	Collision::collision(0, p, Map);
+	Collision::collision(0, p, TileMap);
 
 	if (!onGround)
 		coordinates.y = coordinates.y + 0.0005 * time;
 	rect.top += coordinates.y * time;
 	onGround = false;
-	Collision::collision(0, p, Map);
+	Collision::collision(0, p, TileMap);
 
-	/*currentFrame += time * 0.005;
-		if (currentFrame > 3)
-			currentFrame -= 3;*/ 
 
-	/*if (coordinates.x > 0)
-			sprite.setTextureRect(sf::IntRect(112 + 31 * int(currentFrame), 144, 16, 16));
+	if (coordinates.x > 0)
+			animation.update(time);
 		if (coordinates.x < 0)
-			sprite.setTextureRect(sf::IntRect(112 + 31 * int(currentFrame) + 16, 144, -16, 16));*/ // Тема Сани
+			animation.mirrorUpdate(time);
 
-	sprite.setPosition(rect.left - offset.x, rect.top - offset.y); 
+	animation.setPosition(rect.left - offset.x, rect.top - offset.y); 
 
 	coordinates.x = 0;
 
@@ -108,6 +108,10 @@ float& Person::getRectWidth()
 bool& Person::getOnGround() {
 	return onGround;
 }
+sf::Sprite Person::getSprite()
+{
+	return animation.getSprite();
+}
 void Person::setOnGround(bool val) {
 	onGround = val;
 }
@@ -126,4 +130,11 @@ void Person::setRectHeight(float height)
 void Person::setRectWidth(float width)
 {
 	rect.width = width;
+}
+
+void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed)
+{
+	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, speed);
+	rect.height = size.y;
+	rect.width = size.x;
 }

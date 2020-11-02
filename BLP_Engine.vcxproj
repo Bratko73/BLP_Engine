@@ -164,6 +164,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="TestMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GuiMenu.h" />

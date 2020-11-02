@@ -10,7 +10,7 @@ private:
 	sf::FloatRect rect;
 	bool onGround;
 	Animation animation;
-	sf::Sprite sprite;
+	//sf::Sprite sprite;
 	//Необходима доработка класса, данная часть кода - набросок.
 public:
 	Person();
@@ -29,7 +29,7 @@ public:
 	float& getRectHeight();
 	float& getRectWidth();
 	bool& getOnGround();
-
+	sf::Sprite getSprite();
 
 	void setOffsetX(float x);
 	void setOffsetY(float y);
@@ -38,6 +38,6 @@ public:
 	void setRectTop(float top);
 	void setRectHeight(float height);
 	void setRectWidth(float width);
-
+	void setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.005);
 };
 
