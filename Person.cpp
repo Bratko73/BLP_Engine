@@ -1,4 +1,7 @@
 #include "Person.h"
+#include "Collision.h"
+#include "GameMap.h"
+#include "TestMap.h"
 
 Person::Person()
 {
@@ -8,12 +11,14 @@ Person::Person()
 	//rect = sf::FloatRect(100, 180, 16, 16); //пока не знаем размеры(а надо бы)
 	coordinates.x = 0.1;
 	coordinates.y = 0.1;
+	animation.setPosition(coordinates);
 }
 
 Person::Person(std::string pathToFile)
 {
-	sf::Texture texture;
-	texture.loadFromFile(pathToFile);
+	animation.setSpriteSheet(pathToFile);
+	//sf::Texture texture;
+	//texture.loadFromFile(pathToFile);
 }
 
 void Person::move()
@@ -25,53 +30,55 @@ void Person::move()
 		coordinates.x = 0.1;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		if (onGround) {
-			coordinates.y = -0.27;
-			onGround = false;
-		}
+		coordinates.y = -0.1;
+		//if (onGround) {
+			//coordinates.y = -0.27;
+			//onGround = false;
+		//}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		coordinates.y = 0.1;
 }
 
-void Person::update(float time)
+void Person::update(float time, Person p)
 {
 	rect.left += coordinates.x * time;
+	Collision::collision(0, p, TileMap);
 
-	if (!onGround)
-		coordinates.y = coordinates.y + 0.0005 * time;
-
+	//if (!onGround)
+	//	coordinates.y = coordinates.y + 0.0005 * time;
 	rect.top += coordinates.y * time;
 	onGround = false;
+	Collision::collision(0, p, TileMap);
 
-	/*currentFrame += time * 0.005;
-		if (currentFrame > 3)
-			currentFrame -= 3;*/ 
 
-	/*if (coordinates.x > 0)
-			sprite.setTextureRect(sf::IntRect(112 + 31 * int(currentFrame), 144, 16, 16));
+	if (coordinates.x > 0)
+			animation.update(time);
 		if (coordinates.x < 0)
-			sprite.setTextureRect(sf::IntRect(112 + 31 * int(currentFrame) + 16, 144, -16, 16));*/ // “ема —ани
+			animation.mirrorUpdate(time);
 
-	sprite.setPosition(rect.left - offset.x, rect.top - offset.y); 
+	animation.setPosition(rect.left - offset.x, rect.top - offset.y); 
 
 	coordinates.x = 0;
-
+	coordinates.y = 0;
 }
 
-float Person::getX()
+float& Person::getX()
 {
 	return coordinates.x;
 }
 
-float Person::getY()
+float& Person::getY()
 {
 	return coordinates.y;
 }
 
-float Person::getOffsetX()
+float& Person::getOffsetX()
 {
 	return offset.x;
 }
 
-float Person::getOffsetY()
+float& Person::getOffsetY()
 {
 	return offset.y;
 }
@@ -81,38 +88,57 @@ void Person::setOffsetX(float x)
 	offset.x = x;
 }
 
-float Person::getRectLeft()
+void Person::setOffsetY(float y)
+{
+	offset.y = y;
+}
+
+float& Person::getRectLeft()
 {
 	return rect.left;
 }
-
+float& Person::getRectTop()
+{
+	return rect.top;
+}
+float& Person::getRectHeight()
+{
+	return rect.height;
+}
+float& Person::getRectWidth()
+{
+	return rect.width;
+}
+bool& Person::getOnGround() {
+	return onGround;
+}
 sf::Sprite Person::getSprite()
 {
-	return sprite;
+	return animation.getSprite();
+}
+void Person::setOnGround(bool val) {
+	onGround = val;
+}
+void Person::setRectLeft(float left)
+{
+	rect.left = left;
+}
+void Person::setRectTop(float top)
+{
+	rect.top = top;
+}
+void Person::setRectHeight(float height)
+{
+	rect.height = height;
+}
+void Person::setRectWidth(float width)
+{
+	rect.width = width;
 }
 
-
-// пока не добавили модуль коллизий пусть лежит тут
-/*void Person::Collision(int flag)
+void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed)
 {
-	for (int i = rect.top / 32; i < (rect.top + rect.height) / 32; i++)
-		for (int j = rect.left / 32; j < (rect.left + rect.width) / 32; j++)
-		{
-			if (Map[i][j] == '|') //стена 
-			{
-				if ((dx > 0) && (flag == 0)) 
-					rect.left = j * 32 - rect.width;
-				if ((dx < 0) && (flag == 0)) 
-					rect.left = j * 32 + 32;
-				if ((dy > 0) && (flag == 1)) { 
-					rect.top = i * 32 - rect.height;  
-					dy = 0;   
-					onGround = true; 
-				}
-				if ((dy < 0) && (flag == 1)) { 
-					rect.top = i * 32 + 32;   
-					dy = 0; 
-				}
-			}
-		}
-}*/
+	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, speed);
+	rect.height = size.y;
+	rect.width = size.x;
+}

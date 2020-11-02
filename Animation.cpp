@@ -1,6 +1,17 @@
 #include "Animation.h"
 #include<SFML/Graphics/Image.hpp>
 
+Animation::Animation()
+{
+	this->speed = 0.1f;
+	this->currentFrame = 0;
+	this->firstFrameCoordinates.x = 0;
+	this->firstFrameCoordinates.y = 0;
+	this->countOfFrames = 0;
+	this->frameSize.x = 0;
+	this->frameSize.y = 0;
+}
+
 Animation::Animation(std::string pathToFile)
 {
 	this->texture.loadFromFile(pathToFile);
@@ -14,13 +25,19 @@ Animation::Animation(std::string pathToFile)
 	this->frameSize.y = 0;
 }
 
-void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed, int distanceBetweenSprites)
+void Animation::setSpriteSheet(std::string pathToFile)
+{
+	this->texture.loadFromFile(pathToFile);
+	this->sprite.setTexture(texture);
+}
+
+void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed)
 {
 	this->frameSize = size;
 	this->firstFrameCoordinates = firstFrameCoordinates;
 	this->countOfFrames = countOfFrames - 1;
 	this->speed = speed;
-	this->distanceBetweenSprites = distanceBetweenSprites;
+	//this->distanceBetweenSprites = distanceBetweenSprites;
 	update(0);
 }
 
