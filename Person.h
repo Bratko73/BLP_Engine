@@ -12,9 +12,10 @@ private:
 	bool onGround;
 	Animation animation;
 	float gravitation;
+	float heightOfJump;
 public:
 	Person();
-	Person(std::string pathToFile, float speed, float gravitation);
+	Person(std::string pathToFile, float speed, float gravitation, float heightOfJump);
 
 	void move();
 	void update(float time, Person& p);

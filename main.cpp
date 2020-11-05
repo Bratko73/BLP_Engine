@@ -10,7 +10,7 @@ int main()
 	sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario.jpg");
 
-	Person Player("D:/Libraries/sourses/Mario.jpg", 0.1, 0.0005);
+	Person Player("D:/Libraries/sourses/Mario.jpg", 0.1, 0.0005, 0.27);
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 0.05);
 	sf::Sprite tile(tileSet);
 

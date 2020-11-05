@@ -7,8 +7,9 @@ Person::Person()
 {
 }
 
-Person::Person(std::string pathToFile, float speed, float gravitation)
+Person::Person(std::string pathToFile, float speed, float gravitation, float heightOfJump)
 {
+	this->heightOfJump = heightOfJump;
 	this->gravitation = gravitation;
 	this->speed = speed;
 	coordinates.x = 0.1;
@@ -23,14 +24,14 @@ Person::Person(std::string pathToFile, float speed, float gravitation)
 void Person::move()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		coordinates.x = -(speed);
+		coordinates.x = -speed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		coordinates.x = speed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		if (onGround) {
-			coordinates.y = -0.27;
+			coordinates.y = -heightOfJump;
 			onGround = false;
 		}
 }
