@@ -7,8 +7,9 @@ Person::Person()
 {
 }
 
-Person::Person(std::string pathToFile, float speed)
+Person::Person(std::string pathToFile, float speed, float gravitation)
 {
+	this->gravitation = gravitation;
 	this->speed = speed;
 	coordinates.x = 0.1;
 	coordinates.y = 0.1;
@@ -40,7 +41,7 @@ void Person::update(float time, Person& p)
 	Collision::collision(0, p, TileMap);
 
 	if (!onGround)
-		coordinates.y = coordinates.y + 0.0005 * time;
+		coordinates.y = coordinates.y + gravitation * time;
 	rect.top += coordinates.y * time;
 	onGround = false;
 	Collision::collision(1, p, TileMap);

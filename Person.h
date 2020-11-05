@@ -11,9 +11,10 @@ private:
 	sf::FloatRect rect;
 	bool onGround;
 	Animation animation;
+	float gravitation;
 public:
 	Person();
-	Person(std::string pathToFile, float speed);
+	Person(std::string pathToFile, float speed, float gravitation);
 
 	void move();
 	void update(float time, Person& p);
