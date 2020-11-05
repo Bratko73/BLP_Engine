@@ -7,14 +7,14 @@ Person::Person()
 {
 }
 
-Person::Person(std::string pathToFile, float speed, float gravitation, float heightOfJump)
+Person::Person(std::string pathToFile, float speed, float gravitation, float heightOfJump, sf::FloatRect rect)
 {
 	this->heightOfJump = heightOfJump;
 	this->gravitation = gravitation;
 	this->speed = speed;
-	coordinates.x = 0.1;
-	coordinates.y = 0.1;
-	rect = sf::FloatRect(100, 180, 16, 16);
+	coordinates.x = 0;
+	coordinates.y = 0;
+	this->rect = rect;
 	animation.setPosition(coordinates);
 	offset.x = 0;
 	offset.y = 0;

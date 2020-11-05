@@ -15,7 +15,7 @@ private:
 	float heightOfJump;
 public:
 	Person();
-	Person(std::string pathToFile, float speed, float gravitation, float heightOfJump);
+	Person(std::string pathToFile, float speed, float gravitation, float heightOfJump, sf::FloatRect rect);
 
 	void move();
 	void update(float time, Person& p);
