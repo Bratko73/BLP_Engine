@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
 const int H = 17;
 const int W = 150;
 

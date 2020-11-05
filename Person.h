@@ -10,25 +10,23 @@ private:
 	sf::FloatRect rect;
 	bool onGround;
 	Animation animation;
-	//sf::Sprite sprite;
-	//Необходима доработка класса, данная часть кода - набросок.
 public:
 	Person();
 	Person(std::string pathToFile);
 
 	void move();
-	void update(float time, Person p);
+	void update(float time, Person& p);
 
 
 	float& getX();
 	float& getY();
 	float& getOffsetX();
 	float& getOffsetY();
-	float& getRectLeft();
-	float& getRectTop();
-	float& getRectHeight();
-	float& getRectWidth();
-	bool& getOnGround();
+	float getRectLeft();
+	float getRectTop();
+	float getRectHeight();
+	float getRectWidth();
+	bool getOnGround();
 	sf::Sprite getSprite();
 
 	void setOffsetX(float x);

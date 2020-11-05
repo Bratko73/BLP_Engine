@@ -1,5 +1,6 @@
 #pragma once
 #include "Person.h"
+#include "TestMap.h"
 
 class Collision {
 public:
