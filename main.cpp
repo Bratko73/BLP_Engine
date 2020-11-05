@@ -53,9 +53,6 @@ int main()
 				if (TileMap[i][j] == 'k')
 					tile.setTextureRect(sf::IntRect(143, 112, 16, 16));
 
-				if (TileMap[i][j] == 'c')
-					tile.setTextureRect(sf::IntRect(143 - 16, 112, 16, 16));
-
 				if (TileMap[i][j] == 't')
 					tile.setTextureRect(sf::IntRect(0, 47, 32, 95 - 47));
 
