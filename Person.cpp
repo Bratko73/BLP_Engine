@@ -7,8 +7,9 @@ Person::Person()
 {
 }
 
-Person::Person(std::string pathToFile)
+Person::Person(std::string pathToFile, float speed)
 {
+	this->speed = speed;
 	coordinates.x = 0.1;
 	coordinates.y = 0.1;
 	rect = sf::FloatRect(100, 180, 16, 16);
@@ -21,10 +22,10 @@ Person::Person(std::string pathToFile)
 void Person::move()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		coordinates.x = -0.1;
+		coordinates.x = -(speed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		coordinates.x = 0.1;
+		coordinates.x = speed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		if (onGround) {

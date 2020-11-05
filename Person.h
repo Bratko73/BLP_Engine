@@ -5,6 +5,7 @@
 class Person
 {
 private:
+	float speed;
 	sf::Vector2f offset;
 	sf::Vector2f coordinates;
 	sf::FloatRect rect;
@@ -12,7 +13,7 @@ private:
 	Animation animation;
 public:
 	Person();
-	Person(std::string pathToFile);
+	Person(std::string pathToFile, float speed);
 
 	void move();
 	void update(float time, Person& p);
