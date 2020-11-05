@@ -15,23 +15,24 @@ int main()
 	sf::Sprite tile(tileSet);
 
 	sf::Clock clock;
-
+	
 	while (window.isOpen())
 	{
 
-		float time = clock.getElapsedTime().asMicroseconds();
+	    float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 
 		time = time / 800;
 
 		if (time > 20)
 			time = 20;
-
+			
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+
 		}
 
 		Player.move();
@@ -82,6 +83,7 @@ int main()
 
 
 		window.draw(Player.getSprite());
+		
 		window.display();
 	}
    

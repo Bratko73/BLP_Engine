@@ -36,7 +36,7 @@ private:
 			this->TileFilePos = obj.TileFilePos;
 			this->TileSprite = obj.TileSprite;
 		}
-		Tile& operator = (const Tile obj)
+		Tile& operator = (const Tile& obj)
 		{
 			this->PathToFile = obj.PathToFile;
 			this->Size = obj.Size;
