@@ -10,6 +10,7 @@ Animation::Animation()
 	this->countOfFrames = 0;
 	this->frameSize.x = 0;
 	this->frameSize.y = 0;
+	this->rangeBetweenFrames = 0;
 }
 
 Animation::Animation(std::string pathToFile)
@@ -23,6 +24,7 @@ Animation::Animation(std::string pathToFile)
 	this->countOfFrames = 0;
 	this->frameSize.x = 0;
 	this->frameSize.y = 0;
+	this->rangeBetweenFrames = 0;
 }
 
 void Animation::setSpriteSheet(std::string pathToFile)
@@ -31,22 +33,22 @@ void Animation::setSpriteSheet(std::string pathToFile)
 	this->sprite.setTexture(texture);
 }
 
-void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed)
+void Animation::setAnimationParametres(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
 {
 	this->frameSize = size;
 	this->firstFrameCoordinates = firstFrameCoordinates;
 	this->countOfFrames = countOfFrames - 1;
 	this->speed = speed;
-	//this->distanceBetweenSprites = distanceBetweenSprites;
+	this->rangeBetweenFrames = rangeBetweenFrames;
 	update(0);
 }
 
 sf::Sprite Animation::update(float time)
 {
-	currentFrame += speed * time;
+	currentFrame += speed * time;// speed * time;
 	if (currentFrame > countOfFrames) 
 		currentFrame -= countOfFrames;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame), firstFrameCoordinates.y , frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + (rangeBetweenFrames + frameSize.x) * int(currentFrame), firstFrameCoordinates.y , frameSize.x, frameSize.y));
 	return sprite;
 }
 
@@ -55,7 +57,7 @@ sf::Sprite Animation::mirrorUpdate(float time)
 	currentFrame += speed * time;
 	if (currentFrame > countOfFrames)
 		currentFrame -= countOfFrames;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + frameSize.x * int(currentFrame)+frameSize.x, firstFrameCoordinates.y, -frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x + (rangeBetweenFrames + frameSize.x) * int(currentFrame)+frameSize.x, firstFrameCoordinates.y, -frameSize.x, frameSize.y));
 	return sprite;
 }
 

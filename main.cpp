@@ -8,10 +8,10 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(400, 250), "SFML works!");
 
 	sf::Texture tileSet;
-	tileSet.loadFromFile("D:/Libraries/sourses/Mario.jpg");
+	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 
-	Person Player("D:/Libraries/sourses/Mario.jpg", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
-	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 0.05);
+	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
+	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 14, 0.005);
 	sf::Sprite tile(tileSet);
 
 	sf::Clock clock;

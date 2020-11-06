@@ -131,9 +131,9 @@ void Person::setRectWidth(float width)
 	rect.width = width;
 }
 
-void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, float speed)
+void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
 {
-	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, speed);
+	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, rangeBetweenFrames, speed);
 	rect.height = size.y;
 	rect.width = size.x;
 }

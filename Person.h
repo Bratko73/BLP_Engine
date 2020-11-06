@@ -39,6 +39,6 @@ public:
 	void setRectTop(float top);
 	void setRectHeight(float height);
 	void setRectWidth(float width);
-	void setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, float speed = 0.005);
+	void setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, int rangeBetweenFrames = 0, float speed = 0.005);
 };
 
