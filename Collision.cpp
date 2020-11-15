@@ -41,14 +41,14 @@ bool Collision::npcCollision(Enemy& n, sf::String Map[])
 				if (n.getX() > 0)
 				{
 					n.setRectLeft(j * 16 - n.getRectWidth());
-					return 1;
+					return true;
 				}
 				else if (n.getX() < 0)
 				{
 					n.setRectLeft(j * 16 + 16);
-					return 1;
+					return true;
 				}
 
 			}
-	return 0;
+	return false;
 }
