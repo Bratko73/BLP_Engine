@@ -39,8 +39,7 @@ int main()
 		Player.update(time, Player);
 
 
-		if (Player.getRectLeft() > 200)
-			Player.setOffsetX(Player.getRectLeft() - 200);
+		Player.isEdgeOfMap(400);
 
 		window.clear(sf::Color(107, 140, 255));
 

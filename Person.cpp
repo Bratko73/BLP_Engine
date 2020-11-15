@@ -3,11 +3,7 @@
 #include "GameMap.h"
 #include "TestMap.h"
 
-Person::Person()
-{
-}
-
-Person::Person(std::string pathToFile, float speed, float gravitation, float heightOfJump, sf::FloatRect rect)
+Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect rect)
 {
 	this->heightOfJump = heightOfJump;
 	this->gravitation = gravitation;
@@ -19,6 +15,7 @@ Person::Person(std::string pathToFile, float speed, float gravitation, float hei
 	offset.x = 0;
 	offset.y = 0;
 	animation.setSpriteSheet(pathToFile);
+	onGround = 0;
 }
 
 void Person::move()
@@ -58,6 +55,12 @@ void Person::update(float time, Person& p)
 	coordinates.x = 0;
 }
 
+void Person::isEdgeOfMap(const int screenWidth)
+{
+	if (rect.left > screenWidth / 2)
+		offset.x = rect.left - screenWidth / 2;
+}
+
 float& Person::getX()
 {
 	return coordinates.x;
@@ -78,57 +81,44 @@ float& Person::getOffsetY()
 	return offset.y;
 }
 
-void Person::setOffsetX(float x)
-{
-	offset.x = x;
-}
-
-void Person::setOffsetY(float y)
-{
-	offset.y = y;
-}
-
 float Person::getRectLeft()
 {
 	return rect.left;
 }
+
 float Person::getRectTop()
 {
 	return rect.top;
 }
+
 float Person::getRectHeight()
 {
 	return rect.height;
 }
+
 float Person::getRectWidth()
 {
 	return rect.width;
 }
-bool Person::getOnGround() {
-	return onGround;
-}
+
 sf::Sprite Person::getSprite()
 {
 	return animation.getSprite();
 }
-void Person::setOnGround(bool val) {
+
+void Person::setOnGround(bool val) 
+{
 	onGround = val;
 }
+
 void Person::setRectLeft(float left)
 {
 	rect.left = left;
 }
+
 void Person::setRectTop(float top)
 {
 	rect.top = top;
-}
-void Person::setRectHeight(float height)
-{
-	rect.height = height;
-}
-void Person::setRectWidth(float width)
-{
-	rect.width = width;
 }
 
 void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
