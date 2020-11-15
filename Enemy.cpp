@@ -1,6 +1,10 @@
 #include "Enemy.h"
 #include "Collision.h"
 
+Enemy::Enemy()
+{
+}
+
 Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle)
 {
 	this->speed = speed;

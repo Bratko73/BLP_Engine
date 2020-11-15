@@ -10,6 +10,7 @@ class Enemy {
 	float speed;
 	Animation animation;
 public:
+	Enemy();
 	Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle);
 	void update(float time, Person& p);
 	void move(Enemy& n);
