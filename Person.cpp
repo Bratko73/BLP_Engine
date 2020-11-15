@@ -3,14 +3,14 @@
 #include "GameMap.h"
 #include "TestMap.h"
 
-Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect rect)
+Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect rectangle)
 {
 	this->heightOfJump = heightOfJump;
 	this->gravitation = gravitation;
 	this->speed = speed;
 	coordinates.x = 0;
 	coordinates.y = 0;
-	this->rect = rect;
+	this->rectangle = rectangle;
 	animation.setPosition(coordinates);
 	offset.x = 0;
 	offset.y = 0;
@@ -35,12 +35,12 @@ void Person::move()
 
 void Person::update(float time, Person& p)
 {
-	rect.left += coordinates.x * time;
+	rectangle.left += coordinates.x * time;
 	Collision::collision(0, p, TileMap);
 
 	if (!onGround)
 		coordinates.y += gravitation * time;
-	rect.top += coordinates.y * time;
+	rectangle.top += coordinates.y * time;
 	onGround = false;
 	Collision::collision(1, p, TileMap);
 
@@ -50,15 +50,15 @@ void Person::update(float time, Person& p)
 		if (coordinates.x < 0)
 			animation.mirrorUpdate(time);
 
-	animation.setPosition(rect.left - offset.x, rect.top - offset.y); 
+	animation.setPosition(rectangle.left - offset.x, rectangle.top - offset.y); 
 
 	coordinates.x = 0;
 }
 
 void Person::isEdgeOfMap(const int screenWidth)
 {
-	if (rect.left > screenWidth / 2)
-		offset.x = rect.left - screenWidth / 2;
+	if (rectangle.left > screenWidth / 2)
+		offset.x = rectangle.left - screenWidth / 2;
 }
 
 float& Person::getX()
@@ -81,24 +81,24 @@ float& Person::getOffsetY()
 	return offset.y;
 }
 
-float Person::getRectLeft()
+float Person::getRectangleLeft()
 {
-	return rect.left;
+	return rectangle.left;
 }
 
-float Person::getRectTop()
+float Person::getRectangleTop()
 {
-	return rect.top;
+	return rectangle.top;
 }
 
-float Person::getRectHeight()
+float Person::getRectangleHeight()
 {
-	return rect.height;
+	return rectangle.height;
 }
 
-float Person::getRectWidth()
+float Person::getRectangleWidth()
 {
-	return rect.width;
+	return rectangle.width;
 }
 
 sf::Sprite Person::getSprite()
@@ -106,9 +106,9 @@ sf::Sprite Person::getSprite()
 	return animation.getSprite();
 }
 
-sf::FloatRect Person::getRect()
+sf::FloatRect Person::getRectangle()
 {
-	return rect;
+	return rectangle;
 }
 
 void Person::setOnGround(bool val) 
@@ -116,19 +116,19 @@ void Person::setOnGround(bool val)
 	onGround = val;
 }
 
-void Person::setRectLeft(float left)
+void Person::setRectangleLeft(float left)
 {
-	rect.left = left;
+	rectangle.left = left;
 }
 
-void Person::setRectTop(float top)
+void Person::setRectangleTop(float top)
 {
-	rect.top = top;
+	rectangle.top = top;
 }
 
 void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
 {
 	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, rangeBetweenFrames, speed);
-	rect.height = size.y;
-	rect.width = size.x;
+	rectangle.height = size.y;
+	rectangle.width = size.x;
 }

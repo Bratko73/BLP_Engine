@@ -4,13 +4,13 @@
 
 class Enemy {
 	sf::Vector2f coordinates;
-	sf::FloatRect rect;
+	sf::FloatRect rectangle;
 	bool life;
 	float currentFrame;
 	float speed;
 	Animation animation;
 public:
-	Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect);
+	Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle);
 	void update(float time, Person& p);
 	void move(Enemy& n);
 	void Death(Person& p);
@@ -18,10 +18,10 @@ public:
 
 	float& getX();
 	sf::Sprite getSprite();
-	float getRectLeft();
-	float getRectTop();
-	float getRectHeight();
-	float getRectWidth();
+	float getRectangleLeft();
+	float getRectangleTop();
+	float getRectangleHeight();
+	float getRectangleWidth();
 
-	void setRectLeft(float left);
+	void setRectangleLeft(float left);
 };

@@ -1,10 +1,10 @@
 #include "Enemy.h"
 #include "Collision.h"
 
-Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect)
+Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle)
 {
 	this->speed = speed;
-	this->rect = rect;
+	this->rectangle = rectangle;
 	coordinates.x = 0.05;
 	currentFrame = 0;
 	life = true;
@@ -14,13 +14,13 @@ Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect
 
 void Enemy::update(float time, Person& p)
 {
-	rect.left += coordinates.x * time;
+	rectangle.left += coordinates.x * time;
 
 	animation.update(time);
 	if(!life)
 		Enemy::setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(58, 0), 2, 0, 0.005);
 
-	animation.setPosition(rect.left - p.getOffsetX(), rect.top - p.getOffsetY());
+	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
 
 void Enemy::move(Enemy& n)
@@ -31,7 +31,7 @@ void Enemy::move(Enemy& n)
 
 void Enemy::Death(Person& p)
 {
-	if (p.getRect().intersects(Enemy::rect))
+	if (p.getRectangle().intersects(Enemy::rectangle))
 	{
 		if (life) {
 			if (p.getY() > 0) {
@@ -46,8 +46,8 @@ void Enemy::Death(Person& p)
 void Enemy::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
 {
 	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, rangeBetweenFrames, speed);
-	rect.height = size.y;
-	rect.width = size.x;
+	rectangle.height = size.y;
+	rectangle.width = size.x;
 }
 
 float& Enemy::getX()
@@ -60,24 +60,24 @@ sf::Sprite Enemy::getSprite()
 	return animation.getSprite();
 }
 
-float Enemy::getRectLeft()
+float Enemy::getRectangleLeft()
 {
-	return rect.left;
+	return rectangle.left;
 }
-float Enemy::getRectTop()
+float Enemy::getRectangleTop()
 {
-	return rect.top;
+	return rectangle.top;
 }
-float Enemy::getRectHeight()
+float Enemy::getRectangleHeight()
 {
-	return rect.height;
+	return rectangle.height;
 }
-float Enemy::getRectWidth()
+float Enemy::getRectangleWidth()
 {
-	return rect.width;
+	return rectangle.width;
 }
 
-void Enemy::setRectLeft(float left)
+void Enemy::setRectangleLeft(float left)
 {
-	rect.left = left;
+	rectangle.left = left;
 }
