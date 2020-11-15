@@ -29,6 +29,7 @@ public:
 	float getRectHeight();
 	float getRectWidth();
 	sf::Sprite getSprite();
+	sf::FloatRect getRect();
 
 	void setOnGround(bool val);
 	void setRectLeft(float left);

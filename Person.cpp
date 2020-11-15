@@ -39,7 +39,7 @@ void Person::update(float time, Person& p)
 	Collision::collision(0, p, TileMap);
 
 	if (!onGround)
-		coordinates.y = coordinates.y + gravitation * time;
+		coordinates.y += gravitation * time;
 	rect.top += coordinates.y * time;
 	onGround = false;
 	Collision::collision(1, p, TileMap);
@@ -104,6 +104,11 @@ float Person::getRectWidth()
 sf::Sprite Person::getSprite()
 {
 	return animation.getSprite();
+}
+
+sf::FloatRect Person::getRect()
+{
+	return rect;
 }
 
 void Person::setOnGround(bool val) 

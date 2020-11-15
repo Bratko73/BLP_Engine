@@ -3,6 +3,8 @@
 #include"GameMap.h"
 #include"Person.h"
 #include "TestMap.h"
+#include "Enemy.h"
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(400, 250), "SFML works!");
@@ -12,6 +14,10 @@ int main()
 
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 14, 0.005);
+
+	Enemy enemy("D:/Libraries/sourses/Mario_tileset.png", 0.1, sf::FloatRect(832, 208, 16, 16));
+	enemy.setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+
 	sf::Sprite tile(tileSet);
 
 	sf::Clock clock;
@@ -36,8 +42,11 @@ int main()
 		}
 
 		Player.move();
+		enemy.move(enemy);
 		Player.update(time, Player);
+		enemy.update(time, Player);
 
+		enemy.Death(Player);
 
 		Player.isEdgeOfMap(400);
 
@@ -79,7 +88,7 @@ int main()
 
 
 		window.draw(Player.getSprite());
-		
+		window.draw(enemy.getSprite());
 		window.display();
 	}
    
