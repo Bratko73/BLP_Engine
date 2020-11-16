@@ -31,18 +31,29 @@ void Collision::collision(bool flag, Person& p, sf::String Map[])
 		}
 }
 
-bool Collision::npcCollision(Enemy& n, sf::String Map[])
+bool Collision::npcCollision(bool flag, Enemy& n, sf::String Map[])
 {
 	for (int i = n.getRectangleTop() / 16; i < (n.getRectangleTop() + n.getRectangleHeight()) / 16; i++)
 		for (int j = n.getRectangleLeft() / 16; j < (n.getRectangleLeft() + n.getRectangleWidth()) / 16; j++)
 			if ((Map[i][j] == 'P') || (Map[i][j] == 'k') || (Map[i][j] == '0') || (Map[i][j] == 'r') || (Map[i][j] == 't'))
 			{
-				if (n.getX() > 0)
+				if (n.getY() > 0 && flag == 1)
+				{
+					n.setRectangleTop(i * 16 - n.getRectangleHeight());
+					n.getY() = 0;
+					n.setOnGround(true);
+				}
+				if (n.getY() < 0 && flag == 1)
+				{
+					n.setRectangleTop(i * 16 + 16);
+					n.getY() = 0;
+				}
+				if (n.getX() > 0 && flag == 0)
 				{
 					n.setRectangleLeft(j * 16 - n.getRectangleWidth());
 					return true;
 				}
-				else if (n.getX() < 0)
+				else if (n.getX() < 0 && flag == 0)
 				{
 					n.setRectangleLeft(j * 16 + 16);
 					return true;
