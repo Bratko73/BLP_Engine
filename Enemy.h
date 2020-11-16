@@ -10,7 +10,6 @@ class Enemy {
 	bool onGround;
 	float gravitation;
 public:
-	Enemy();
 	Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation);
 	void update(float time, Person& p);
 	void move(Enemy& n);
