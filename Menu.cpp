@@ -20,28 +20,31 @@ void Menu::MainMenu(sf::RenderWindow& window)
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			switch (event.type) {
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case sf::Keyboard::Up:
+					if (menuNum > 1)
+						menuNum = 1;
+					break;
+				case sf::Keyboard::Down:
+					if (menuNum < 2)
+						menuNum = 2;
+					break;
+				}
+				break;
+			case sf::Event::Closed:
 				window.close();
-
+				break;
+			}
 		}
-
 		menuStart.setColor(sf::Color::White);
 		menuExit.setColor(sf::Color::White);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			menuNum++;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			menuNum--;
-		if (menuNum > 2)
-			menuNum = 1;
-		if (menuNum < 1)
-			menuNum = 2;
 		if (menuNum == 1) 
 			menuStart.setColor(sf::Color::Red);
-		if (menuNum == 2) 
+		if (menuNum == 2)
 			menuExit.setColor(sf::Color::Red);
-
-
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
 			if (menuNum == 1) 
@@ -53,7 +56,6 @@ void Menu::MainMenu(sf::RenderWindow& window)
 			}
 
 		}
-
 		window.draw(menuBg);
 		window.draw(menuTitle);
 		window.draw(menuStart);
