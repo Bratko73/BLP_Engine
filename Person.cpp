@@ -61,6 +61,11 @@ void Person::isEdgeOfMap(const int screenWidth)
 		offset.x = rectangle.left - screenWidth / 2;
 }
 
+void Person::Death()
+{
+	//прыгает и проваливается под землю
+}
+
 float& Person::getX()
 {
 	return coordinates.x;

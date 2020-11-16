@@ -19,6 +19,7 @@ public:
 	void move();
 	void update(float time, Person& p);
 	void isEdgeOfMap(const int screenWidth);
+	void Death();
 
 	float& getX();
 	float& getY();
