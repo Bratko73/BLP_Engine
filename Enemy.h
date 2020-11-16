@@ -6,8 +6,6 @@ class Enemy {
 	sf::Vector2f coordinates;
 	sf::FloatRect rectangle;
 	bool life;
-	float currentFrame;
-	float speed;
 	Animation animation;
 	bool onGround;
 	float gravitation;
