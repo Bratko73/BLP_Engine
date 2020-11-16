@@ -10,7 +10,6 @@ Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect
 	this->gravitation = gravitation;
 	this->rectangle = rectangle;
 	coordinates.x = speed;
-	currentFrame = 0;
 	life = true;
 	animation.setPosition(coordinates);
 	animation.setSpriteSheet(pathToFile);
