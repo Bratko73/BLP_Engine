@@ -4,6 +4,7 @@
 #include"Person.h"
 #include "TestMap.h"
 #include "Enemy.h"
+#include "Menu.h"
 
 int main()
 {
@@ -28,7 +29,8 @@ int main()
 	sf::Sprite tile(tileSet);
 
 	sf::Clock clock;
-	
+	Menu menu;
+	menu.MainMenu(window);
 	while (window.isOpen())
 	{
 
