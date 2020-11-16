@@ -2,48 +2,53 @@
 
 void Menu::MainMenu(sf::RenderWindow& window)
 {
-	sf::Texture menuTexture1, menuTexture2, menuTexture3, aboutTexture, menuBackground;
-	menuTexture1.loadFromFile("images/111.png");
-	menuTexture2.loadFromFile("images/222.png");
-	menuTexture3.loadFromFile("images/333.png");
-	aboutTexture.loadFromFile("images/about.png");
-	menuBackground.loadFromFile("images/Penguins.jpg");
-	sf::Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), about(aboutTexture), menuBg(menuBackground);
+	sf::Texture startTexture, exitTexture,titleTexture, menuBackground;
+	startTexture.loadFromFile("D:/Libraries/sourses/start.png");
+	exitTexture.loadFromFile("D:/Libraries/sourses/exit.png");
+	titleTexture.loadFromFile("D:/Libraries/sourses/title.png");
+	menuBackground.loadFromFile("D:/Libraries/sourses/MainMenuBackground.jpg");
+	sf::Sprite menuStart(startTexture), menuExit(exitTexture),menuTitle(titleTexture), menuBg(menuBackground);
 	bool isMenu = 1;
-	int menuNum = 0;
-	menu1.setPosition(100, 30);
-	menu2.setPosition(100, 90);
-	menu3.setPosition(100, 150);
-	menuBg.setPosition(345, 0);
-
-	//////////////////////////////МЕНЮ///////////////////
+	int menuNum = 1;
+	menuTitle.setPosition(0, 0);
+	menuStart.setPosition(200, 100);
+	menuExit.setPosition(200, 150);	
+	//menuBg.setPosition(0, 0);
 	while (isMenu)
 	{
-		menu1.setColor(sf::Color::White);
-		menu2.setColor(sf::Color::White);
-		menu3.setColor(sf::Color::White);
-		menuNum = 0;
-		window.clear(sf::Color(129, 181, 221));
+		menuStart.setColor(sf::Color::White);
+		menuExit.setColor(sf::Color::White);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			menuNum++;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			menuNum--;
+		if (menuNum > 2)
+			menuNum = 1;
+		if (menuNum < 1)
+			menuNum = 2;
+		if (menuNum == 1) 
+			menuStart.setColor(sf::Color::Red);
+		if (menuNum == 2) 
+			menuExit.setColor(sf::Color::Red);
 
-		if (sf::IntRect(100, 30, 300, 50).contains(sf::Mouse::getPosition(window))) { menu1.setColor(sf::Color::Blue); menuNum = 1; }
-		if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) { menu2.setColor(sf::Color::Blue); menuNum = 2; }
-		if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) { menu3.setColor(sf::Color::Blue); menuNum = 3; }
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
-			if (menuNum == 1) isMenu = false;//если нажали первую кнопку, то выходим из меню 
-			if (menuNum == 2) { window.draw(about); window.display(); while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); }
-			if (menuNum == 3) { window.close(); isMenu = false; }
+			if (menuNum == 1) 
+				isMenu = false;//если нажали первую кнопку, то выходим из меню 
+			//if (menuNum == 2) { window.draw(about); window.display(); while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); }
+			if (menuNum == 2) {
+				window.close();
+				isMenu = false; 
+			}
 
 		}
 
 		window.draw(menuBg);
-		window.draw(menu1);
-		window.draw(menu2);
-		window.draw(menu3);
-
+		window.draw(menuTitle);
+		window.draw(menuStart);
+		window.draw(menuExit);
 		window.display();
 	}
-	////////////////////////////////////////////////////
 }
 

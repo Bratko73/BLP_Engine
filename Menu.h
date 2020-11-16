@@ -3,6 +3,7 @@
 
 class Menu
 {
+public:
 	void MainMenu(sf::RenderWindow& window);
 };
 
