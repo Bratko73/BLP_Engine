@@ -16,8 +16,18 @@ void Menu::MainMenu(sf::RenderWindow& window)
 	//menuBg.setPosition(0, 0);
 	while (isMenu)
 	{
+		window.clear();		
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+		}
+
 		menuStart.setColor(sf::Color::White);
 		menuExit.setColor(sf::Color::White);
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			menuNum++;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
