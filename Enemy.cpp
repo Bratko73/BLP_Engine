@@ -5,20 +5,26 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle)
+Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation)
 {
-	this->speed = speed;
+	this->gravitation = gravitation;
 	this->rectangle = rectangle;
-	coordinates.x = 0.05;
+	coordinates.x = speed;
 	currentFrame = 0;
 	life = true;
 	animation.setPosition(coordinates);
 	animation.setSpriteSheet(pathToFile);
+	onGround = 0;
 }
 
 void Enemy::update(float time, Person& p)
 {
 	rectangle.left += coordinates.x * time;
+
+	if (!onGround)
+		coordinates.y += gravitation * time;
+	rectangle.top += coordinates.y * time;
+	onGround = false;
 
 	animation.update(time);
 	if(!life)
@@ -29,7 +35,8 @@ void Enemy::update(float time, Person& p)
 
 void Enemy::move(Enemy& n)
 {
-	if (Collision::npcCollision(n, TileMap))
+	Collision::npcCollision(1, n, TileMap);
+	if (Collision::npcCollision(0, n, TileMap))
 		n.coordinates.x *= -1;
 }
 
@@ -59,6 +66,11 @@ float& Enemy::getX()
 	return coordinates.x;
 }
 
+float& Enemy::getY()
+{
+	return coordinates.y;
+}
+
 sf::Sprite Enemy::getSprite()
 {
 	return animation.getSprite();
@@ -84,4 +96,14 @@ float Enemy::getRectangleWidth()
 void Enemy::setRectangleLeft(float left)
 {
 	rectangle.left = left;
+}
+
+void Enemy::setRectangleTop(float top)
+{
+	rectangle.top = top;
+}
+
+void Enemy::setOnGround(bool val)
+{
+	this->onGround = val;
 }

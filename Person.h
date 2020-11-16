@@ -9,8 +9,8 @@ private:
 	sf::Vector2f offset;
 	sf::Vector2f coordinates;
 	sf::FloatRect rectangle;
-	bool onGround;
 	Animation animation;
+	bool onGround;
 	float gravitation;
 	float heightOfJump;
 public:

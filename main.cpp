@@ -18,13 +18,12 @@ int main()
 	const int length = 2;
 	Enemy enemy[length]
 	{
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.1, sf::FloatRect(832, 208, 16, 16)),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.1, sf::FloatRect(130, 208, 16, 16)),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005),
 	};
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < length; i++)
 		enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-	}
 
 	sf::Sprite tile(tileSet);
 
@@ -65,28 +64,28 @@ int main()
 			for (int j = 0; j < W; j++)
 			{
 				if (TileMap[i][j] == 'P')
-					tile.setTextureRect(sf::IntRect(143 - 16 * 3, 112, 16, 16));
+					tile.setTextureRect(sf::IntRect(95, 112, 16, 16));
 
 				if (TileMap[i][j] == 'k')
 					tile.setTextureRect(sf::IntRect(143, 112, 16, 16));
 
 				if (TileMap[i][j] == 't')
-					tile.setTextureRect(sf::IntRect(0, 47, 32, 95 - 47));
+					tile.setTextureRect(sf::IntRect(0, 47, 32, 48));
 
 				if (TileMap[i][j] == 'g')
-					tile.setTextureRect(sf::IntRect(0, 16 * 9 - 5, 3 * 16, 16 * 2 + 5));
+					tile.setTextureRect(sf::IntRect(0, 139, 48, 37));
 
 				if (TileMap[i][j] == 'G')
-					tile.setTextureRect(sf::IntRect(145, 222, 222 - 145, 255 - 222));
+					tile.setTextureRect(sf::IntRect(145, 222, 77, 33));
 
 				if (TileMap[i][j] == 'd')
-					tile.setTextureRect(sf::IntRect(0, 106, 74, 127 - 106));
+					tile.setTextureRect(sf::IntRect(0, 106, 74, 21));
 
 				if (TileMap[i][j] == 'w')
-					tile.setTextureRect(sf::IntRect(99, 224, 140 - 99, 255 - 224));
+					tile.setTextureRect(sf::IntRect(99, 224, 41, 31));
 
 				if (TileMap[i][j] == 'r')
-					tile.setTextureRect(sf::IntRect(143 - 32, 112, 16, 16));
+					tile.setTextureRect(sf::IntRect(111, 112, 16, 16));
 
 				if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0'))
 					continue;
@@ -98,9 +97,8 @@ int main()
 
 		window.draw(Player.getSprite());
 
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++)
 			window.draw(enemy[i].getSprite());
-		}
 
 		window.display();
 	}
