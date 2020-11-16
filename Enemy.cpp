@@ -1,9 +1,6 @@
 #include "Enemy.h"
 #include "Collision.h"
 
-Enemy::Enemy()
-{
-}
 
 Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation)
 {
@@ -46,8 +43,11 @@ void Enemy::Death(Person& p)
 		if (life) {
 			if (p.getY() > 0) {
 				coordinates.x = 0;
-				p.getY() = -0.2;
+				p.getY() = -0.1;
 				life = false;
+			}
+			else {
+				p.Death();
 			}
 		}
 	}
