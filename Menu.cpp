@@ -35,7 +35,7 @@ void Menu::MainMenu(sf::RenderWindow& window)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
 			if (menuNum == 1) 
-				isMenu = false;//если нажали первую кнопку, то выходим из меню 
+				isMenu = false;
 			//if (menuNum == 2) { window.draw(about); window.display(); while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); }
 			if (menuNum == 2) {
 				window.close();
