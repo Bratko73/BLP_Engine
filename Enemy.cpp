@@ -24,7 +24,7 @@ void Enemy::update(float time, Person& p)
 
 	animation.update(time);
 	if(!life)
-		Enemy::setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(58, 0), 2, 0, 0.005);
+		Enemy::setAnimationSettings(sf::Vector2i(rectangle.width, rectangle.height), sf::Vector2i(58, 0), 2, 0, 0);
 
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
