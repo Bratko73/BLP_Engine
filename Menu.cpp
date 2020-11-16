@@ -11,8 +11,8 @@ void Menu::MainMenu(sf::RenderWindow& window)
 	bool isMenu = 1;
 	int menuNum = 1;
 	menuTitle.setPosition(0, 0);
-	menuStart.setPosition(200, 100);
-	menuExit.setPosition(200, 150);	
+	menuStart.setPosition(180, 100);
+	menuExit.setPosition(180, 150);	
 	//menuBg.setPosition(0, 0);
 	while (isMenu)
 	{
@@ -49,7 +49,6 @@ void Menu::MainMenu(sf::RenderWindow& window)
 		{
 			if (menuNum == 1) 
 				isMenu = false;
-			//if (menuNum == 2) { window.draw(about); window.display(); while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); }
 			if (menuNum == 2) {
 				window.close();
 				isMenu = false; 
