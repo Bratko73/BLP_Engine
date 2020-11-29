@@ -26,7 +26,6 @@ Interface::~Interface()
 void Interface::addElem(std::string pathToFile)
 {
 	textures[countOfSprites];
-	sprites[coun]
 }
 
 void Interface::increaceScore(int scoreIncrement)
