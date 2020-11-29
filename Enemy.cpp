@@ -2,7 +2,7 @@
 #include "Collision.h"
 
 
-Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation)
+Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation, const int index)
 {
 	this->gravitation = gravitation;
 	this->rectangle = rectangle;
@@ -11,6 +11,7 @@ Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect
 	animation.setPosition(coordinates);
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
+	this->index = index;
 }
 
 void Enemy::update(float time, Person& p)
@@ -22,9 +23,15 @@ void Enemy::update(float time, Person& p)
 	rectangle.top += coordinates.y * time;
 	onGround = false;
 
-	animation.update(time);
+	if (coordinates.x > 0)
+		animation.update(time);
+	if (coordinates.x < 0)
+		animation.mirrorUpdate(time);
 	if(!life)
-		Enemy::setAnimationSettings(sf::Vector2i(rectangle.width, rectangle.height), sf::Vector2i(58, 0), 2, 0, 0);
+		if (index == 1)
+			Enemy::setAnimationSettings(sf::Vector2i(16,16), sf::Vector2i(58, 0), 2, 0, 0);
+		else if (index == 2)
+			Enemy::setAnimationSettings(sf::Vector2i(16,13), sf::Vector2i(388, 268), 2, 0, 0);
 
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
@@ -33,7 +40,7 @@ void Enemy::move(Enemy& n)
 {
 	Collision::npcCollision(1, n, TileMap);
 	if (Collision::npcCollision(0, n, TileMap))
-		n.coordinates.x *= -1;
+			n.coordinates.x *= -1;
 }
 
 void Enemy::Death(Person& p)
@@ -90,6 +97,11 @@ float Enemy::getRectangleHeight()
 float Enemy::getRectangleWidth()
 {
 	return rectangle.width;
+}
+
+int Enemy::getIndex()
+{
+	return index;
 }
 
 void Enemy::setRectangleLeft(float left)

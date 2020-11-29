@@ -9,8 +9,9 @@ class Enemy {
 	Animation animation;
 	bool onGround;
 	float gravitation;
+	int index;
 public:
-	Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation);
+	Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation, const int index);
 	void update(float time, Person& p);
 	void move(Enemy& n);
 	void Death(Person& p);
@@ -23,6 +24,7 @@ public:
 	float getRectangleTop();
 	float getRectangleHeight();
 	float getRectangleWidth();
+	int getIndex();
 
 	void setRectangleLeft(float left);
 	void setRectangleTop(float top);
