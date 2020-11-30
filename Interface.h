@@ -1,24 +1,27 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
-//DOES NOT WORK!Leave HOPE everyone who enters here
+
 class Interface
 {
 private:
 	int score;
-	int time;
+	float time;
 	int money;
-	int level;
-	sf::Texture textures[9];
-	sf::Sprite sprites[9];
-	int countOfSprites;
+	std::string level;
+	sf::Font font;
+	sf::Text titles[8];
+	int countOfTitles;
 public:
 	Interface();
-	Interface(int score, int time, int money, int level);
+	Interface(std::string pathToFont, int score, int money, std::string level, float time);
+	Interface(std::string pathToFont);
 	~Interface();
-	void addElem(std::string pathToFile);
 	void increaceScore(int scoreIncrement);
-	void setSpritePosition(int item, sf::Vector2f Position);
+	void increaceMoney(int moneyIncrement);
+	void changeLevel(std::string level);
+	void updateTime(float time);
+	void setTitlePosition(int item, sf::Vector2f Position);
 	void draw(sf::RenderWindow& window);
 };
 

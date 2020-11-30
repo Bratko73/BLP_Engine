@@ -5,6 +5,7 @@
 #include "TestMap.h"
 #include "Enemy.h"
 #include "Menu.h"
+#include "Interface.h"
 
 int main()
 {
@@ -30,15 +31,23 @@ int main()
 		else if (enemy[i].getIndex() == 2)
 			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
 	}
-
 	sf::Sprite tile(tileSet);
-
+	
+	Interface interface("D:/Libraries/sourses/19783.ttf");
+	interface.setTitlePosition(0, sf::Vector2f(25, 20));
+	interface.setTitlePosition(1, sf::Vector2f(135, 20));
+	interface.setTitlePosition(2, sf::Vector2f(200, 20));
+	interface.setTitlePosition(3, sf::Vector2f(300, 20));
+	interface.setTitlePosition(4, sf::Vector2f(25, 2));
+	interface.setTitlePosition(5, sf::Vector2f(125, 2));
+	interface.setTitlePosition(6, sf::Vector2f(200, 2));
+	interface.setTitlePosition(7, sf::Vector2f(300, 2));
 	sf::Clock clock;
 	Menu menu;
 	menu.MainMenu(window);
 	while (window.isOpen())
 	{
-
+		interface.updateTime(clock.getElapsedTime().asSeconds());
 	    float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 
@@ -106,7 +115,7 @@ int main()
 
 		for (int i = 0; i < length; i++)
 			window.draw(enemy[i].getSprite());
-
+		interface.draw(window);
 		window.display();
 	}
    
