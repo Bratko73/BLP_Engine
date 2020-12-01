@@ -1,7 +1,7 @@
 #BLP_Engine - game Mario
 =
 
-Project diricted by
+Project directed by
 --------------------
 Bobrovskih M., Pushin S. and Laptev A.
 
