@@ -68,13 +68,13 @@ void Person::Death(const int screenHeight)
 		if ((pixelCounter > 0) && (pixelCounter < heightOfJump * 237))
 		{
 			animation.setPosition(rectangle.left - offset.x, rectangle.top - pixelCounter);
-			pixelCounter += 0.3;
+			pixelCounter += 0.4;
 		}
 		else if (pixelCounter > heightOfJump * 237)
 			pixelCounter = 0;
 		else if ((rectangle.top - heightOfJump * 237 - pixelCounter) < screenHeight) {
 			animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * 237 - pixelCounter));
-			pixelCounter -=0.3;
+			pixelCounter -=0.4;
 		}
 }
 

@@ -21,12 +21,12 @@ int main()
 	Enemy enemy[numberOfEnemy]
 	{
 		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Gumba", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Gumba", 0),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Lenin", 0),
 	};
 
 	for (int i = 0; i < numberOfEnemy; i++) {
-		if (enemy[i].getName() == "Gumba")
+		if (enemy[i].getName() == "Lenin")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
 		else if (enemy[i].getName() == "Turtle")
 			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
@@ -71,7 +71,10 @@ int main()
 			for (int i = 0; i < numberOfEnemy; i++) {
 				enemy[i].move(enemy[i]);
 				enemy[i].update(time, Player);
-				enemy[i].Death(Player);
+				if (enemy[i].Death(Player) && enemy[i].getName() == "Lenin")
+					interface.increaceScore(10);
+				else if (enemy[i].Death(Player) && enemy[i].getName() == "Turtle")
+					interface.increaceScore(25);
 			}
 		}
 		else

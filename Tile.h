@@ -9,6 +9,7 @@ private:
 	sf::Texture Texture;
 	sf::Sprite Sprite;
 	sf::Vector2i StartPos;
+	bool hardness;
 public:
 	Tile(std::string path);
 	Tile();

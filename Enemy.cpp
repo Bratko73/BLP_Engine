@@ -29,7 +29,7 @@ void Enemy::update(float time, Person& p)
 	if (coordinates.x < 0)
 		animation.mirrorUpdate(time);
 	if(!life)
-		if (name == "Gumba")
+		if (name == "Lenin")
 			Enemy::setAnimationSettings(sf::Vector2i(16,16), sf::Vector2i(58, 0), 2, 0, 0);
 		else if (name == "Turtle")
 			Enemy::setAnimationSettings(sf::Vector2i(16,13), sf::Vector2i(388, 268), 2, 0, 0);
@@ -43,10 +43,8 @@ void Enemy::move(Enemy& n)
 	if (Collision::npcCollision(0, n, TileMap))
 			n.coordinates.x *= -1;
 	if (name == "Turtle") {
-		int i = rectangle.top / 16;
-		int j = rectangle.left / 16;
 		if (coordinates.x > 0) {
-			if (TileMap[i + 1][j + 2] == '0' || TileMap[i + 1][j + 2] == 'r')
+			if (TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 + 2] == '0' || TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 + 2] == 'r')
 				if (onGround) {
 					coordinates.y = -heightOfJump;
 					onGround = false;
@@ -54,7 +52,7 @@ void Enemy::move(Enemy& n)
 		}
 		else if (coordinates.x < 0)
 			if (rectangle.left > 33)
-				if (TileMap[i + 1][j - 2] == '0' || TileMap[i + 1][j - 2] == 'r')
+				if (TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 - 2] == '0' || TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 - 2] == 'r')
 					if (onGround) {
 						coordinates.y = -heightOfJump;
 						onGround = false;
@@ -62,7 +60,7 @@ void Enemy::move(Enemy& n)
 	}
 }
 
-void Enemy::Death(Person& p)
+bool Enemy::Death(Person& p)
 {
 	if (p.getRectangle().intersects(Enemy::rectangle))
 	{
@@ -71,12 +69,14 @@ void Enemy::Death(Person& p)
 				coordinates.x = 0;
 				p.getY() = -0.1;
 				life = false;
+				return true;
 			}
 			else {
 				p.setLife(false);
 			}
 		}
 	}
+	return false;
 }
 
 void Enemy::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
