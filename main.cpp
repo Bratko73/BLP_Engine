@@ -17,15 +17,15 @@ int main()
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 14, 0.005);
 
-	const int length = 3;
-	Enemy enemy[length]
+	const int numberOfEnemy = 3;
+	Enemy enemy[numberOfEnemy]
 	{
 		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Gumba", 0),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Gumba", 0),
 	};
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < numberOfEnemy; i++) {
 		if (enemy[i].getName() == "Gumba")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
 		else if (enemy[i].getName() == "Turtle")
@@ -68,7 +68,7 @@ int main()
 			Player.update(time, Player);
 			Player.isEdgeOfMap(400);
 
-			for (int i = 0; i < length; i++) {
+			for (int i = 0; i < numberOfEnemy; i++) {
 				enemy[i].move(enemy[i]);
 				enemy[i].update(time, Player);
 				enemy[i].Death(Player);
@@ -118,7 +118,7 @@ int main()
 
 		window.draw(Player.getSprite());
 
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < numberOfEnemy; i++)
 			window.draw(enemy[i].getSprite());
 		interface.draw(window);
 		window.display();
