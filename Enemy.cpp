@@ -2,7 +2,7 @@
 #include "Collision.h"
 
 
-Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation, const int index)
+Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rectangle, float gravitation, const std::string name, float heightOfJump)
 {
 	this->gravitation = gravitation;
 	this->rectangle = rectangle;
@@ -11,7 +11,8 @@ Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect
 	animation.setPosition(coordinates);
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
-	this->index = index;
+	this->name = name;
+	this->heightOfJump = heightOfJump;
 }
 
 void Enemy::update(float time, Person& p)
@@ -28,9 +29,9 @@ void Enemy::update(float time, Person& p)
 	if (coordinates.x < 0)
 		animation.mirrorUpdate(time);
 	if(!life)
-		if (index == 1)
+		if (name == "Gumba")
 			Enemy::setAnimationSettings(sf::Vector2i(16,16), sf::Vector2i(58, 0), 2, 0, 0);
-		else if (index == 2)
+		else if (name == "Turtle")
 			Enemy::setAnimationSettings(sf::Vector2i(16,13), sf::Vector2i(388, 268), 2, 0, 0);
 
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
@@ -41,6 +42,24 @@ void Enemy::move(Enemy& n)
 	Collision::npcCollision(1, n, TileMap);
 	if (Collision::npcCollision(0, n, TileMap))
 			n.coordinates.x *= -1;
+	if (name == "Turtle") {
+		int i = rectangle.top / 16;
+		int j = rectangle.left / 16;
+		if (coordinates.x > 0) {
+			if (TileMap[i + 1][j + 2] == '0' || TileMap[i + 1][j + 2] == 'r')
+				if (onGround) {
+					coordinates.y = -heightOfJump;
+					onGround = false;
+				}
+		}
+		else if (coordinates.x < 0)
+			if (rectangle.left > 33)
+				if (TileMap[i + 1][j - 2] == '0' || TileMap[i + 1][j - 2] == 'r')
+					if (onGround) {
+						coordinates.y = -heightOfJump;
+						onGround = false;
+					}
+	}
 }
 
 void Enemy::Death(Person& p)
@@ -54,7 +73,7 @@ void Enemy::Death(Person& p)
 				life = false;
 			}
 			else {
-				p.Death();
+				p.setLife(false);
 			}
 		}
 	}
@@ -99,9 +118,9 @@ float Enemy::getRectangleWidth()
 	return rectangle.width;
 }
 
-int Enemy::getIndex()
+std::string Enemy::getName()
 {
-	return index;
+	return name;
 }
 
 void Enemy::setRectangleLeft(float left)

@@ -19,15 +19,15 @@ int main()
 	const int length = 3;
 	Enemy enemy[length]
 	{
-		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, 2),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, 1),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, 1),
+		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Gumba", 0),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Gumba", 0),
 	};
 
 	for (int i = 0; i < length; i++) {
-		if (enemy[i].getIndex() == 1)
+		if (enemy[i].getName() == "Gumba")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-		else if (enemy[i].getIndex() == 2)
+		else if (enemy[i].getName() == "Turtle")
 			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
 	}
 
@@ -52,17 +52,22 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-
 		}
+		
+		if (Player.getLife() == true) {
+			Player.move();
+			Player.update(time, Player);
+			Player.isEdgeOfMap(400);
 
-		Player.move();
-		Player.update(time, Player);
-		Player.isEdgeOfMap(400);
-
-		for (int i = 0; i < length; i++) {
-			enemy[i].move(enemy[i]);
-			enemy[i].update(time, Player);
-			enemy[i].Death(Player);
+			for (int i = 0; i < length; i++) {
+				enemy[i].move(enemy[i]);
+				enemy[i].update(time, Player);
+				enemy[i].Death(Player);
+			}
+		}
+		else
+		{
+			Player.Death(250);
 		}
 
 		window.clear(sf::Color(107, 140, 255));

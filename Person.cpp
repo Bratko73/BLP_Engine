@@ -16,6 +16,7 @@ Person::Person(std::string pathToFile, const float speed, const float gravitatio
 	offset.y = 0;
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
+	life = true;
 }
 
 void Person::move()
@@ -61,9 +62,20 @@ void Person::isEdgeOfMap(const int screenWidth)
 		offset.x = rectangle.left - screenWidth / 2;
 }
 
-void Person::Death()
+void Person::Death(const int screenHeight)
 {
-	//прыгает и проваливается под землю
+	static float  pixelCounter = 0.1;
+		if ((pixelCounter > 0) && (pixelCounter < heightOfJump * 237))
+		{
+			animation.setPosition(rectangle.left - offset.x, rectangle.top - pixelCounter);
+			pixelCounter += 0.3;
+		}
+		else if (pixelCounter > heightOfJump * 237)
+			pixelCounter = 0;
+		else if ((rectangle.top - heightOfJump * 237 - pixelCounter) < screenHeight) {
+			animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * 237 - pixelCounter));
+			pixelCounter -=0.3;
+		}
 }
 
 float& Person::getX()
@@ -116,7 +128,17 @@ sf::FloatRect Person::getRectangle()
 	return rectangle;
 }
 
-void Person::setOnGround(bool val) 
+bool Person::getLife()
+{
+	return life;
+}
+
+void Person::setLife(bool life)
+{
+	this->life = life;
+}
+
+void Person::setOnGround(bool val)
 {
 	onGround = val;
 }
