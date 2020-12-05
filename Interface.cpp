@@ -2,48 +2,98 @@
 
 Interface::Interface()
 {
-	this->score = score;
-	this->time = time;
-	this->money = money;
-	this->level = level;
-	this->countOfSprites = 0;
+	this->score = 0;
+	this->time = 999;
+	this->money = 0;
+	this->level = "1-1";
+	this->countOfTitles = 8;
 }
 
-Interface::Interface(int score, int time, int money, int level)
+Interface::Interface(std::string pathToFont, int score, int money, std::string level, float time)
 {
+
 	this->score = score;
 	this->time = time;
 	this->money = money;
 	this->level = level;
+	this->countOfTitles = 8;
+	font.loadFromFile(pathToFont);
+	for (int i = 0; i < countOfTitles; i++) {
+		titles[i].setFont(font);
+	}
+	titles[0].setString("000000");
+	titles[1].setString("00");
+	titles[2].setString(level);
+	titles[3].setString("999");
+	titles[4].setString("MARIO");
+	titles[5].setString("COINS");
+	titles[6].setString("WORLD");
+	titles[7].setString("TIME");
+}
+
+Interface::Interface(std::string pathToFont)
+{
+	this->score = 0;
+	this->time = 999;
+	this->money = 0;
+	this->level = "1-1";
+	this->countOfTitles = 8;
+	font.loadFromFile(pathToFont);
+	for (int i = 0; i < countOfTitles; i++) {
+		titles[i].setFont(font);
+	}
+	titles[0].setString("000000");
+	titles[1].setString("00");
+	titles[2].setString(level);
+	titles[3].setString("999");
+	titles[4].setString("MARIO");
+	titles[5].setString("MONEY");
+	titles[6].setString("WORLD");
+	titles[7].setString("TIME");
 }
 
 Interface::~Interface()
 {
-	delete[] textures;
-	delete[] sprites;
-}
-
-void Interface::addElem(std::string pathToFile)
-{
-	textures[countOfSprites];
 }
 
 void Interface::increaceScore(int scoreIncrement)
 {
 	this->score += scoreIncrement;
+	if (score >= 1000000)
+		score = 999999;
+	//std::string temp = std::to_string(score);
+	titles[0].setString(std::to_string(score));
 }
 
-void Interface::setSpritePosition(int item, sf::Vector2f Position)
+void Interface::increaceMoney(int moneyIncrement)
 {
-	item--;
-	if (item < this->countOfSprites || item >= 0)
-	{
-		sprites[item].setPosition(Position);
-	}
-	else
-		return;
+	
+	this->money += moneyIncrement;
+	if (money >= 100)
+		score = 99;
+	titles[1].setString(std::to_string(money));
+}
+
+void Interface::changeLevel(std::string level)
+{
+	this->level = level;
+	titles[2].setString(this->level);
+}
+
+void Interface::updateTime(float time)
+{
+	this->time -= time;
+	titles[3].setString(std::to_string(int(this->time)));
+
+}
+
+void Interface::setTitlePosition(int item, sf::Vector2f Position)
+{
+	titles[item].setPosition(Position);
 }
 
 void Interface::draw(sf::RenderWindow& window)
 {
+	for (int i = 0; i < countOfTitles; i++)
+		window.draw(titles[i]);
 }
