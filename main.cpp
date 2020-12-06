@@ -5,36 +5,49 @@
 #include "TestMap.h"
 #include "Enemy.h"
 #include "Menu.h"
-#include <map>
-#include "Tile.h"
+#include "Interface.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(400, 250), "SFML works!");
-    sf::Texture tileSet;
+
+	sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 14, 0.005);
 
-	const int length = 2;
-	Enemy enemy[length]
+	const int numberOfEnemy = 3;
+	Enemy enemy[numberOfEnemy]
 	{
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005),
+		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Lenin", 0),
 	};
 
-	for (int i = 0; i < length; i++)
-		enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-
+	for (int i = 0; i < numberOfEnemy; i++) {
+		if (enemy[i].getName() == "Lenin")
+			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+		else if (enemy[i].getName() == "Turtle")
+			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
+	}
 	sf::Sprite tile(tileSet);
-
+	
+	Interface interface("D:/Libraries/sourses/19783.ttf");
+	interface.setTitlePosition(0, sf::Vector2f(25, 20));
+	interface.setTitlePosition(1, sf::Vector2f(135, 20));
+	interface.setTitlePosition(2, sf::Vector2f(200, 20));
+	interface.setTitlePosition(3, sf::Vector2f(300, 20));
+	interface.setTitlePosition(4, sf::Vector2f(25, 2));
+	interface.setTitlePosition(5, sf::Vector2f(125, 2));
+	interface.setTitlePosition(6, sf::Vector2f(200, 2));
+	interface.setTitlePosition(7, sf::Vector2f(300, 2));
 	sf::Clock clock;
 	Menu menu;
 	menu.MainMenu(window);
 	while (window.isOpen())
 	{
-
+		interface.updateTime(clock.getElapsedTime().asSeconds());
 	    float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 
@@ -48,17 +61,25 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-
 		}
+		
+		if (Player.getLife() == true) {
+			Player.move();
+			Player.update(time, Player);
+			Player.isEdgeOfMap(400);
 
-		Player.move();
-		Player.update(time, Player);
-		Player.isEdgeOfMap(400);
-
-		for (int i = 0; i < length; i++) {
-			enemy[i].move(enemy[i]);
-			enemy[i].update(time, Player);
-			enemy[i].Death(Player);
+			for (int i = 0; i < numberOfEnemy; i++) {
+				enemy[i].move(enemy[i]);
+				enemy[i].update(time, Player);
+				if (enemy[i].Death(Player) && enemy[i].getName() == "Lenin")
+					interface.increaceScore(10);
+				else if (enemy[i].Death(Player) && enemy[i].getName() == "Turtle")
+					interface.increaceScore(25);
+			}
+		}
+		else
+		{
+			Player.Death(250);
 		}
 
 		window.clear(sf::Color(107, 140, 255));
@@ -100,10 +121,11 @@ int main()
 
 		window.draw(Player.getSprite());
 
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < numberOfEnemy; i++)
 			window.draw(enemy[i].getSprite());
-
+		interface.draw(window);
 		window.display();
 	}
+   
     return 0;
 }

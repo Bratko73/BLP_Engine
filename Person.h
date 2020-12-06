@@ -13,13 +13,14 @@ private:
 	bool onGround;
 	float gravitation;
 	float heightOfJump;
+	bool life;
 public:
 	Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect Rectangle);
 
 	void move();
 	void update(float time, Person& p);
 	void isEdgeOfMap(const int screenWidth);
-	void Death();
+	void Death(const int screenHeight);
 
 	float& getX();
 	float& getY();
@@ -31,7 +32,9 @@ public:
 	float getRectangleWidth();
 	sf::Sprite getSprite();
 	sf::FloatRect getRectangle();
+	bool getLife();
 
+	void setLife(bool life);
 	void setOnGround(bool val);
 	void setRectangleLeft(float left);
 	void setRectangleTop(float top);
