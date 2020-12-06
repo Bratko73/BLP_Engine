@@ -5,12 +5,13 @@
 #include "TestMap.h"
 #include "Enemy.h"
 #include "Menu.h"
+#include <map>
+#include "Tile.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(400, 250), "SFML works!");
-
-	sf::Texture tileSet;
+    sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
@@ -104,6 +105,5 @@ int main()
 
 		window.display();
 	}
-   
     return 0;
 }
