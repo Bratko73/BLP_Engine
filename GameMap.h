@@ -10,8 +10,12 @@ private:
 	Tile** Map;
 	int x_size;
 	int y_size;
+	sf::Texture Background;
 public:
-	//¬ данный момент здесь пусто. ћетоды будут добавлены, когда окончательно будет определены уровни, их размеры и используемые тайлы.
+	GameMap(sf::Vector2i size, std::string PathToBackground);
+	void loadFromFile(const std::string &filePath, std::map<char, Tile> dictionary);
+	void SetCell(int x, int y, Tile& tile);
+	void ReadFromFile(std::string path, std::map<char, Tile> dictionary);
 };
 
 
