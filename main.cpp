@@ -6,12 +6,31 @@
 #include "Enemy.h"
 #include "Menu.h"
 #include "Interface.h"
-
+#include <map>
 int main()
 {
+	//Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	sf::RenderWindow window(sf::VideoMode(400, 250), "SFML works!");
+	Tile tile(1, "D:/Libraries/sourses/tileset.png");
+	std::map<char, Tile> test = { {'A', tile}, {' ', Tile()} };
+	GameMap Test(9, 6, "D:/Libraries/sourses/tileset.png");
+	Test.loadFromFile("D:/Libraries/sourses/test.txt", test);
+	
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+			
+		}
 
-	sf::Texture tileSet;
+		Test.DrawMap(window);
+		//window.draw(Player.getSprite());
+		window.display();
+	}
+	/*sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
@@ -126,6 +145,6 @@ int main()
 		interface.draw(window);
 		window.display();
 	}
-   
+   */
     return 0;
 }
