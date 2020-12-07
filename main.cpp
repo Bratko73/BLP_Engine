@@ -83,6 +83,7 @@ int main()
 		}
 		
 		if (Player.getLife() == true) {
+
 			Player.move();
 			Player.update(time, Player);
 			Player.isEdgeOfMap(400);
@@ -90,10 +91,7 @@ int main()
 			for (int i = 0; i < numberOfEnemy; i++) {
 				enemy[i].move(enemy[i]);
 				enemy[i].update(time, Player);
-				if (enemy[i].Death(Player) && enemy[i].getName() == "Lenin")
-					interface.increaceScore(10);
-				else if (enemy[i].Death(Player) && enemy[i].getName() == "Turtle")
-					interface.increaceScore(25);
+				enemy[i].Death(Player, interface);
 			}
 		}
 		else
