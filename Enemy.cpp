@@ -60,7 +60,7 @@ void Enemy::move(Enemy& n)
 	}
 }
 
-bool Enemy::Death(Person& p)
+bool Enemy::Death(Person& p, Interface& i)
 {
 	if (p.getRectangle().intersects(Enemy::rectangle))
 	{
@@ -68,6 +68,10 @@ bool Enemy::Death(Person& p)
 			if (p.getY() > 0) {
 				coordinates.x = 0;
 				p.getY() = -0.1;
+				if (name == "Lenin")
+					i.increaceScore(10);
+				else if (name == "Turtle")
+					i.increaceScore(25);
 				life = false;
 				return true;
 			}
