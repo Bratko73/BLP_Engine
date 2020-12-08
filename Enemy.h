@@ -18,6 +18,7 @@ public:
 	void move(Enemy& n);
 	bool Death(Person& p, Interface& i);
 	void setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, int rangeBetweenFrames = 0, float speed = 0.005);
+	void play(float time, Person& Player, Interface& interface, Enemy enemy[], const int index);
 
 	float& getX();
 	float& getY();

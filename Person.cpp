@@ -78,6 +78,17 @@ void Person::Death(const int screenHeight)
 		}
 }
 
+void Person::play(float time, Person& player, const int screenWidth, const int screenHeight)
+{
+	if (life == true) {
+		move();
+		update(time, player);
+		isEdgeOfMap(screenWidth);
+	}
+	else
+		Death(screenHeight);
+}
+
 float& Person::getX()
 {
 	return coordinates.x;

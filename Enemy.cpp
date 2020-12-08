@@ -90,6 +90,13 @@ void Enemy::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoord
 	rectangle.width = size.x;
 }
 
+void Enemy::play(float time, Person& Player, Interface& interface, Enemy enemy[], const int index)
+{
+		enemy[index].move(enemy[index]);
+		enemy[index].update(time, Player);
+		enemy[index].Death(Player, interface);
+}
+
 float& Enemy::getX()
 {
 	return coordinates.x;

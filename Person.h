@@ -21,6 +21,7 @@ public:
 	void update(float time, Person& p);
 	void isEdgeOfMap(const int screenWidth);
 	void Death(const int screenHeight);
+	void play(float time, Person& player, const int screenWidth, const int screenHeight);
 
 	float& getX();
 	float& getY();
