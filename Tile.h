@@ -1,17 +1,18 @@
 #pragma once
-#include <iostream>
-#include "SFML/include/SFML/Graphics.hpp"
+#include "SFML/Graphics.hpp"
 class Tile
 {
-private:
-	std::string FilePath;
-	sf::Vector2i TileSize;
-	sf::Texture Texture;
-	sf::Sprite Sprite;
-	sf::Vector2i StartPos;
+protected:
 	bool hardness;
+	sf::Texture texture;
+	sf::Sprite sprite;
+	sf::Vector2i SizeOfTile;
+	std::string PathToTexture;
 public:
-	Tile(std::string path);
 	Tile();
+	Tile(bool hardness, std::string path_to_texture);
+	Tile(const Tile& obj);
+	sf::Sprite& Get_Sprite();
+	void Set_Position(float xPos, float yPos);
 };
 
