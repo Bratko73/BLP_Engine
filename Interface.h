@@ -16,12 +16,12 @@ public:
 	Interface();
 	Interface(std::string pathToFont, int score, int money, std::string level, float time);
 	Interface(std::string pathToFont);
-	~Interface();
 	void increaceScore(int scoreIncrement);
 	void increaceMoney(int moneyIncrement);
 	void changeLevel(std::string level);
 	void updateTime(float time);
 	void setTitlePosition(int item, sf::Vector2f Position);
+	void setFont(std::string pathToFont);
 	void draw(sf::RenderWindow& window);
 };
 

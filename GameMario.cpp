@@ -1,42 +1,96 @@
-#include "SFML/include/SFML/Graphics.hpp"
-/*#include "Animation.h"
-#include"GameMap.h"
-#include"Person.h"
-#include "TestMap.h"
-#include "Enemy.h"
-#include "Menu.h"
-#include "Interface.h"
-#include <map>*/
 #include "GameMario.h"
-int main()
+
+GameMario::GameMario(int lives)
 {
-	//Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
-	sf::RenderWindow window(sf::VideoMode(400, 250), "Fuk yea!");
-	const int lives = 4;
-	GameMario Mario(lives);
-	Mario.init();
-	Mario.mainMenu(window);
-	/*
-	Tile tile(1, "D:/Libraries/sourses/tileset.png");
-	std::map<char, Tile> test = { {'A', tile}, {' ', Tile()} };
-	GameMap Test(9, 6, "D:/Libraries/sourses/tileset.png");
-	Test.loadFromFile("D:/Libraries/sourses/test.txt", test);
-	
-	while (window.isOpen())
+	this->lives = lives;
+	this->map = GameMap(10,10);
+}
+
+void GameMario::init()
+{
+	interface.setFont("D:/Libraries/sourses/19783.ttf");
+	interface.setTitlePosition(0, sf::Vector2f(25, 20));
+	interface.setTitlePosition(1, sf::Vector2f(135, 20));
+	interface.setTitlePosition(2, sf::Vector2f(200, 20));
+	interface.setTitlePosition(3, sf::Vector2f(300, 20));
+	interface.setTitlePosition(4, sf::Vector2f(25, 2));
+	interface.setTitlePosition(5, sf::Vector2f(125, 2));
+	interface.setTitlePosition(6, sf::Vector2f(200, 2));
+	interface.setTitlePosition(7, sf::Vector2f(300, 2));
+}
+
+void GameMario::mainMenu(sf::RenderWindow& window)
+{
+	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
+	startTexture.loadFromFile("D:/Libraries/sourses/start.png");
+	exitTexture.loadFromFile("D:/Libraries/sourses/exit.png");
+	titleTexture.loadFromFile("D:/Libraries/sourses/title.png");
+	menuBackground.loadFromFile("D:/Libraries/sourses/MainMenuBackground.jpg");
+	sf::Sprite menuStart(startTexture), menuExit(exitTexture), menuTitle(titleTexture), menuBg(menuBackground);
+	bool isMenu = 1;
+	int menuNum = 1;
+	menuTitle.setPosition(0, 0);
+	menuStart.setPosition(180, 100);
+	menuExit.setPosition(180, 150);
+
+	while (isMenu)
 	{
+		window.clear();
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			switch (event.type) {
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case sf::Keyboard::Up:
+					if (menuNum > 1)
+						menuNum = 1;
+					break;
+				case sf::Keyboard::Down:
+					if (menuNum < 2)
+						menuNum = 2;
+					break;
+				}
+				break;
+			case sf::Event::Closed:
 				window.close();
-			
+				break;
+			}
 		}
+		menuStart.setColor(sf::Color::White);
+		menuExit.setColor(sf::Color::White);
 
-		Test.DrawMap(window);
-		//window.draw(Player.getSprite());
+		if (menuNum == 1)
+			menuStart.setColor(sf::Color::Red);
+		if (menuNum == 2)
+			menuExit.setColor(sf::Color::Red);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		{
+			if (menuNum == 1)
+				isMenu = false;
+			if (menuNum == 2) {
+				window.close();
+				return;
+			}
+
+		}
+		window.draw(menuBg);
+		window.draw(menuTitle);
+		window.draw(menuStart);
+		window.draw(menuExit);
 		window.display();
-	}*/
-	/*sf::Texture tileSet;
+	}
+	play(window);
+}
+
+void GameMario::loadLevel(std::string pathToLevel)
+{
+
+}
+
+void GameMario::play(sf::RenderWindow& window)
+{
+	sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
@@ -57,43 +111,30 @@ int main()
 			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
 	}
 	sf::Sprite tile(tileSet);
-	
-	Interface interface("D:/Libraries/sourses/19783.ttf");
-	interface.setTitlePosition(0, sf::Vector2f(25, 20));
-	interface.setTitlePosition(1, sf::Vector2f(135, 20));
-	interface.setTitlePosition(2, sf::Vector2f(200, 20));
-	interface.setTitlePosition(3, sf::Vector2f(300, 20));
-	interface.setTitlePosition(4, sf::Vector2f(25, 2));
-	interface.setTitlePosition(5, sf::Vector2f(125, 2));
-	interface.setTitlePosition(6, sf::Vector2f(200, 2));
-	interface.setTitlePosition(7, sf::Vector2f(300, 2));
-	sf::Clock clock;
-	Menu menu;
-	menu.MainMenu(window);
 	while (window.isOpen())
 	{
 		interface.updateTime(clock.getElapsedTime().asSeconds());
-	    float time = clock.getElapsedTime().asMicroseconds();
+		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 
 		time = time / 800;
 
 		if (time > 20)
 			time = 20;
-			
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		
+
 
 		Player.play(time, Player, 400, 250);
 		if (Player.getLife() == true)
 			for (int i = 0; i < numberOfEnemy; i++)
 				enemy[i].play(time, Player, interface, enemy, i);
-		
+
 
 		window.clear(sf::Color(107, 140, 255));
 
@@ -139,6 +180,4 @@ int main()
 		interface.draw(window);
 		window.display();
 	}
-   */
-    return 0;
 }

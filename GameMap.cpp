@@ -1,11 +1,16 @@
 #include "GameMap.h"
 #include "assert.h"
 #include <fstream>
-GameMap::GameMap(unsigned int x, unsigned int y, std::string path_to_background)
+GameMap::GameMap()
+{
+	Size = sf::Vector2i(0, 0);
+	Map = NULL;
+}
+GameMap::GameMap(unsigned int x, unsigned int y)
 {
 	Size.x = x;
 	Size.y = y;
-	this->Background.loadFromFile(path_to_background);
+	//this->Background.loadFromFile(path_to_background);
 	Map = new Tile * [Size.x];
 	for (int i = 0; i < Size.x; i++)
 	{
@@ -34,11 +39,13 @@ GameMap::GameMap(sf::Vector2i size)
 
 GameMap::~GameMap()
 {
-	for (int i = 0; i < Size.x; i++)
-	{
-		delete[] Map[i];
+	if (Map != NULL) {
+		for (int i = 0; i < Size.x; i++)
+		{
+			delete[] Map[i];
+		}
+		delete[] Map;
 	}
-	delete Map;
 }
 
 void GameMap::SetCell(unsigned int x, unsigned int y, Tile tile)

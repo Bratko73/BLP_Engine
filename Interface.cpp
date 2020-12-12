@@ -52,17 +52,17 @@ Interface::Interface(std::string pathToFont)
 	titles[7].setString("TIME");
 }
 
-Interface::~Interface()
-{
-}
-
 void Interface::increaceScore(int scoreIncrement)
 {
 	this->score += scoreIncrement;
 	if (score >= 1000000)
 		score = 999999;
+	std::string score = std::to_string(this->score);
+	int strScoreSize = 6 - score.size();
+	for (int i = 0; i < strScoreSize; i++)
+		score = '0' + score;
 	//std::string temp = std::to_string(score);
-	titles[0].setString(std::to_string(score));
+	titles[0].setString(score);
 }
 
 void Interface::increaceMoney(int moneyIncrement)
@@ -70,7 +70,7 @@ void Interface::increaceMoney(int moneyIncrement)
 	
 	this->money += moneyIncrement;
 	if (money >= 100)
-		score = 99;
+		money = 99;
 	titles[1].setString(std::to_string(money));
 }
 
@@ -90,6 +90,11 @@ void Interface::updateTime(float time)
 void Interface::setTitlePosition(int item, sf::Vector2f Position)
 {
 	titles[item].setPosition(Position);
+}
+
+void Interface::setFont(std::string pathToFont)
+{
+	font.loadFromFile(pathToFont);
 }
 
 void Interface::draw(sf::RenderWindow& window)

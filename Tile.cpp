@@ -31,6 +31,10 @@ Tile::Tile(const Tile& obj)
 	this->sprite = obj.sprite;
 }
 
+Tile::~Tile()
+{
+}
+
 sf::Sprite& Tile::Get_Sprite()
 {
 	return this->sprite;

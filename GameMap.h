@@ -9,7 +9,8 @@ private:
 	sf::Vector2i Size;
 	Tile** Map;
 public:
-	GameMap(unsigned int x, unsigned int y, std::string path_to_background);
+	GameMap();
+	GameMap(unsigned int x, unsigned int y);
 	GameMap(sf::Vector2i size);
 	~GameMap();
 	void SetCell(unsigned int x, unsigned int y, Tile tile);
