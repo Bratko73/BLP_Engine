@@ -23,6 +23,7 @@ private:
 	sf::Clock clock;
 	int lives;
 	Interface interface;
+	int level;
 	//std::vector<Enemy> enemies;
 	//Person Player;
 	//GameMap map;

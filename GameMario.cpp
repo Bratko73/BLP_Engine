@@ -94,7 +94,7 @@ void GameMario::play(sf::RenderWindow& window)
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 
 	Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
-	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 3, 14, 0.005);
+	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(112, 144), 4, 14, 0.005);
 
 	const int numberOfEnemy = 3;
 	Enemy enemy[numberOfEnemy]
@@ -106,7 +106,7 @@ void GameMario::play(sf::RenderWindow& window)
 
 	for (int i = 0; i < numberOfEnemy; i++) {
 		if (enemy[i].getName() == "Lenin")
-			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 3, 0.005);
 		else if (enemy[i].getName() == "Turtle")
 			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
 	}
