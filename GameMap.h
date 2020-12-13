@@ -21,7 +21,7 @@ public:
 	const int& GetSizeX();
 	const int& GetSizeY();
 	void CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile);
-	void DrawMap(sf::RenderWindow& window);
+	void DrawMap(sf::RenderWindow& window, float a);
 	void loadFromFile(const std::string& filePath, std::map<char, Tile>& dictionary);
 	bool& get_Hardness(int x_coord, int y_coord);
 };

@@ -98,7 +98,7 @@ void GameMap::CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile 
 	}
 }
 
-void GameMap::DrawMap(sf::RenderWindow& window)
+void GameMap::DrawMap(sf::RenderWindow& window, float a)
 {
 	if (this->Map != nullptr)
 	{
@@ -106,6 +106,7 @@ void GameMap::DrawMap(sf::RenderWindow& window)
 		{
 			for (int j = 0; j < Size.y; j++)
 			{
+				Map[i][j].Set_Position(i * 16 - a, j * 16);
 				window.draw(Map[i][j].Get_Sprite());
 			}
 		}
