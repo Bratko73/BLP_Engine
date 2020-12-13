@@ -138,3 +138,10 @@ void GameMap::loadFromFile(const std::string& filePath, std::map<char, Tile>& di
 		}
 	}
 }
+
+Tile** GameMap::GetMap()
+{
+	return this->Map;
+}
+
+

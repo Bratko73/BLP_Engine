@@ -23,5 +23,6 @@ public:
 	void CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile);
 	void DrawMap(sf::RenderWindow& window);
 	void loadFromFile(const std::string& filePath, std::map<char, Tile>& dictionary);
+	Tile** GetMap();
 };
 
