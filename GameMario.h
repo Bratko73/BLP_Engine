@@ -15,7 +15,7 @@ class GameMario
 public:
 	GameMario(int lives);
 	void init();
-	void mainMenu(sf::RenderWindow& window);
+	void start(sf::RenderWindow& window);
 	void loadLevel(std::string pathToLevel);
 	void play(sf::RenderWindow& window);
 

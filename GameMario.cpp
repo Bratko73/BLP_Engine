@@ -19,7 +19,7 @@ void GameMario::init()
 	interface.setTitlePosition(7, sf::Vector2f(300, 2));
 }
 
-void GameMario::mainMenu(sf::RenderWindow& window)
+void GameMario::start(sf::RenderWindow& window)
 {
 	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
 	startTexture.loadFromFile("D:/Libraries/sourses/start.png");

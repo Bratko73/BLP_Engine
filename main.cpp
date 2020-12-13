@@ -15,7 +15,7 @@ int main()
 	const int lives = 4;
 	GameMario Mario(lives);
 	Mario.init();
-	Mario.mainMenu(window);
+	Mario.start(window);
 	/*
 	Tile tile(1, "D:/Libraries/sourses/tileset.png");
 	std::map<char, Tile> test = { {'A', tile}, {' ', Tile()} };
