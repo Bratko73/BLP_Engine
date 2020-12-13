@@ -3,7 +3,7 @@
 GameMario::GameMario(int lives)
 {
 	this->lives = lives;
-	this->map = GameMap(10,10);
+	//this->map = GameMap(10,10);
 }
 
 void GameMario::init()
