@@ -44,3 +44,7 @@ void Tile::Set_Position(float xPos, float yPos)
 {
 	this->sprite.setPosition(xPos, yPos);
 }
+bool& Tile::Get_Hardness()
+{
+	return this->hardness;
+}

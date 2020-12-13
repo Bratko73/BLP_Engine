@@ -1,12 +1,12 @@
 #include "Collision.h"
 
-void Collision::collision(bool flag, Person& p, sf::String Map[])
+void Collision::collision(bool flag, Person& p, GameMap& map)
 {
 
 	for (int i = p.getRectangleTop() / 16; i < (p.getRectangleTop() + p.getRectangleHeight()) / 16; i++)
 		for (int j = p.getRectangleLeft() / 16; j < (p.getRectangleLeft() + p.getRectangleWidth()) / 16; j++)
 		{
-			if ((Map[i][j] == 'P') || (Map[i][j] == 'k') || (Map[i][j] == '0') || (Map[i][j] == 'r') || (Map[i][j] == 't'))
+			if (map.get_Hardness(j,i) == true)
 			{
 				if (p.getY() > 0 && flag == 1)
 				{
@@ -31,11 +31,11 @@ void Collision::collision(bool flag, Person& p, sf::String Map[])
 		}
 }
 
-bool Collision::npcCollision(bool flag, Enemy& n, sf::String Map[])
+bool Collision::npcCollision(bool flag, Enemy& n, GameMap& map)
 {
 	for (int i = n.getRectangleTop() / 16; i < (n.getRectangleTop() + n.getRectangleHeight()) / 16; i++)
 		for (int j = n.getRectangleLeft() / 16; j < (n.getRectangleLeft() + n.getRectangleWidth()) / 16; j++)
-			if ((Map[i][j] == 'P') || (Map[i][j] == 'k') || (Map[i][j] == '0') || (Map[i][j] == 'r') || (Map[i][j] == 't'))
+			if (map.get_Hardness(j, i) == true)
 			{
 				if (n.getY() > 0 && flag == 1)
 				{
