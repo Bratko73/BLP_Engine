@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
+#include "GameMap.h"
 
 class Person
 {
@@ -18,10 +19,10 @@ public:
 	Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect Rectangle);
 
 	void move();
-	void update(float time, Person& p);
+	void update(float time, GameMap& map);
 	void isEdgeOfMap(const int screenWidth);
 	void Death(const int screenHeight);
-	void play(float time, Person& player, const int screenWidth, const int screenHeight);
+	void play(float time, const int screenWidth, const int screenHeight, GameMap& map);
 
 	float& getX();
 	float& getY();
@@ -34,6 +35,7 @@ public:
 	sf::Sprite getSprite();
 	sf::FloatRect getRectangle();
 	bool getLife();
+	bool isOnGround();
 
 	void setLife(bool life);
 	void setOnGround(bool val);

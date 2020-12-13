@@ -37,14 +37,14 @@ void Enemy::update(float time, Person& p)
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
 
-void Enemy::move(Enemy& n)
+void Enemy::move(GameMap& map)
 {
-	Collision::npcCollision(1, n, TileMap);
-	if (Collision::npcCollision(0, n, TileMap))
-			n.coordinates.x *= -1;
+	Collision::npcCollision(1, *this, map);
+	if (Collision::npcCollision(0, *this, map))
+			coordinates.x *= -1;
 	if (name == "Turtle") {
 		if (coordinates.x > 0) {
-			if (TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 + 2] == '0' || TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 + 2] == 'r')
+			if (map.get_Hardness(int(rectangle.left) / 16 + 2, int(rectangle.top) / 16 + 1) == true)
 				if (onGround) {
 					coordinates.y = -heightOfJump;
 					onGround = false;
@@ -52,7 +52,7 @@ void Enemy::move(Enemy& n)
 		}
 		else if (coordinates.x < 0)
 			if (rectangle.left > 33)
-				if (TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 - 2] == '0' || TileMap[int(rectangle.top) / 16 + 1][int(rectangle.left) / 16 - 2] == 'r')
+				if (map.get_Hardness(int(rectangle.left) / 16 + 2, int(rectangle.top) / 16 + 1) == true)
 					if (onGround) {
 						coordinates.y = -heightOfJump;
 						onGround = false;

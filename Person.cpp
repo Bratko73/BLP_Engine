@@ -1,7 +1,5 @@
 #include "Person.h"
 #include "Collision.h"
-#include "GameMap.h"
-#include "TestMap.h"
 
 Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect rectangle)
 {
@@ -34,22 +32,22 @@ void Person::move()
 		}
 }
 
-void Person::update(float time, Person& p)
+void Person::update(float time, GameMap& map)
 {
 	rectangle.left += coordinates.x * time;
-	Collision::collision(0, p, TileMap);
+	Collision::collision(0, *this, map);
 
 	if (!onGround)
 		coordinates.y += gravitation * time;
 	rectangle.top += coordinates.y * time;
 	onGround = false;
-	Collision::collision(1, p, TileMap);
+	Collision::collision(1, *this, map);
 
 
 	if (coordinates.x > 0)
-			animation.update(time);
+			this->animation.update(time);
 		if (coordinates.x < 0)
-			animation.mirrorUpdate(time);
+			this->animation.mirrorUpdate(time);
 
 	animation.setPosition(rectangle.left - offset.x, rectangle.top - offset.y); 
 
@@ -78,11 +76,11 @@ void Person::Death(const int screenHeight)
 		}
 }
 
-void Person::play(float time, Person& player, const int screenWidth, const int screenHeight)
+void Person::play(float time, const int screenWidth, const int screenHeight, GameMap& map)
 {
 	if (life == true) {
 		move();
-		update(time, player);
+		update(time, map);
 		isEdgeOfMap(screenWidth);
 	}
 	else
@@ -142,6 +140,11 @@ sf::FloatRect Person::getRectangle()
 bool Person::getLife()
 {
 	return life;
+}
+
+bool Person::isOnGround()
+{
+	return onGround;
 }
 
 void Person::setLife(bool life)
