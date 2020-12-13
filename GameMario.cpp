@@ -129,11 +129,18 @@ void GameMario::play(sf::RenderWindow& window)
 				window.close();
 		}
 
-
-		Player.play(time, Player, 400, 250);
-		if (Player.getLife() == true)
-			for (int i = 0; i < numberOfEnemy; i++)
-				enemy[i].play(time, Player, interface, enemy, i);
+		if (Player.getLife() == true) {
+			Player.move();
+			Player.update(time, map);
+			Player.isEdgeOfMap(400);
+			for (int i = 0; i < numberOfEnemy; i++) {
+				enemy[i].move(map);
+				enemy[i].update(time, Player);
+				enemy[i].Death(Player, interface);
+			}
+		}
+		else
+			Player.Death(250);
 
 
 		window.clear(sf::Color(107, 140, 255));

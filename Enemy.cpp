@@ -52,7 +52,7 @@ void Enemy::move(GameMap& map)
 		}
 		else if (coordinates.x < 0)
 			if (rectangle.left > 33)
-				if (map.get_Hardness(int(rectangle.left) / 16 + 2, int(rectangle.top) / 16 + 1) == true)
+				if (map.get_Hardness(int(rectangle.left) / 16 - 2, int(rectangle.top) / 16 + 1) == true)
 					if (onGround) {
 						coordinates.y = -heightOfJump;
 						onGround = false;
@@ -90,12 +90,12 @@ void Enemy::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoord
 	rectangle.width = size.x;
 }
 
-void Enemy::play(float time, Person& Player, Interface& interface, Enemy enemy[], const int index)
-{
-		enemy[index].move(enemy[index]);
-		enemy[index].update(time, Player);
-		enemy[index].Death(Player, interface);
-}
+//void Enemy::play(float time, Person& Player, Interface& interface, Enemy enemy[], const int index)
+//{
+//		enemy[index].move();
+//		enemy[index].update(time, Player);
+//		enemy[index].Death(Player, interface);
+//}
 
 float& Enemy::getX()
 {
