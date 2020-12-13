@@ -139,9 +139,10 @@ void GameMap::loadFromFile(const std::string& filePath, std::map<char, Tile>& di
 	}
 }
 
-Tile** GameMap::GetMap()
+bool& GameMap::get_Hardness(int x_coord, int y_coord)
 {
-	return this->Map;
+	return Map[x_coord][y_coord].Get_Hardness();
 }
+
 
 
