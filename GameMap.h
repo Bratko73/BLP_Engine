@@ -8,10 +8,12 @@ private:
 	sf::Texture Background;
 	sf::Vector2i Size;
 	Tile** Map;
+
 public:
 	GameMap();
 	GameMap(unsigned int x, unsigned int y);
 	GameMap(sf::Vector2i size);
+	GameMap(const GameMap& obj);
 	~GameMap();
 	void SetCell(unsigned int x, unsigned int y, Tile tile);
 	const Tile& GetCell(unsigned int x, unsigned int y);

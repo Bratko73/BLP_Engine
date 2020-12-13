@@ -37,6 +37,12 @@ GameMap::GameMap(sf::Vector2i size)
 	}
 }
 
+GameMap::GameMap(const GameMap& obj)
+{
+	this->Size = obj.Size;
+	this->Map = obj.Map;	
+}
+
 GameMap::~GameMap()
 {
 	if (Map != NULL) {
