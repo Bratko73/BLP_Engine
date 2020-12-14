@@ -10,7 +10,7 @@ Tile::Tile()
 
 }
 
-Tile::Tile(bool hardness, std::string path_to_texture)
+Tile::Tile(bool hardness, std::string path_to_texture, bool lethality)
 {
 	SizeOfTile.x = 16;
 	SizeOfTile.y = 16;
@@ -19,6 +19,7 @@ Tile::Tile(bool hardness, std::string path_to_texture)
 	this->texture.loadFromFile(PathToTexture);
 	this->sprite = sf::Sprite(texture);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
+	this->lethality = lethality;
 }
 
 Tile::Tile(const Tile& obj)
@@ -33,6 +34,13 @@ Tile::Tile(const Tile& obj)
 
 Tile::~Tile()
 {
+}
+
+
+
+bool& Tile::GetLethality()
+{
+	return this->lethality;
 }
 
 sf::Sprite& Tile::Get_Sprite()

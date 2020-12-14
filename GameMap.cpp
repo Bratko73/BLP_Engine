@@ -87,6 +87,11 @@ const int& GameMap::GetSizeY()
 	return Size.y;
 }
 
+bool& GameMap::GetLethality(int x_coord, int y_coord)
+{
+	return Map[x_coord][y_coord].GetLethality();
+}
+
 void GameMap::CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile)
 {
 	for (unsigned int i = startCoord.x; i < sizeOfRect.x + startCoord.x; i++)
