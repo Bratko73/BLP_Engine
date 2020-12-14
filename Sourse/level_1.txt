@@ -1,0 +1,16 @@
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0                                                                                                                                                                                                      0
+0                                                                                                                                                                                                      0
+0   b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000                           0
+00                                                                                                                  0                                                                                  0
+0                                                                                                                   0                                                                      bbbbbbbbbbbbb
+0                                                                                                                   0                                                                      bbbbbbbbbbbbb
+0  0        b                                                                                                       0                                                                      bbbbbbbbbbbbb
+0                                                                                                                   0                            0                                         bbbbbbbbbbbbb
+0                                                            P            P                                                                 PP       PP            PPP                     bbbbbbbbbbbbb
+00        bbbbb            LR                                       P             P      P                                                 PPP       PPP          PPPP                     bbbbbbbbbbbbb
+0                    LR    lr      LR                     P                   0                                 LR      LR                PPPP       PPP         PPPPP                     bbbbbbbbbbbbb
+0                    lr    lr      lr               P                                           P        LR     lr      lr      LR       PPPPP       PPPP       PPPPPP                     bbbbbbbbbbbbb
+ssssssssssssssssssssssssssssssssssssssssss   ss                                                 ssssssssssssssssssssssssssssssssssssssssssssss       sssssssssssssssssssssssssssssssssssssssssssssssssss
+ssssssssssssssssssssssssssssssssssssssssss   ss                                                 ssssssssssssssssssssssssssssssssssssssssssssss       sssssssssssssssssssssssssssssssssssssssssssssssssss
+ssssssssssssssssssssssssssssssssssssssssss000ss0000000000000000000000000000000000000000000000000ssssssssssssssssssssssssssssssssssssssssssssss0000000sssssssssssssssssssssssssssssssssssssssssssssssssss
