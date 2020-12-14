@@ -70,7 +70,7 @@ void MainMenu(sf::RenderWindow& window) {
 		window.display();
 	}
 }
-void gameInit(Interface& interface, std::map<char, Tile>& TileMap) {
+void gameInit(Interface& interface) {
 	interface.setTitlePosition(0, sf::Vector2f(25, 20));
 	interface.setTitlePosition(1, sf::Vector2f(135, 20));
 	interface.setTitlePosition(2, sf::Vector2f(200, 20));
@@ -80,29 +80,28 @@ void gameInit(Interface& interface, std::map<char, Tile>& TileMap) {
 	interface.setTitlePosition(6, sf::Vector2f(200, 2));
 	interface.setTitlePosition(7, sf::Vector2f(300, 2));
 	
-	Tile Bricks(1, "D:/Libraries/sourses/bricks.png");
-	Tile Block(1, "D:/Libraries/sourses/block.png");
-	Tile GPTL(1, "D:/Libraries/sourses/grassplatformTopLeft.png");
-	Tile GPL(1, "D:/Libraries/sourses/grassplatformLeft.png");
-	Tile GPTR(1, "D:/Libraries/sourses/grassplatformTopRight.png");
-	Tile GPR(1, "D:/Libraries/sourses/grassplatformRight.png");
-	Tile FreeSpace(1, "D:/Libraries/sourses/freespace.png");
-	TileMap = std::map<char, Tile> {
-	{' ', Tile()},
-	{'b', Bricks},
-	{'P', Block},
-	{'L', GPTL},
-	{'l', GPL},
-	{'R', GPTR},
-	{'r', GPR},
-	{'0', FreeSpace},
-	};
+
 }
-void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
+void level_init(int level, background& Bg, GameMap& map,std::vector<Enemy>& Enemies, std::map<char, Tile>& TileMap) {
+	map.ClearMap();
 	switch (level)
 	{
 	case 1:
-
+		map.loadFromFile("D:/Libraries/sourses/test.txt", TileMap);
+		//Bg.addImageObj("D:/Libraries/sourses/castle.png");
+		/*Bg.addTextObj(30, "Fuc' Yo' Nig'a");
+		Bg.TextObjSetPosition(0, sf::Vector2f(160, 70));
+		Bg.ImageObjSetPosition(0, sf::Vector2f(160, 105));
+		Bg.SetBgColor(sf::Color(100, 100, 255));*/
+		Enemies.push_back(Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27));
+		Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Lenin", 0));
+		Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Lenin", 0));
+		for (int i = 0; i < Enemies.size(); i++) {
+			if (Enemies[i].getName() == "Lenin")
+				Enemies[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+			else if (Enemies[i].getName() == "Turtle")
+				Enemies[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
+		}
 		break;
 	case 2:
 		break;
@@ -111,12 +110,58 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	case 4: 
 		break;
 	default:
+
 		break;
 	}
 }
 
-void level_1(sf::RenderWindow& window, int& lives) {
+void level_1(sf::RenderWindow& window, int& lives, GameMap& map, Interface& interface, Person& Player,std::vector<Enemy>& Enemies, std::map<char, Tile>& TileMap) {
+	int level = 1;
+	background Bg("D:/Libraries/sourses/19783.ttf");
+	level_init(level, Bg, map,Enemies, TileMap);
+	sf::Clock clock;
+	bool Islevel = true;
+	while (Islevel)
+	{
+		interface.updateTime(clock.getElapsedTime().asSeconds());
+		float time = clock.getElapsedTime().asMicroseconds();
+		clock.restart();
 
+		time = time / 800;
+
+		if (time > 20)
+			time = 20;
+
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+		}
+		if (Player.getLife() == true) {
+			Player.move();
+			Player.update(time, map);
+			Player.isEdgeOfMap(400);
+			for (int i = 0; i < Enemies.size(); i++) {
+				Enemies[i].move(map);
+				Enemies[i].update(time, Player);
+				Enemies[i].Death(Player, interface);
+			}
+		}
+		else {
+			Player.Death(250);
+			lives--;
+		}
+		Bg.drawBackground(window, Player.getOffsetX());
+		map.DrawMap(window, Player.getOffsetX());
+		for (int i = 0; i < Enemies.size(); i++)
+			window.draw(Enemies[i].getSprite());
+		window.draw(Player.getSprite());
+		interface.draw(window);
+		window.display();
+	}
+	window.close();
 }
 
 void level_2(sf::RenderWindow& window, int& lives) {
@@ -139,27 +184,11 @@ int main()
 	background Bg("D:/Libraries/sourses/19783.ttf");
 	GameMap map(200, 16);	
 	Interface interface("D:/Libraries/sourses/19783.ttf");
-	//std::map<char, Tile> TileMap;
+	std::vector<Enemy> Enemies;
 	Person Player("D:/Libraries/sourses/spacemanWalk.png", 0.1,0.0005,0.27,sf::FloatRect(100,180,16,16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
-	//gameInit(interface, TileMap);
-	//map.loadFromFile("D:/Libraries/sourses/test.txt", TileMap);
+	gameInit(interface);
 
-	interface.setTitlePosition(0, sf::Vector2f(25, 20));
-	interface.setTitlePosition(1, sf::Vector2f(135, 20));
-	interface.setTitlePosition(2, sf::Vector2f(200, 20));
-	interface.setTitlePosition(3, sf::Vector2f(300, 20));
-	interface.setTitlePosition(4, sf::Vector2f(25, 2));
-	interface.setTitlePosition(5, sf::Vector2f(125, 2));
-	interface.setTitlePosition(6, sf::Vector2f(200, 2));
-	interface.setTitlePosition(7, sf::Vector2f(300, 2));
-	
-	Bg.addImageObj("D:/Libraries/sourses/castle.png");
-	Bg.addTextObj(30, "Fuc' Yo' Nig'a");
-	Bg.TextObjSetPosition(0, sf::Vector2f(160, 70));
-	Bg.ImageObjSetPosition(0, sf::Vector2f(160, 105));
-	Bg.SetBgColor(sf::Color(100, 100, 255));
-	
 	Tile Bricks(1, "D:/Libraries/sourses/bricks.png");
 	Tile Block(1, "D:/Libraries/sourses/block.png");
 	Tile GPTL(1, "D:/Libraries/sourses/grassplatformTopLeft.png");
@@ -176,8 +205,9 @@ int main()
 	{'r', GPR},
 	{'0', FreeSpace},
 	};
-	map.loadFromFile("D:/Libraries/sourses/test.txt", TileMap);
-
+	level_1(window, lives, map, interface, Player,Enemies,TileMap);
+	/*map.loadFromFile("D:/Libraries/sourses/test.txt", TileMap);
+	interface.increaceScore(15);
 	sf::Clock clock;
 	while (window.isOpen())
 	{
@@ -205,7 +235,7 @@ int main()
 				enemy[i].move(map);
 				enemy[i].update(time, Player);
 				enemy[i].Death(Player, interface);
-			}*/
+			}
 		}
 		else
 			Player.Death(250);
@@ -215,7 +245,7 @@ int main()
 		window.draw(Player.getSprite());
 		interface.draw(window);
 		window.display();
-	}
+	}*/
 	/*sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 

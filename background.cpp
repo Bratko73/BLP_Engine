@@ -18,6 +18,11 @@ void background::SetBgColor(sf::Color color)
 	this->BgColor = color;
 }
 
+void background::SetFont(std::string PathToFont)
+{
+	StandartFont.loadFromFile(PathToFont);
+}
+
 void background::addTextObj(int kernel, std::string text, sf::Font font)
 {
 	TextObj.push_back(sf::Text(text, font, kernel));
