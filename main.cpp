@@ -70,7 +70,7 @@ void MainMenu(sf::RenderWindow& window) {
 		window.display();
 	}
 }
-void gameInit(Interface& interface) {
+void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(0, sf::Vector2f(25, 20));
 	interface.setTitlePosition(1, sf::Vector2f(135, 20));
 	interface.setTitlePosition(2, sf::Vector2f(200, 20));
@@ -92,16 +92,8 @@ void level_init(int level, background& Bg, GameMap& map,std::vector<Enemy>& Enem
 		/*Bg.addTextObj(30, "Fuc' Yo' Nig'a");
 		Bg.TextObjSetPosition(0, sf::Vector2f(160, 70));
 		Bg.ImageObjSetPosition(0, sf::Vector2f(160, 105));
-		Bg.SetBgColor(sf::Color(100, 100, 255));*/
-		Enemies.push_back(Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27));
-		Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Lenin", 0));
-		Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Lenin", 0));
-		for (int i = 0; i < Enemies.size(); i++) {
-			if (Enemies[i].getName() == "Lenin")
-				Enemies[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-			else if (Enemies[i].getName() == "Turtle")
-				Enemies[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
-		}
+		Bg.SetBgColor(sf::Color(100, 100, 255));*/		
+
 		break;
 	case 2:
 		break;
@@ -113,12 +105,24 @@ void level_init(int level, background& Bg, GameMap& map,std::vector<Enemy>& Enem
 
 		break;
 	}
+
+	
 }
 
 void level_1(sf::RenderWindow& window, int& lives, GameMap& map, Interface& interface, Person& Player,std::vector<Enemy>& Enemies, std::map<char, Tile>& TileMap) {
 	int level = 1;
 	background Bg("D:/Libraries/sourses/19783.ttf");
+
 	level_init(level, Bg, map,Enemies, TileMap);
+	Enemies.push_back(Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27));
+	Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Lenin", 0));
+	Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Lenin", 0));
+	for (int i = 0; i < Enemies.size(); i++) {
+		if (Enemies[i].getName() == "Lenin")
+			Enemies[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+		else if (Enemies[i].getName() == "Turtle")
+			Enemies[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
+	}
 	sf::Clock clock;
 	bool Islevel = true;
 	while (Islevel)
@@ -187,7 +191,7 @@ int main()
 	std::vector<Enemy> Enemies;
 	Person Player("D:/Libraries/sourses/spacemanWalk.png", 0.1,0.0005,0.27,sf::FloatRect(100,180,16,16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
-	gameInit(interface);
+	InterfaceInit(interface);
 
 	Tile Bricks(1, "D:/Libraries/sourses/bricks.png");
 	Tile Block(1, "D:/Libraries/sourses/block.png");
@@ -205,6 +209,8 @@ int main()
 	{'r', GPR},
 	{'0', FreeSpace},
 	};
+
+
 	level_1(window, lives, map, interface, Player,Enemies,TileMap);
 	/*map.loadFromFile("D:/Libraries/sourses/test.txt", TileMap);
 	interface.increaceScore(15);
