@@ -96,12 +96,12 @@ int main()
 	Mario.init();
 	Mario.start(window);
 	/**/
-	background Bg("D:/Libraries/sourses/19783.ttf");
+	/*background Bg("D:/Libraries/sourses/19783.ttf");
 	Bg.addImageObj("D:/Libraries/sourses/castle.png");
 	Bg.addTextObj(30, "Fuc' Yo' Nig'a");
 	Bg.TextObjSetPosition(0, sf::Vector2f(160, 70));
 	Bg.ImageObjSetPosition(0, sf::Vector2f(160, 105));
-	Bg.SetBgColor(sf::Color(107, 140, 255));
+	Bg.SetBgColor(sf::Color(107, 140, 255));*/
 	GameMap map(200, 16);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'b', Tile(1, "D:/Libraries/sourses/bricks.png")},
@@ -124,7 +124,7 @@ int main()
 			
 		}
 		//window.clear(sf::Color(107, 140, 255));
-		Bg.drawBackground(window, sf::Vector2f(0,0));
+		//Bg.drawBackground(window, sf::Vector2f(0,0));
 		map.DrawMap(window, 0);
 
 		//window.draw(Player.getSprite());
