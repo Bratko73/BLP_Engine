@@ -2,12 +2,13 @@
 
 void Collision::collision(bool flag, Person& p, GameMap& map)
 {
-
 	for (int i = p.getRectangleTop() / 16; i < (p.getRectangleTop() + p.getRectangleHeight()) / 16; i++)
 		for (int j = p.getRectangleLeft() / 16; j < (p.getRectangleLeft() + p.getRectangleWidth()) / 16; j++)
 		{
 			if (map.get_Hardness(j,i) == true)
 			{
+				//if (map.GetLethality(j, i))
+				//	p.Death(250);
 				if (p.getY() > 0 && flag == 1)
 				{
 					p.setRectangleTop(i * 16 - p.getRectangleHeight());
@@ -28,6 +29,7 @@ void Collision::collision(bool flag, Person& p, GameMap& map)
 					p.setRectangleLeft(j * 16 + 16);
 				}
 			}
+
 		}
 }
 

@@ -62,6 +62,7 @@ void Person::isEdgeOfMap(const int screenWidth)
 
 void Person::Death(const int screenHeight)
 {
+	life = false;
 	const float speedOfDeath = 0.4; //скорость, с которой спрайт персонажа "уходит" под карту
 	const int jumpCoeff = 237;      //с помощью этого параметра поднимаю спрайт персонажа примерно на высоту его прыжка, чтобы было ка кв оригинал марио
 	static float  pixelCounter = 0.1;

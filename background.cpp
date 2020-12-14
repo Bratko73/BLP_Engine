@@ -33,12 +33,19 @@ void background::addTextObj(int kernel, std::string text)
 	TextObj.push_back(sf::Text(text, StandartFont, kernel));
 }
 
-void background::addImageObj(std::string PathToFile)
+void background::addTexture(std::string name, std::string PathToFile)
 {
+	ImageNames.push_back(name);
 	sf::Texture texture;
 	texture.loadFromFile(PathToFile);
 	textures.push_back(texture);
-	ImageObj.push_back(sf::Sprite(textures[textures.size()-1]));
+}
+
+void background::addImageObj(std::string name)
+{
+	for(int i = 0; i < textures.size(); i++)
+		if(ImageNames[i] == name)
+			ImageObj.push_back(sf::Sprite(textures[i]));
 }
 
 void background::clearBg()
@@ -50,12 +57,14 @@ void background::clearBg()
 
 void background::ImageObjSetPosition(int index, sf::Vector2f Pos)
 {
-	ImageObj[index].setPosition(Pos);
+	if (index < ImageObj.size())
+		ImageObj[index].setPosition(Pos);
 }
 
 void background::TextObjSetPosition(int index, sf::Vector2f Pos)
 {
-	TextObj[index].setPosition(Pos);
+	if (index < TextObj.size())
+		TextObj[index].setPosition(Pos);
 }
 
 void background::drawBackground(sf::RenderWindow& window, float offsetX)
