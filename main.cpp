@@ -170,8 +170,6 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, Interface& inte
 			Player.move();
 			Player.update(time, map);
 			Player.isEdgeOfMap(400);
-			if (Player.getRectangleTop() > 222)
-				Player.Death(250);
 			for (int i = 0; i < 7; i++) {
 				enemy[i].move(map);
 				enemy[i].update(time, Player);
@@ -226,7 +224,7 @@ int main()
 	Tile GPR(1, "D:/Libraries/sourses/grassplatformRight.png");
 	Tile GPTC(1, "D:/Libraries/sourses/grassplatformTopCenter.png");
 	Tile GPC(1, "D:/Libraries/sourses/grassplatformCenter.png");
-	Tile FreeSpace(1, "D:/Libraries/sourses/freespace.png");
+	Tile FreeSpace(0, "D:/Libraries/sourses/freespace.png", 1);
 	Tile DeathBlock(0, "D:/Libraries/sourses/blockcc.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},

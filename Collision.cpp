@@ -5,10 +5,10 @@ void Collision::collision(bool flag, Person& p, GameMap& map)
 	for (int i = p.getRectangleTop() / 16; i < (p.getRectangleTop() + p.getRectangleHeight()) / 16; i++)
 		for (int j = p.getRectangleLeft() / 16; j < (p.getRectangleLeft() + p.getRectangleWidth()) / 16; j++)
 		{
-			if (map.get_Hardness(j,i) == true)
+			if (map.GetLethality(j, i) == true)
+				p.Death(250);
+			if (map.get_Hardness(j,i))
 			{
-				//if (map.GetLethality(j, i) && /*p.getRectangleTop()+13 == map.GetTilePos(j,i).y ||*/ p.getRectangleLeft()+ p.getRectangleWidth() == map.GetTilePos(j, i).x)
-				//	p.Death(250);
 				if (p.getY() > 0 && flag == 1)
 				{
 					p.setRectangleTop(i * 16 - p.getRectangleHeight());
