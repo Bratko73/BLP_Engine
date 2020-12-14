@@ -56,36 +56,38 @@ void Person::update(float time, GameMap& map)
 
 void Person::isEdgeOfMap(const int screenWidth)
 {
-	if (rectangle.left > screenWidth / 2)
+	if (rectangle.left > screenWidth / 2)          //так как персонаж находится в центре экрана, ширину экрана делю пополам
 		offset.x = rectangle.left - screenWidth / 2;
 }
 
 void Person::Death(const int screenHeight)
 {
+	const float speedOfDeath = 0.4; //скорость, с которой спрайт персонажа "уходит" под карту
+	const int jumpCoeff = 237;      //с помощью этого параметра поднимаю спрайт персонажа примерно на высоту его прыжка, чтобы было ка кв оригинал марио
 	static float  pixelCounter = 0.1;
-		if ((pixelCounter > 0) && (pixelCounter < heightOfJump * 237))
+		if ((pixelCounter > 0) && (pixelCounter < heightOfJump * jumpCoeff))
 		{
 			animation.setPosition(rectangle.left - offset.x, rectangle.top - pixelCounter);
-			pixelCounter += 0.4;
+			pixelCounter += speedOfDeath;
 		}
-		else if (pixelCounter > heightOfJump * 237)
+		else if (pixelCounter > heightOfJump * jumpCoeff)
 			pixelCounter = 0;
-		else if ((rectangle.top - heightOfJump * 237 - pixelCounter) < screenHeight) {
-			animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * 237 - pixelCounter));
-			pixelCounter -=0.4;
+		else if ((rectangle.top - heightOfJump * jumpCoeff - pixelCounter) < screenHeight) {
+			animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * jumpCoeff - pixelCounter));
+			pixelCounter -= speedOfDeath;
 		}
 }
 
-void Person::play(float time, const int screenWidth, const int screenHeight, GameMap& map)
-{
-	if (life == true) {
-		move();
-		update(time, map);
-		isEdgeOfMap(screenWidth);
-	}
-	else
-		Death(screenHeight);
-}
+//void Person::play(float time, const int screenWidth, const int screenHeight, GameMap& map)
+//{
+//	if (life == true) {
+//		move();
+//		update(time, map);
+//		isEdgeOfMap(screenWidth);
+//	}
+//	else
+//		Death(screenHeight);
+//}
 
 float& Person::getX()
 {
