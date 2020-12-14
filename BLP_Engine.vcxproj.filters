@@ -45,7 +45,7 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="GameMario.cpp">
+    <ClCompile Include="background.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="Sound.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="GameMario.h">
+    <ClInclude Include="background.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

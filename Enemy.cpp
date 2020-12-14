@@ -92,7 +92,7 @@ void Enemy::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoord
 
 void Enemy::play(float time, Person& Player, Interface& interface, Enemy enemy[], const int index)
 {
-		enemy[index].move(enemy[index]);
+		//enemy[index].move(enemy[index]);
 		enemy[index].update(time, Player);
 		enemy[index].Death(Player, interface);
 }

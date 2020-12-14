@@ -1,27 +1,119 @@
 #include "SFML/include/SFML/Graphics.hpp"
-/*#include "Animation.h"
+#include "Animation.h"
 #include"GameMap.h"
 #include"Person.h"
 #include "TestMap.h"
 #include "Enemy.h"
 #include "Menu.h"
 #include "Interface.h"
-#include <map>*/
-#include "GameMario.h"
+#include "background.h"
+#include <map>
+
+void MainMenu(sf::RenderWindow& window) {
+	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
+	startTexture.loadFromFile("D:/Libraries/sourses/start.png");
+	exitTexture.loadFromFile("D:/Libraries/sourses/exit.png");
+	titleTexture.loadFromFile("D:/Libraries/sourses/title.png");
+	menuBackground.loadFromFile("D:/Libraries/sourses/MainMenuBackground.jpg");
+	sf::Sprite menuStart(startTexture), menuExit(exitTexture), menuTitle(titleTexture), menuBg(menuBackground);
+	bool isMenu = 1;
+	int menuNum = 1;
+	menuTitle.setPosition(0, 0);
+	menuStart.setPosition(180, 100);
+	menuExit.setPosition(180, 150);
+
+	while (isMenu)
+	{
+		window.clear();
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			switch (event.type) {
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case sf::Keyboard::Up:
+					if (menuNum > 1)
+						menuNum = 1;
+					break;
+				case sf::Keyboard::Down:
+					if (menuNum < 2)
+						menuNum = 2;
+					break;
+				}
+				break;
+			case sf::Event::Closed:
+				window.close();
+				break;
+			}
+		}
+		menuStart.setColor(sf::Color::White);
+		menuExit.setColor(sf::Color::White);
+
+		if (menuNum == 1)
+			menuStart.setColor(sf::Color::Red);
+		if (menuNum == 2)
+			menuExit.setColor(sf::Color::Red);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		{
+			if (menuNum == 1)
+				isMenu = false;
+			if (menuNum == 2) {
+				window.close();
+				return;
+			}
+
+		}
+		window.draw(menuBg);
+		window.draw(menuTitle);
+		window.draw(menuStart);
+		window.draw(menuExit);
+		window.display();
+	}
+}
+
+void level_1(sf::RenderWindow& window, int& lives) {
+
+}
+
+void level_2(sf::RenderWindow& window, int& lives) {
+
+}
+
+void level_3(sf::RenderWindow& window, int& lives) {
+
+}
+
+void level_4(sf::RenderWindow& window, int& lives) {
+
+}
+
 int main()
 {
 	//Person Player("D:/Libraries/sourses/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	sf::RenderWindow window(sf::VideoMode(400, 250), "Fuk yea!");
-	const int lives = 4;
+	/*const int lives = 4;
 	GameMario Mario(lives);
 	Mario.init();
 	Mario.start(window);
-	/*
-	Tile tile(1, "D:/Libraries/sourses/tileset.png");
-	std::map<char, Tile> test = { {'A', tile}, {' ', Tile()} };
-	GameMap Test(9, 6, "D:/Libraries/sourses/tileset.png");
-	Test.loadFromFile("D:/Libraries/sourses/test.txt", test);
-	
+	/**/
+	background Bg("D:/Libraries/sourses/19783.ttf");
+	Bg.addImageObj("D:/Libraries/sourses/castle.png");
+	Bg.addTextObj(30, "Fuc' Yo' Nig'a");
+	Bg.TextObjSetPosition(0, sf::Vector2f(160, 70));
+	Bg.ImageObjSetPosition(0, sf::Vector2f(160, 105));
+	Bg.SetBgColor(sf::Color(107, 140, 255));
+	GameMap map(200, 16);
+	std::map<char, Tile> TileMap ={ {' ', Tile()},
+	{'b', Tile(1, "D:/Libraries/sourses/bricks.png")},
+	{'P', Tile(1, "D:/Libraries/sourses/block.png")},
+	{'t', Tile(1, "D:/Libraries/sourses/grassplatformTopLeft.png")},
+	{'l', Tile(1, "D:/Libraries/sourses/grassplatformLeft.png")},
+	{'y', Tile(1, "D:/Libraries/sourses/grassplatformTopRight.png")},
+	{'r', Tile(1, "D:/Libraries/sourses/grassplatformRight.png")},
+	{'0', Tile(1, "D:/Libraries/sourses/grassplatformCenter.png")},
+	};
+	map.loadFromFile("D:/Libraries/sourses/test.txt", TileMap);
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -31,11 +123,13 @@ int main()
 				window.close();
 			
 		}
+		//window.clear(sf::Color(107, 140, 255));
+		Bg.drawBackground(window, sf::Vector2f(0,0));
+		map.DrawMap(window, 0);
 
-		Test.DrawMap(window);
 		//window.draw(Player.getSprite());
 		window.display();
-	}*/
+	}
 	/*sf::Texture tileSet;
 	tileSet.loadFromFile("D:/Libraries/sourses/Mario_tileset.png");
 

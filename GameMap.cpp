@@ -102,9 +102,9 @@ void GameMap::DrawMap(sf::RenderWindow& window, float a)
 {
 	if (this->Map != nullptr)
 	{
-		for (int i = 0; i < Size.x; i++)
+		for (int i = 0; i < Size.x; ++i)
 		{
-			for (int j = 0; j < Size.y; j++)
+			for (int j = 0; j < Size.y; ++j)
 			{
 				Map[i][j].Set_Position(i * 16 - a, j * 16);
 				window.draw(Map[i][j].Get_Sprite());
