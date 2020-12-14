@@ -103,7 +103,8 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 		Bg.ImageObjSetPosition(2, sf::Vector2f(2304, 104));
 		Bg.ImageObjSetPosition(3, sf::Vector2f(1808, 100));
 		Bg.ImageObjSetPosition(4, sf::Vector2f(2832, 104));
-
+		Bg.addTextObj(20, "Instead of moving forward, we must move back.");
+		Bg.TextObjSetPosition(0, sf::Vector2f(2832, 50));
 		Bg.SetBgColor(sf::Color(100, 100, 255));		
 
 		break;
@@ -152,6 +153,10 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, Interface& inte
 		else if (Enemies[i].getName() == "Turtle")
 			Enemies[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
 	}*/
+	sf::Font font;
+	font.loadFromFile("D:/Libraries/sourses/19783.ttf");
+	sf::Text test(" ", font,20);
+	test.setPosition(300, 100);
 	sf::Clock clock;
 	bool Islevel = true;
 	while (window.isOpen())
@@ -188,12 +193,14 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, Interface& inte
 			Player.Death(250);
 			lives--;
 		}
+		test.setString(std::to_string(Player.getRectangle().top) + "," + std::to_string(Player.getRectangle().left));
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
 		for (int i = 0; i < 7; i++)
 			window.draw(enemy[i].getSprite());
 		window.draw(Player.getSprite());
 		interface.draw(window);
+		window.draw(test);
 		window.display();
 	}
 	window.close();
@@ -217,7 +224,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(windowSize.x,windowSize.y), "Fuk yea!");
 	int lives = 4;
 	background Bg("D:/Libraries/sourses/19783.ttf");
-	GameMap map(200, 16);	
+	GameMap map(200, 17);	
 	Interface interface("D:/Libraries/sourses/19783.ttf");
 	Person Player("D:/Libraries/sourses/spacemanWalk.png", 0.1,0.0005,0.23,sf::FloatRect(100,180,16,16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
@@ -226,19 +233,27 @@ int main()
 	Tile Bricks(1, "D:/Libraries/sourses/bricks.png");
 	Tile Block(1, "D:/Libraries/sourses/block.png");
 	Tile OStone(1, "D:/Libraries/sourses/orangestone.png");
+	Tile svOStone(0, "D:/Libraries/sourses/orangestone.png");
 	Tile GPTL(1, "D:/Libraries/sourses/grassplatformTopLeft.png");
 	Tile GPL(1, "D:/Libraries/sourses/grassplatformLeft.png");
 	Tile GPTR(1, "D:/Libraries/sourses/grassplatformTopRight.png");
 	Tile GPR(1, "D:/Libraries/sourses/grassplatformRight.png");
-	Tile FreeSpace(1, "D:/Libraries/sourses/freespace.png", true);
+	Tile GPTC(1, "D:/Libraries/sourses/grassplatformTopCenter.png");
+	Tile GPC(1, "D:/Libraries/sourses/grassplatformCenter.png");
+	Tile FreeSpace(1, "D:/Libraries/sourses/freespace.png");
+	Tile DeathBlock(0, "D:/Libraries/sourses/blockcc.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
+	{'d', DeathBlock},
 	{'b', Bricks},
 	{'P', Block},
 	{'s', OStone},
+	{'S', svOStone},
 	{'L', GPTL},
 	{'l', GPL},
 	{'R', GPTR},
 	{'r', GPR},
+	{'C', GPTC},
+	{'c', GPC},
 	{'0', FreeSpace},
 	};
 

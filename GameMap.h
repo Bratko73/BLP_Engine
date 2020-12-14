@@ -20,6 +20,7 @@ public:
 	void ClearMap(Tile tile = Tile());
 	const int& GetSizeX();
 	const int& GetSizeY();
+	const sf::Vector2f& GetTilePos(int x_xoord, int y_coord);
 	bool& GetLethality(int x_xoord, int y_coord);
 	void CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile);
 	void DrawMap(sf::RenderWindow& window, float a);

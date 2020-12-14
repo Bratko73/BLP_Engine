@@ -7,7 +7,7 @@ void Collision::collision(bool flag, Person& p, GameMap& map)
 		{
 			if (map.get_Hardness(j,i) == true)
 			{
-				//if (map.GetLethality(j, i))
+				//if (map.GetLethality(j, i) && /*p.getRectangleTop()+13 == map.GetTilePos(j,i).y ||*/ p.getRectangleLeft()+ p.getRectangleWidth() == map.GetTilePos(j, i).x)
 				//	p.Death(250);
 				if (p.getY() > 0 && flag == 1)
 				{
