@@ -70,6 +70,7 @@ void MainMenu(sf::RenderWindow& window) {
 		window.display();
 	}
 }
+
 void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(0, sf::Vector2f(25, 20));
 	interface.setTitlePosition(1, sf::Vector2f(135, 20));
@@ -79,8 +80,6 @@ void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(5, sf::Vector2f(125, 2));
 	interface.setTitlePosition(6, sf::Vector2f(200, 2));
 	interface.setTitlePosition(7, sf::Vector2f(300, 2));
-	
-
 }
 void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
 	map.ClearMap();
@@ -112,8 +111,6 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 		break;
 	case 3:
 		break;
-	case 4: 
-		break;
 	default:
 
 		break;
@@ -144,15 +141,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, Interface& inte
 		else if (enemy[i].getName() == "Turtle")
 			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
 	}
-	/*Enemies.push_back(Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27));
-	Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(832, 208, 16, 16), 0.0005, "Lenin", 0));
-	Enemies.push_back(Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(130, 190, 16, 16), 0.0005, "Lenin", 0));
-	for (int i = 0; i < Enemies.size(); i++) {
-		if (Enemies[i].getName() == "Lenin")
-			Enemies[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-		else if (Enemies[i].getName() == "Turtle")
-			Enemies[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
-	}*/
+
 	sf::Font font;
 	font.loadFromFile("D:/Libraries/sourses/19783.ttf");
 	sf::Text test(" ", font,20);
@@ -214,9 +203,6 @@ void level_3(sf::RenderWindow& window, int& lives) {
 
 }
 
-void level_4(sf::RenderWindow& window, int& lives) {
-
-}
 
 int main()
 {
