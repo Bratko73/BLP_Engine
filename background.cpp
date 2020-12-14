@@ -3,12 +3,14 @@
 background::background()
 {
 	BgColor = sf::Color(0, 0, 0, 255);
+	offset = 0;
 }
 
 background::background(std::string PathToFont)
 {
 	StandartFont.loadFromFile(PathToFont);
 	BgColor = sf::Color(0, 0, 0, 255);
+	offset = 0;
 }
 
 void background::SetBgColor(sf::Color color)
@@ -51,15 +53,17 @@ void background::TextObjSetPosition(int index, sf::Vector2f Pos)
 	TextObj[index].setPosition(Pos);
 }
 
-void background::drawBackground(sf::RenderWindow& window, sf::Vector2f offset)
+void background::drawBackground(sf::RenderWindow& window, float offsetX)
 {
+	float tempOffset = offsetX - offset;
+	offset = offsetX;
 	window.clear(BgColor);
 	for (int i = 0; i < ImageObj.size(); i++) {
-		ImageObj[i].move(offset);
+		ImageObj[i].move(sf::Vector2f(-tempOffset,0));
 		window.draw(ImageObj[i]);
 	}
 	for (int i = 0; i < TextObj.size(); i++) {
-		TextObj[i].move(offset);
+		TextObj[i].move(sf::Vector2f(-tempOffset, 0));
 		window.draw(TextObj[i]);
 	}
 }

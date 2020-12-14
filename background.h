@@ -9,6 +9,7 @@ private:
 	std::vector<sf::Text> TextObj;
 	sf::Font StandartFont;
 	sf::Color BgColor;
+	float offset;
 public:
 	background();
 	background(std::string PathToFont);
@@ -19,6 +20,6 @@ public:
 	void clearBg();
 	void ImageObjSetPosition(int index, sf::Vector2f Pos);
 	void TextObjSetPosition(int index, sf::Vector2f Pos);
-	void drawBackground(sf::RenderWindow& window, sf::Vector2f offset);
+	void drawBackground(sf::RenderWindow& window, float offsetX);
 };
 
