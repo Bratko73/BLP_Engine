@@ -282,7 +282,7 @@ int main()
 
 	InterfaceInit(interface);
 
-	Tile Bricks(1, "D:/Libraries/sourses/bricks.png");
+	Tile Bricks(1, "D:/Libraries/sourses/bricks.png",0,1);
 	Tile Block(1, "D:/Libraries/sourses/block.png");
 	Tile OStone(1, "D:/Libraries/sourses/orangestone.png");
 	Tile invOStone(0, "D:/Libraries/sourses/orangestone.png");
