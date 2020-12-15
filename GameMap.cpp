@@ -87,6 +87,11 @@ const int& GameMap::GetSizeY()
 	return Size.y;
 }
 
+const sf::Vector2f& GameMap::GetTilePos(int x_xoord, int y_coord)
+{
+	return Map[x_xoord][y_coord].Get_Sprite().getPosition();
+}
+
 bool& GameMap::GetLethality(int x_coord, int y_coord)
 {
 	return Map[x_coord][y_coord].GetLethality();

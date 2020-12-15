@@ -16,6 +16,7 @@ public:
 	background(std::string PathToFont);
 	void SetBgColor(sf::Color color);
 	void SetFont(std::string PathToFont);
+	void ChangeText(int index, std::string text);
 	void addTextObj(int kernel, std::string text, sf::Font font);
 	void addTextObj(int kernel, std::string text);
 	void addTexture(std::string name, std::string PathToFile);

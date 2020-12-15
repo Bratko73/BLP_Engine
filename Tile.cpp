@@ -7,7 +7,7 @@ Tile::Tile()
 	SizeOfTile.x = 16;
 	SizeOfTile.y = 16;
 	PathToTexture = '0';
-
+	lethality = false;
 }
 
 Tile::Tile(bool hardness, std::string path_to_texture, bool lethality)
@@ -30,6 +30,7 @@ Tile::Tile(const Tile& obj)
 	this->PathToTexture = obj.PathToTexture;
 	this->texture = obj.texture;
 	this->sprite = obj.sprite;
+	this->lethality = obj.lethality;
 }
 
 Tile::~Tile()
