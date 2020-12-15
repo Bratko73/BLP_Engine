@@ -186,6 +186,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setRectangleLeft(100);
 	Player.setRectangleTop(180);
+	Player.clearOffSet();
 	level_init(level, Bg, map, TileMap);
 
 	Enemy enemy[7]

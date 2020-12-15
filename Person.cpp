@@ -150,6 +150,12 @@ bool Person::isOnGround()
 	return onGround;
 }
 
+void Person::clearOffSet()
+{
+	offset.x = 0;
+	offset.y = 0;
+}
+
 void Person::setLife(bool life)
 {
 	this->life = life;

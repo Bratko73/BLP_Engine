@@ -36,7 +36,7 @@ public:
 	sf::FloatRect getRectangle();
 	bool getLife();
 	bool isOnGround();
-
+	void clearOffSet();
 	void setLife(bool life);
 	void setOnGround(bool val);
 	void setRectangleLeft(float left);
