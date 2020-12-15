@@ -32,6 +32,7 @@ Tile::Tile(const Tile& obj)
 	this->texture = obj.texture;
 	this->sprite = obj.sprite;
 	this->lethality = obj.lethality;
+	this->breakable = obj.breakable;
 }
 
 Tile::~Tile()

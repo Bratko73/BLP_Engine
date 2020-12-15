@@ -8,8 +8,9 @@ protected:
 	sf::Sprite sprite;
 	sf::Vector2i SizeOfTile;
 	std::string PathToTexture;
-	bool lethality;
-	bool breakable;
+	bool lethality = 0;
+	bool breakable = 0;
+
 public:
 	Tile();
 	Tile(bool hardness, std::string path_to_texture, bool lethality = 0, bool breacable = 0);
