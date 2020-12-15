@@ -10,7 +10,6 @@ GameMap::GameMap(unsigned int x, unsigned int y)
 {
 	Size.x = x;
 	Size.y = y;
-	//this->Background.loadFromFile(path_to_background);
 	Map = new Tile * [Size.x];
 	for (int i = 0; i < Size.x; i++)
 	{
@@ -100,6 +99,11 @@ bool& GameMap::GetLethality(int x_coord, int y_coord)
 bool& GameMap::GetBreakable(int x_coord, int y_coord)
 {
 	return Map[x_coord][y_coord].GetBreakable();
+}
+
+void GameMap::SetEmptySpace(int x_coord, int y_coord)
+{
+	Map[x_coord][y_coord] = Tile();
 }
 
 void GameMap::CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile)
