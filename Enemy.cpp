@@ -7,7 +7,10 @@ Enemy::Enemy(std::string pathToFile, const float speed, const sf::FloatRect rect
 	this->gravitation = gravitation;
 	this->rectangle = rectangle;
 	coordinates.x = speed;
-	life = true;
+	if (name == "Lenin")
+		life = 1;
+	else if (name == "Turtle")
+		life = 3;
 	animation.setPosition(coordinates);
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
@@ -28,11 +31,12 @@ void Enemy::update(float time, Person& p)
 		animation.update(time);
 	if (coordinates.x < 0)
 		animation.mirrorUpdate(time);
-	if(!life)
-		if (name == "Lenin")
-			Enemy::setAnimationSettings(sf::Vector2i(16,16), sf::Vector2i(58, 0), 2, 0, 0);
-		else if (name == "Turtle")
-			Enemy::setAnimationSettings(sf::Vector2i(16,13), sf::Vector2i(388, 268), 2, 0, 0);
+	if(life == 0 && name == "Lenin")
+		Enemy::setAnimationSettings(sf::Vector2i(16,16), sf::Vector2i(58, 0), 2, 0, 0);
+	if (name == "Turtle" && (life == 2 || life == 1))
+		Enemy::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 2, 0, 0);
+	else if (name == "Turtle" && life == 0)
+		Enemy::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 1, 0, 0);
 
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
@@ -42,7 +46,8 @@ void Enemy::move(GameMap& map)
 	Collision::npcCollision(1, *this, map);
 	if (Collision::npcCollision(0, *this, map))
 			coordinates.x *= -1;
-	if (name == "Turtle") {
+
+	if (name == "Turtle" && life == 2) {
 		if (coordinates.x > 0) {
 			if (map.get_Hardness(int(rectangle.left) / 16 + 2, int(rectangle.top) / 16 + 1) == true)
 				if (onGround) {
@@ -59,27 +64,38 @@ void Enemy::move(GameMap& map)
 	}
 }
 
-bool Enemy::Death(Person& p, Interface& i)
+void Enemy::Death(Person& p, Interface& i)
 {
 	if (p.getRectangle().intersects(Enemy::rectangle))
 	{
 		if (life) {
 			if (p.getY() > 0) {
-				coordinates.x = 0;
-				p.getY() = -0.1;
-				if (name == "Lenin")
+				p.getY() = -0.2;
+				if (name == "Lenin") {
 					i.increaceScore(10);
-				else if (name == "Turtle")
-					i.increaceScore(25);
-				life = false;
-				return true;
+					life--;
+					coordinates.x = 0;
+				}
+				else if (name == "Turtle" && life == 3) {
+					i.increaceScore(15);
+					life--;
+					coordinates.x = 0;
+				}
+				else if (name == "Turtle" && life == 2) {
+					life--;
+					coordinates.x += 0.15;
+				}
+				else if (name == "Turtle" && life == 1) {
+					life++;
+					coordinates.x = 0;
+				}
 			}
-			else {
+			else if(!(name == "Turtle" && life == 2))
+			{
 				p.setLife(false);
 			}
 		}
 	}
-	return false;
 }
 
 void Enemy::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
@@ -146,4 +162,9 @@ void Enemy::setRectangleTop(float top)
 void Enemy::setOnGround(bool val)
 {
 	this->onGround = val;
+}
+
+sf::FloatRect Enemy::getRectangle()
+{
+	return rectangle;
 }

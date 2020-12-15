@@ -192,20 +192,20 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 
 	Enemy enemy[7]
 	{
-		//Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
+		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
+		//Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
 	};
 	for (int i = 0; i < 7; i++) {
 		if (enemy[i].getName() == "Lenin")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
 		else if (enemy[i].getName() == "Turtle")
-			enemy[i].setAnimationSettings(sf::Vector2i(16, 26), sf::Vector2i(388, 240), 3, 1, 0.005);
+			enemy[i].setAnimationSettings(sf::Vector2i(17, 26), sf::Vector2i(387, 242), 3, 0, 0.005);
 	}
 
 	sf::Font font;
