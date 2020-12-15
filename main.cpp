@@ -135,6 +135,7 @@ void InterfaceInit(Interface& interface) {
 void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
 	map.ClearMap();
 	Bg.clearBg();
+	Bg.clearOffSet();
 	switch (level)
 	{
 	case 1:

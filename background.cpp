@@ -18,6 +18,11 @@ void background::SetBgColor(sf::Color color)
 	this->BgColor = color;
 }
 
+void background::clearOffSet()
+{
+	offset = 0;
+}
+
 void background::SetFont(std::string PathToFont)
 {
 	StandartFont.loadFromFile(PathToFont);
