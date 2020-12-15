@@ -207,9 +207,6 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	}
 
 	sf::Font font;
-	font.loadFromFile("D:/Libraries/sourses/19783.ttf");
-	sf::Text test(" ", font,20);
-	test.setPosition(300, 100);
 	sf::Clock clock;
 	bool Islevel = true;
 	bool isTriggered = false;
@@ -256,14 +253,12 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			return;
 		}
 		
-		test.setString(std::to_string(Player.getRectangle().top) + "," + std::to_string(Player.getRectangle().left));
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
 		for (int i = 0; i < 7; i++)
 			window.draw(enemy[i].getSprite());
 		window.draw(Player.getSprite());
 		interface.draw(window);
-		window.draw(test);
 		window.display();
 	}
 }
