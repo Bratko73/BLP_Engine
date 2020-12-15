@@ -33,10 +33,10 @@ void Enemy::update(float time, Person& p)
 		animation.mirrorUpdate(time);
 	if(life == 0 && name == "Lenin")
 		Enemy::setAnimationSettings(sf::Vector2i(16,16), sf::Vector2i(58, 0), 2, 0, 0);
-	if (name == "Turtle" && (life == 2 || life == 1))
+	if (name == "Turtle" && life == 2)
 		Enemy::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 2, 0, 0);
-	else if (name == "Turtle" && life == 0)
-		Enemy::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 1, 0, 0);
+	else if (name == "Turtle" && life == 1)
+		Enemy::setAnimationSettings(sf::Vector2i(17, 14), sf::Vector2i(387, 267), 5, 0, 0.005);
 
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
