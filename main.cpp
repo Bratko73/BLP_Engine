@@ -179,12 +179,15 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	
 }
 
-void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, Person& Player, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
+void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
 	int level = 1;
 	//background Bg("D:/Libraries/sourses/19783.ttf");
+	Person Player("D:/Libraries/sourses/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
+	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setRectangleLeft(100);
 	Player.setRectangleTop(180);
 	level_init(level, Bg, map, TileMap);
+
 	Enemy enemy[7]
 	{
 		//Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
@@ -279,8 +282,7 @@ int main()
 	background Bg("D:/Libraries/sourses/19783.ttf");
 	GameMap map(200, 17);	
 	Interface interface("D:/Libraries/sourses/19783.ttf");
-	Person Player("D:/Libraries/sourses/spacemanWalk.png", 0.1,0.0005,0.23,sf::FloatRect(100,180,16,16));
-	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
+
 	InterfaceInit(interface);
 
 	Tile Bricks(1, "D:/Libraries/sourses/bricks.png");
@@ -315,7 +317,7 @@ int main()
 	{
 		if (lives) {
 			BlackScreen(window, lives, 1000);
-			level_1(window, lives, map, Bg, interface, Player, TileMap, isLevelPassed_1);
+			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1);
 			if (isLevelPassed_1)
 				level_2(window, lives);
 		}
