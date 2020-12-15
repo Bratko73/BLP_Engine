@@ -51,7 +51,6 @@ void Enemy::move(GameMap& map)
 				}
 		}
 		else if (coordinates.x < 0)
-			if (rectangle.left > 33)
 				if (map.get_Hardness(int(rectangle.left) / 16 - 2, int(rectangle.top) / 16 + 1) == true)
 					if (onGround) {
 						coordinates.y = -heightOfJump;
