@@ -5,7 +5,6 @@
 class GameMap
 {
 private:
-	sf::Texture Background;
 	sf::Vector2i Size;
 	Tile** Map;
 

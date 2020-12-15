@@ -10,7 +10,6 @@ GameMap::GameMap(unsigned int x, unsigned int y)
 {
 	Size.x = x;
 	Size.y = y;
-	//this->Background.loadFromFile(path_to_background);
 	Map = new Tile * [Size.x];
 	for (int i = 0; i < Size.x; i++)
 	{
