@@ -13,6 +13,7 @@ public:
 	GameMap(unsigned int x, unsigned int y);
 	GameMap(sf::Vector2i size);
 	GameMap(const GameMap& obj);
+	~GameMap();
 	void SetCell(unsigned int x, unsigned int y, Tile tile);
 	const Tile& GetCell(unsigned int x, unsigned int y);
 	void ClearMap(Tile tile = Tile());

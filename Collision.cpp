@@ -17,7 +17,8 @@ void Collision::collision(bool flag, Person& p, GameMap& map)
 				}
 				if (p.getY() < 0 && flag == 1)
 				{
-					if (map.GetBreakable(j, i));
+					if (map.GetBreakable(j, i))
+						map.SetEmptySpace(j, i);
 					p.setRectangleTop(i * 16 + 16);
 					p.getY() = 0;
 				}
