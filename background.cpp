@@ -23,6 +23,12 @@ void background::SetFont(std::string PathToFont)
 	StandartFont.loadFromFile(PathToFont);
 }
 
+void background::ChangeText(int index, std::string text)
+{
+	if (index < TextObj.size())
+		TextObj[index].setString(text);
+}
+
 void background::addTextObj(int kernel, std::string text, sf::Font font)
 {
 	TextObj.push_back(sf::Text(text, font, kernel));
@@ -50,6 +56,7 @@ void background::addImageObj(std::string name)
 
 void background::clearBg()
 {
+	ImageNames.clear();
 	ImageObj.clear();
 	textures.clear();
 	TextObj.clear();
