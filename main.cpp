@@ -293,7 +293,7 @@ int main()
 	Tile GPTC(1, "D:/Libraries/sourses/grassplatformTopCenter.png");
 	Tile GPC(1, "D:/Libraries/sourses/grassplatformCenter.png");
 	Tile FreeSpace(1, "D:/Libraries/sourses/freespace.png");
-	Tile DeathBlock(1, "D:/Libraries/sourses/freespace.png", 0);
+	Tile DeathBlock(1, "D:/Libraries/sourses/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
 	{'b', Bricks},

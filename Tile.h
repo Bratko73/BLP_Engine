@@ -9,12 +9,14 @@ protected:
 	sf::Vector2i SizeOfTile;
 	std::string PathToTexture;
 	bool lethality;
+	bool breakable;
 public:
 	Tile();
-	Tile(bool hardness, std::string path_to_texture, bool lethality = 0);
+	Tile(bool hardness, std::string path_to_texture, bool lethality = 0, bool breacable = 0);
 	Tile(const Tile& obj);
 	~Tile();
 	bool& GetLethality();
+	bool& GetBreakable();
 	sf::Sprite& Get_Sprite();
 	void Set_Position(float xPos, float yPos);
 	bool& Get_Hardness();
