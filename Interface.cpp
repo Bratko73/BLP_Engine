@@ -4,52 +4,52 @@ Interface::Interface()
 {
 	this->score = 0;
 	this->time = 999;
-	this->money = 0;
+	//this->money = 0;
 	this->level = "1-1";
-	this->countOfTitles = 8;
+	this->countOfTitles = 6;
 }
 
-Interface::Interface(std::string pathToFont, int score, int money, std::string level, float time)
+Interface::Interface(std::string pathToFont, int score, std::string level, float time)
 {
 
 	this->score = score;
 	this->time = time;
-	this->money = money;
+	//this->money = money;
 	this->level = level;
-	this->countOfTitles = 8;
+	this->countOfTitles = 6;
 	font.loadFromFile(pathToFont);
 	for (int i = 0; i < countOfTitles; i++) {
 		titles[i].setFont(font);
 	}
 	titles[0].setString("000000");
-	titles[1].setString("00");
-	titles[2].setString(level);
-	titles[3].setString("999");
-	titles[4].setString("MARIO");
-	titles[5].setString("COINS");
-	titles[6].setString("WORLD");
-	titles[7].setString("TIME");
+	titles[1].setString(level);
+	titles[2].setString("999");
+	titles[3].setString("MARIO");
+	titles[4].setString("WORLD");
+	titles[5].setString("TIME");
+	//titles[6].setString("00");
+	//titles[7].setString("COINS");
 }
 
 Interface::Interface(std::string pathToFont)
 {
 	this->score = 0;
 	this->time = 999;
-	this->money = 0;
+	//this->money = 0;
 	this->level = "1-1";
-	this->countOfTitles = 8;
+	this->countOfTitles = 6;
 	font.loadFromFile(pathToFont);
 	for (int i = 0; i < countOfTitles; i++) {
 		titles[i].setFont(font);
 	}
 	titles[0].setString("000000");
-	titles[1].setString("00");
-	titles[2].setString(level);
-	titles[3].setString("999");
-	titles[4].setString("MARIO");
-	titles[5].setString("MONEY");
-	titles[6].setString("WORLD");
-	titles[7].setString("TIME");
+	titles[1].setString(level);
+	titles[2].setString("999");
+	titles[3].setString("MARIO");
+	titles[4].setString("WORLD");
+	titles[5].setString("TIME");
+	//titles[6].setString("00");
+	//titles[7].setString("MONEY");
 }
 
 void Interface::increaceScore(int scoreIncrement)
@@ -64,7 +64,7 @@ void Interface::increaceScore(int scoreIncrement)
 	//std::string temp = std::to_string(score);
 	titles[0].setString(score);
 }
-
+/*
 void Interface::increaceMoney(int moneyIncrement)
 {
 	
@@ -72,18 +72,31 @@ void Interface::increaceMoney(int moneyIncrement)
 	if (money >= 100)
 		money = 99;
 	titles[1].setString(std::to_string(money));
-}
+}*/
 
 void Interface::changeLevel(std::string level)
 {
 	this->level = level;
-	titles[2].setString(this->level);
+	titles[1].setString(this->level);
 }
 
 void Interface::updateTime(float time)
 {
 	this->time -= time;
-	titles[3].setString(std::to_string(int(this->time)));
+	titles[2].setString(std::to_string(int(this->time)));
+
+}
+
+void Interface::RestartTime()
+{
+	this->time = 999;
+	titles[2].setString(std::to_string(int(this->time)));
+}
+
+void Interface::RestartScore()
+{
+	titles[0].setString("000000");
+	this->score = 0;
 
 }
 
