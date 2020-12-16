@@ -25,7 +25,7 @@ void MainMenu(sf::RenderWindow& window) {
 	music.setLoop(true);
 	music.setVolume(50);
 	music.play();
-	while (isMenu)
+	while (window.isOpen())
 	{
 		window.clear();
 		sf::Event event;
@@ -60,7 +60,7 @@ void MainMenu(sf::RenderWindow& window) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
 			if (menuNum == 1)
-				isMenu = false;
+				return;
 			if (menuNum == 2) {
 				window.close();
 				return;
@@ -108,11 +108,11 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 	Bg.addTexture("Tramp", "sourses/sprites/tramp.jpg");
 	Bg.addImageObj("Tramp");
 	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
-	sf::Clock clock;
+
 
 	while (window.isOpen())
 	{
-		time -= clock.getElapsedTime().asSeconds();
+		time -= 0.05;
 		if (time < 0)
 			return;
 		sf::Event event;
@@ -210,6 +210,7 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
 	int level = 1;
 	interface.RestartScore();
+	interface.RestartTime();
 	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setRectangleLeft(100);
@@ -241,7 +242,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	music.setVolume(30);
 	music.play();
 	static sf::Music death;
-	death.openFromFile("sourses/sounds/death.ogg");
+	death.openFromFile("sourses/sounds/death1.ogg");
 	death.setLoop(false);
 	death.setVolume(30);
 	death.play();
@@ -370,7 +371,7 @@ int main()
 		}
 		else
 		{
-			LoseScreen(window, 1000);
+			LoseScreen(window, 1800);
 			MainMenu(window);
 			lives = 3;
 			isLevelPassed_1 = false;
