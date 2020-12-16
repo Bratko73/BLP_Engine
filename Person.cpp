@@ -60,23 +60,31 @@ void Person::isEdgeOfMap(const int screenWidth)
 		offset.x = rectangle.left - screenWidth / 2;
 }
 
-void Person::Death(const int screenHeight)
+bool Person::Death(const int screenHeight)
 {
 	life = false;
 	const float speedOfDeath = 0.4; //скорость, с которой спрайт персонажа "уходит" под карту
 	const int jumpCoeff = 237;      //с помощью этого параметра поднимаю спрайт персонажа примерно на высоту его прыжка, чтобы было ка кв оригинал марио
 	static float  pixelCounter = 0.1;
-		if ((pixelCounter > 0) && (pixelCounter < heightOfJump * jumpCoeff))
-		{
-			animation.setPosition(rectangle.left - offset.x, rectangle.top - pixelCounter);
-			pixelCounter += speedOfDeath;
-		}
-		else if (pixelCounter > heightOfJump * jumpCoeff)
-			pixelCounter = 0;
-		else if ((rectangle.top - heightOfJump * jumpCoeff - pixelCounter) < screenHeight) {
-			animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * jumpCoeff - pixelCounter));
-			pixelCounter -= speedOfDeath;
-		}
+	if ((pixelCounter > 0) && (pixelCounter < heightOfJump * jumpCoeff))
+	{
+		animation.setPosition(rectangle.left - offset.x, rectangle.top - pixelCounter);
+		pixelCounter += speedOfDeath;
+		return 0;
+	}
+	else if (pixelCounter > heightOfJump* jumpCoeff) {
+		pixelCounter = 0;
+		return 0;
+	}
+	else if ((rectangle.top - heightOfJump * jumpCoeff - pixelCounter) < screenHeight) {
+		animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * jumpCoeff - pixelCounter));
+		pixelCounter -= speedOfDeath;
+		return 0;
+	}
+	else {
+		pixelCounter = 0.1;
+		return 1;
+	}
 }
 
 //void Person::play(float time, const int screenWidth, const int screenHeight, GameMap& map)

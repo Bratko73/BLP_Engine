@@ -207,7 +207,9 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		else if (enemy[i].getName() == "Turtle")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 26), sf::Vector2i(387, 242), 3, 0, 0.005);
 	}
-
+	sf::SoundBuffer buffer;
+	buffer.loadFromFile("sourses/sounds/jumpsound.ogg");
+	sf::Sound sound (buffer);
 	sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
 	music.setLoop(true);
@@ -234,6 +236,12 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.key.code == sf::Keyboard::Up&& Player.isOnGround())
+			{
+				//sound.resetBuffer();
+				sound.play();
+
+			}
 
 		}
 		if (Player.getRectangleLeft() > 2650)
@@ -255,11 +263,12 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			}
 		}
 		else {
-			Player.Death(250);
-			lives--;
-			Player.setLife(true);
-			isLevelPassed = false;
-			return;
+			if (Player.Death(250)) {
+				lives--;
+				Player.setLife(true);
+				isLevelPassed = false;
+				return;
+			}
 		}
 		
 		Bg.drawBackground(window, Player.getOffsetX());
