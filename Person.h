@@ -21,7 +21,7 @@ public:
 	void move();
 	void update(float time, GameMap& map);
 	void isEdgeOfMap(const int screenWidth);
-	void Death(const int screenHeight);
+	bool Death(const int screenHeight);
 	//void play(float time, const int screenWidth, const int screenHeight, GameMap& map);
 
 	float& getX();
