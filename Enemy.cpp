@@ -56,7 +56,7 @@ void Enemy::move(GameMap& map)
 	if (Collision::npcCollision(0, *this, map))
 			coordinates.x *= -1;
 
-	if (name == "Turtle" && life == 2) {
+	if (name == "Turtle" && life == 3) {
 		if (coordinates.x > 0) {
 			if (map.get_Hardness(int(rectangle.left) / 16 + 2, int(rectangle.top) / 16 + 1) == true)
 				if (onGround) {
