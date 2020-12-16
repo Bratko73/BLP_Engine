@@ -213,6 +213,11 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 26), sf::Vector2i(387, 242), 3, 0, 0.005);
 	}
 
+	sf::Music music;
+	music.openFromFile("sourses/sounds/moonlight.ogg");
+	music.setLoop(true);
+	music.setVolume(30);
+	music.play();
 	sf::Font font;
 	sf::Clock clock;
 	bool Islevel = true;
