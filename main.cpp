@@ -144,7 +144,7 @@ void WinScreen(sf::RenderWindow& window) {
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.key.code == sf::Keyboard::Enter)
+			if (event.key.code == sf::Keyboard::Escape)
 				return;
 		}
 		Bg.drawBackground(window, 0);
@@ -271,6 +271,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.key.code == sf::Keyboard::Escape)
+				return;
 		}
 		if (Player.getRectangleLeft() > 2650)
 			isTriggered = 1;
