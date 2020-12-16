@@ -1,4 +1,5 @@
 #include "SFML/include/SFML/Graphics.hpp"
+#include "SFML/include/SFML/Audio.hpp"
 #include "Animation.h"
 #include"GameMap.h"
 #include"Person.h"
@@ -10,17 +11,21 @@
 
 void MainMenu(sf::RenderWindow& window) {
 	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
-	startTexture.loadFromFile("D:/Libraries/sourses/start.png");
-	exitTexture.loadFromFile("D:/Libraries/sourses/exit.png");
-	titleTexture.loadFromFile("D:/Libraries/sourses/title.png");
-	menuBackground.loadFromFile("D:/Libraries/sourses/MainMenuBackground.jpg");
+	startTexture.loadFromFile("sourses/sprites/start.png");
+	exitTexture.loadFromFile("sourses/sprites/exit.png");
+	titleTexture.loadFromFile("sourses/sprites/title.png");
+	menuBackground.loadFromFile("sourses/sprites/MainMenuBackground.jpg");
 	sf::Sprite menuStart(startTexture), menuExit(exitTexture), menuTitle(titleTexture), menuBg(menuBackground);
 	bool isMenu = 1;
 	int menuNum = 1;
 	menuTitle.setPosition(0, 0);
 	menuStart.setPosition(180, 100);
 	menuExit.setPosition(180, 150);
-
+	sf::Music music;
+	music.openFromFile("sourses/sounds/narwhal.ogg");
+	music.setLoop(true);
+	music.setVolume(50);
+	music.play();
 	while (isMenu)
 	{
 		window.clear();
@@ -61,7 +66,7 @@ void MainMenu(sf::RenderWindow& window) {
 				window.close();
 				return;
 			}
-
+			music.pause();
 		}
 		window.draw(menuBg);
 		window.draw(menuTitle);
@@ -72,11 +77,11 @@ void MainMenu(sf::RenderWindow& window) {
 }
 
 void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
-	background Bg("D:/Libraries/sourses/19783.ttf");
+	background Bg("sourses/fonts/19783.ttf");
 	Bg.addTextObj(15, "X");
 	Bg.addTextObj(30, std::to_string(lives));
 	Bg.SetBgColor(sf::Color::Black);
-	Bg.addTexture("Zefir", "D:/Libraries/sourses/zefir.png");
+	Bg.addTexture("Zefir", "sourses/sprites/zefir.png");
 	Bg.addImageObj("Zefir");
 	Bg.TextObjSetPosition(0, sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2 - 5));
 	Bg.TextObjSetPosition(1, sf::Vector2f(window.getSize().x / 2+16, window.getSize().y / 2 - 16));
@@ -99,9 +104,9 @@ void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
 	}
 }
 void LoseScreen(sf::RenderWindow& window, float time) {
-	background Bg("D:/Libraries/sourses/19783.ttf");
+	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Black);
-	Bg.addTexture("Tramp", "D:/Libraries/sourses/tramp.jpg");
+	Bg.addTexture("Tramp", "sourses/sprites/tramp.jpg");
 	Bg.addImageObj("Tramp");
 	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
 	sf::Clock clock;
@@ -139,11 +144,11 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	switch (level)
 	{
 	case 1:
-		map.loadFromFile("D:/Libraries/sourses/level_1.txt", TileMap);
-		Bg.addTexture("cloudS","D:/Libraries/sourses/cloudS.png");
-		Bg.addTexture("cloudXXL","D:/Libraries/sourses/cloudXXL.png");
-		Bg.addTexture("holm","D:/Libraries/sourses/holm.png");
-		Bg.addTexture("castle","D:/Libraries/sourses/castle.png");
+		map.loadFromFile("sourses/levels/level_1.txt", TileMap);
+		Bg.addTexture("cloudS","sourses/sprites/cloudS.png");
+		Bg.addTexture("cloudXXL","sourses/sprites/cloudXXL.png");
+		Bg.addTexture("holm","sourses/sprites/holm.png");
+		Bg.addTexture("castle","sourses/sprites/castle.png");
 		Bg.addImageObj("cloudS");
 		Bg.addImageObj("cloudS");
 		Bg.addImageObj("cloudS");
@@ -183,7 +188,7 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
 	int level = 1;
 	//background Bg("D:/Libraries/sourses/19783.ttf");
-	Person Player("D:/Libraries/sourses/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
+	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setRectangleLeft(100);
 	Player.setRectangleTop(180);
@@ -192,13 +197,13 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 
 	Enemy enemy[7]
 	{
-		Enemy("D:/Libraries/sourses/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
 		//Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
 	};
 	for (int i = 0; i < 7; i++) {
@@ -276,24 +281,24 @@ int main()
 	sf::Vector2i windowSize(400,250);
 	sf::RenderWindow window(sf::VideoMode(windowSize.x,windowSize.y), "Fuk yea!");
 	int lives = 3;
-	background Bg("D:/Libraries/sourses/19783.ttf");
+	background Bg("sourses/fonts/19783.ttf");
 	GameMap map(200, 17);	
-	Interface interface("D:/Libraries/sourses/19783.ttf");
-
+	Interface interface("sourses/fonts/19783.ttf");
+	int volume = 100;
 	InterfaceInit(interface);
 
-	Tile Bricks(1, "D:/Libraries/sourses/bricks.png",0,1);
-	Tile Block(1, "D:/Libraries/sourses/block.png");
-	Tile OStone(1, "D:/Libraries/sourses/orangestone.png");
-	Tile invOStone(0, "D:/Libraries/sourses/orangestone.png");
-	Tile GPTL(1, "D:/Libraries/sourses/grassplatformTopLeft.png");
-	Tile GPL(1, "D:/Libraries/sourses/grassplatformLeft.png");
-	Tile GPTR(1, "D:/Libraries/sourses/grassplatformTopRight.png");
-	Tile GPR(1, "D:/Libraries/sourses/grassplatformRight.png");
-	Tile GPTC(1, "D:/Libraries/sourses/grassplatformTopCenter.png");
-	Tile GPC(1, "D:/Libraries/sourses/grassplatformCenter.png");
-	Tile FreeSpace(1, "D:/Libraries/sourses/freespace.png");
-	Tile DeathBlock(1, "D:/Libraries/sourses/freespace.png", 1);
+	Tile Bricks(1, "sourses/sprites/bricks.png",0,1);
+	Tile Block(1, "sourses/sprites/block.png");
+	Tile OStone(1, "sourses/sprites/orangestone.png");
+	Tile invOStone(0, "sourses/sprites/orangestone.png");
+	Tile GPTL(1, "sourses/sprites/grassplatformTopLeft.png");
+	Tile GPL(1, "sourses/sprites/grassplatformLeft.png");
+	Tile GPTR(1, "sourses/sprites/grassplatformTopRight.png");
+	Tile GPR(1, "sourses/sprites/grassplatformRight.png");
+	Tile GPTC(1, "sourses/sprites/grassplatformTopCenter.png");
+	Tile GPC(1, "sourses/sprites/grassplatformCenter.png");
+	Tile FreeSpace(1, "sourses/sprites/freespace.png");
+	Tile DeathBlock(1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
 	{'b', Bricks},
