@@ -125,10 +125,11 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 		window.display();
 	}
 }
+
 void WinScreen(sf::RenderWindow& window) {
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Cyan);
-	Bg.addTexture("Tramp", "sourses/sprites/tramp.jpg");
+	Bg.addTexture("Tramp", "sourses/sprites/Grazies.png");
 	Bg.addImageObj("Tramp");
 	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
 	sf::Music music;
@@ -356,14 +357,15 @@ int main()
 	{'0', FreeSpace},
 	};
 	bool isLevelPassed_1 = false;
-	//MainMenu(window);
-	/*while (window.isOpen())
+	MainMenu(window);
+	while (window.isOpen())
 	{
 		if (lives) {
 			BlackScreen(window, lives, 1000);
 			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1);
 			if (isLevelPassed_1){
-
+				WinScreen(window);
+				isLevelPassed_1 = false;
 			}
 		}
 		else
@@ -374,6 +376,6 @@ int main()
 			isLevelPassed_1 = false;
 		}
 
-	}*/
+	}
     return 0;
 }
