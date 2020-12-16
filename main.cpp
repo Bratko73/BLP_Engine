@@ -207,19 +207,27 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		else if (enemy[i].getName() == "Turtle")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 26), sf::Vector2i(387, 242), 3, 0, 0.005);
 	}
-	sf::SoundBuffer buffer;
-	buffer.loadFromFile("sourses/sounds/jumpsound.ogg");
-	sf::Sound sound (buffer);
+	
 	sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
 	music.setLoop(true);
 	music.setVolume(30);
 	music.play();
+	static sf::Music death;
+	death.openFromFile("sourses/sounds/death.ogg");
+	death.setLoop(false);
+	death.setVolume(30);
+	death.play();
+	static sf::Music LastDeath;
+	LastDeath.openFromFile("sourses/sounds/LastlifeLost.ogg");
+	LastDeath.setLoop(false);
+	LastDeath.setVolume(30);
 	sf::Font font;
 	sf::Clock clock;
 	bool Islevel = true;
 	bool isTriggered = false;
 	bool isFirsttime = true;
+	sf::Event event;
 	while (window.isOpen())
 	{
 		interface.updateTime(clock.getElapsedTime().asSeconds());
@@ -230,19 +238,11 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 
 		if (time > 20)
 			time = 20;
-
-		sf::Event event;
+		
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.key.code == sf::Keyboard::Up&& Player.isOnGround())
-			{
-				//sound.resetBuffer();
-				sound.play();
-
-			}
-
 		}
 		if (Player.getRectangleLeft() > 2650)
 			isTriggered = 1;
@@ -261,8 +261,16 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 				
 
 			}
+			if (lives > 1)
+				death.play();
+			else
+			{
+				death.stop();
+				LastDeath.play();
+			}
 		}
 		else {
+			music.stop();
 			if (Player.Death(250)) {
 				lives--;
 				Player.setLife(true);
