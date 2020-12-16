@@ -173,9 +173,6 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 		Bg.addTextObj(20, "Instead of moving forward, we must move back.");
 		Bg.TextObjSetPosition(0, sf::Vector2f(2800, 50));
 		Bg.SetBgColor(sf::Color(100, 100, 255));		
-
-
-
 		break;
 	case 2:
 		break;
@@ -186,7 +183,6 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 
 void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
 	int level = 1;
-	//background Bg("D:/Libraries/sourses/19783.ttf");
 	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setRectangleLeft(100);
@@ -202,8 +198,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
-		//Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
+		//Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
 	};
 	for (int i = 0; i < 7; i++) {
 		if (enemy[i].getName() == "Lenin")
