@@ -34,4 +34,5 @@ public:
 	void setRectangleLeft(float left);
 	void setRectangleTop(float top);
 	void setOnGround(bool val);
+	void setLife(int life);
 };

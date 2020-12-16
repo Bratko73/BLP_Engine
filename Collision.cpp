@@ -38,7 +38,9 @@ void Collision::collision(bool flag, Person& p, GameMap& map)
 bool Collision::npcCollision(bool flag, Enemy& n, GameMap& map)
 {
 	for (int i = n.getRectangleTop() / 16; i < (n.getRectangleTop() + n.getRectangleHeight()) / 16; i++)
-		for (int j = n.getRectangleLeft() / 16; j < (n.getRectangleLeft() + n.getRectangleWidth()) / 16; j++)
+		for (int j = n.getRectangleLeft() / 16; j < (n.getRectangleLeft() + n.getRectangleWidth()) / 16; j++){
+			if (map.GetLethality(j, i))
+				n.setLife(0);
 			if (map.get_Hardness(j, i) == true)
 			{
 				if (n.getY() > 0 && flag == 1)
@@ -62,7 +64,7 @@ bool Collision::npcCollision(bool flag, Enemy& n, GameMap& map)
 					n.setRectangleLeft(j * 16 + 16);
 					return true;
 				}
-
+			}
 			}
 	return false;
 }

@@ -205,7 +205,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		if (enemy[i].getName() == "Lenin")
 			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
 		else if (enemy[i].getName() == "Turtle")
-			enemy[i].setAnimationSettings(sf::Vector2i(17, 26), sf::Vector2i(387, 242), 3, 0, 0.005);
+			enemy[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	}
 	
 	sf::Music music;

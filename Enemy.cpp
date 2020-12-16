@@ -46,6 +46,8 @@ void Enemy::update(float time, Person& p)
 		Enemy::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 2, 0, 0);
 	else if (name == "Turtle" && life == 1)
 		Enemy::setAnimationSettings(sf::Vector2i(17, 14), sf::Vector2i(387, 267), 5, 0, 0.005);
+	else if (name == "Turtle" && life == 0)
+		animation.makeInvisible();
 
 	animation.setPosition(rectangle.left - p.getOffsetX(), rectangle.top - p.getOffsetY());
 }
@@ -171,6 +173,11 @@ void Enemy::setRectangleTop(float top)
 void Enemy::setOnGround(bool val)
 {
 	this->onGround = val;
+}
+
+void Enemy::setLife(int life)
+{
+	this->life = life;
 }
 
 sf::FloatRect Enemy::getRectangle()
