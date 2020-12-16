@@ -250,6 +250,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 				enemy[i].move(map);
 				enemy[i].update(time, Player);
 				enemy[i].Death(Player, interface);
+				
+
 			}
 		}
 		else {
