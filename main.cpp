@@ -255,11 +255,12 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			}
 		}
 		else {
-			Player.Death(250);
-			lives--;
-			Player.setLife(true);
-			isLevelPassed = false;
-			return;
+			if (Player.Death(250)) {
+				lives--;
+				Player.setLife(true);
+				isLevelPassed = false;
+				return;
+			}
 		}
 		
 		Bg.drawBackground(window, Player.getOffsetX());
