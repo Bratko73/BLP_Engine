@@ -16,3 +16,15 @@ Based on the SFML graphics library, create a Mario.
 **Trello**
 ------------------
 https://trello.com/b/wgXnBs5T/stankintalebmlaps-engine
+
+** How to do a game from this?**
+------------------
+- Compile this code.
+- Сreate a separate folder
+- Download to this folder: "sourse" folder, compiled ".exe" file and <sfml-<category name>>.dll libraries
+ - sfml-<category names>: window, system, graphics, audio.
+ - And also <openal32>.dll
+ 
+**Or download the assembled game from the link:**
+------------------
+https://drive.google.com/file/d/1oEbVJZvKezyulhvDeNX5ANteVah4FzQC/view?usp=sharing
