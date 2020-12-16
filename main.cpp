@@ -3,7 +3,6 @@
 #include "Animation.h"
 #include"GameMap.h"
 #include"Person.h"
-#include "TestMap.h"
 #include "Enemy.h"
 #include "Interface.h"
 #include "background.h"

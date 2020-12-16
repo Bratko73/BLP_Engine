@@ -173,7 +173,6 @@
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Sound.h" />
-    <ClInclude Include="TestMap.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
