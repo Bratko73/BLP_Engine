@@ -227,7 +227,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005, "Lenin", 0),
 		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005, "Lenin", 0),
 		//Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
+		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
 	};
 	for (int i = 0; i < 7; i++) {
 		if (enemy[i].getName() == "Lenin")
