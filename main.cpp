@@ -224,7 +224,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	};
 	Gumba gumba[6]
 	{
-			Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005),
