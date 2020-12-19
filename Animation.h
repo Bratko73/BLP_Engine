@@ -13,7 +13,6 @@ private:
 	float currentFrame;
 	int rangeBetweenFrames;
 	float speed;
-	//int distanceBetweenSprites;
 public:
 	Animation();
 	Animation(std::string pathToFile);
