@@ -1,15 +1,15 @@
 #include "Person.h"
 #include "Collision.h"
 
-Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect rectangle)
+Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox)
 {
 	this->heightOfJump = heightOfJump;
 	this->gravitation = gravitation;
 	this->speed = speed;
-	coordinates.x = 0;
-	coordinates.y = 0;
-	this->rectangle = rectangle;
-	animation.setPosition(coordinates);
+	velocity.x = 0;
+	velocity.y = 0;
+	this->personHitbox = personHitbox;
+	animation.setPosition(velocity);
 	offset.x = 0;
 	offset.y = 0;
 	animation.setSpriteSheet(pathToFile);
@@ -20,44 +20,44 @@ Person::Person(std::string pathToFile, const float speed, const float gravitatio
 void Person::move()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		coordinates.x = -speed;
+		velocity.x = -speed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		coordinates.x = speed;
+		velocity.x = speed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		if (onGround) {
-			coordinates.y = -heightOfJump;
+			velocity.y = -heightOfJump;
 			onGround = false;
 		}
 }
 
 void Person::update(float time, GameMap& map)
 {
-	rectangle.left += coordinates.x * time;
+	personHitbox.left += velocity.x * time;
 	Collision::collision(0, *this, map);
 
 	if (!onGround)
-		coordinates.y += gravitation * time;
-	rectangle.top += coordinates.y * time;
+		velocity.y += gravitation * time;
+	personHitbox.top += velocity.y * time;
 	onGround = false;
 	Collision::collision(1, *this, map);
 
 
-	if (coordinates.x > 0)
+	if (velocity.x > 0)
 			this->animation.update(time);
-		if (coordinates.x < 0)
+		if (velocity.x < 0)
 			this->animation.mirrorUpdate(time);
 
-	animation.setPosition(rectangle.left - offset.x, rectangle.top - offset.y); 
+	animation.setPosition(personHitbox.left - offset.x, personHitbox.top - offset.y); 
 
-	coordinates.x = 0;
+	velocity.x = 0;
 }
 
 void Person::isEdgeOfMap(const int screenWidth)
 {
-	if (rectangle.left > screenWidth / 2)          //так как персонаж находится в центре экрана, ширину экрана делю пополам
-		offset.x = rectangle.left - screenWidth / 2;
+	if (personHitbox.left > screenWidth / 2)          //так как персонаж находится в центре экрана, ширину экрана делю пополам
+		offset.x = personHitbox.left - screenWidth / 2;
 }
 
 bool Person::Death(const int screenHeight)
@@ -68,7 +68,7 @@ bool Person::Death(const int screenHeight)
 	static float  pixelCounter = 0.1;
 	if ((pixelCounter > 0) && (pixelCounter < heightOfJump * jumpCoeff))
 	{
-		animation.setPosition(rectangle.left - offset.x, rectangle.top - pixelCounter);
+		animation.setPosition(personHitbox.left - offset.x, personHitbox.top - pixelCounter);
 		pixelCounter += speedOfDeath;
 		return 0;
 	}
@@ -76,8 +76,8 @@ bool Person::Death(const int screenHeight)
 		pixelCounter = 0;
 		return 0;
 	}
-	else if ((rectangle.top - heightOfJump * jumpCoeff - pixelCounter) < screenHeight) {
-		animation.setPosition(rectangle.left - offset.x, (rectangle.top - heightOfJump * jumpCoeff - pixelCounter));
+	else if ((personHitbox.top - heightOfJump * jumpCoeff - pixelCounter) < screenHeight) {
+		animation.setPosition(personHitbox.left - offset.x, (personHitbox.top - heightOfJump * jumpCoeff - pixelCounter));
 		pixelCounter -= speedOfDeath;
 		return 0;
 	}
@@ -87,25 +87,19 @@ bool Person::Death(const int screenHeight)
 	}
 }
 
-//void Person::play(float time, const int screenWidth, const int screenHeight, GameMap& map)
-//{
-//	if (life == true) {
-//		move();
-//		update(time, map);
-//		isEdgeOfMap(screenWidth);
-//	}
-//	else
-//		Death(screenHeight);
-//}
-
-float& Person::getX()
+void Person::draw(sf::RenderWindow& window)
 {
-	return coordinates.x;
+	window.draw(animation.getSprite());
 }
 
-float& Person::getY()
+float& Person::getXvelocity()
 {
-	return coordinates.y;
+	return velocity.x;
+}
+
+float& Person::getYvelocity()
+{
+	return velocity.y;
 }
 
 float& Person::getOffsetX()
@@ -118,34 +112,9 @@ float& Person::getOffsetY()
 	return offset.y;
 }
 
-float Person::getRectangleLeft()
+sf::FloatRect Person::getPersonHitbox()
 {
-	return rectangle.left;
-}
-
-float Person::getRectangleTop()
-{
-	return rectangle.top;
-}
-
-float Person::getRectangleHeight()
-{
-	return rectangle.height;
-}
-
-float Person::getRectangleWidth()
-{
-	return rectangle.width;
-}
-
-sf::Sprite Person::getSprite()
-{
-	return animation.getSprite();
-}
-
-sf::FloatRect Person::getRectangle()
-{
-	return rectangle;
+	return personHitbox;
 }
 
 bool Person::getLife()
@@ -156,6 +125,11 @@ bool Person::getLife()
 bool Person::isOnGround()
 {
 	return onGround;
+}
+
+void Person::setYvelocity(float velocityY)
+{
+	this->velocity.y = velocityY;
 }
 
 void Person::clearOffSet()
@@ -174,19 +148,18 @@ void Person::setOnGround(bool val)
 	onGround = val;
 }
 
-void Person::setRectangleLeft(float left)
+void Person::setPersonHitboxTop(float personHitboxTop)
 {
-	rectangle.left = left;
+	this->personHitbox.top = personHitboxTop;
 }
-
-void Person::setRectangleTop(float top)
+void Person::setPersonHitboxLeft(float personHitboxLeft)
 {
-	rectangle.top = top;
+	this->personHitbox.left = personHitboxLeft;
 }
 
 void Person::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
 {
 	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, rangeBetweenFrames, speed);
-	rectangle.height = size.y;
-	rectangle.width = size.x;
+	personHitbox.height = size.y;
+	personHitbox.width = size.x;
 }

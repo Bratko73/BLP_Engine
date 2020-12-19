@@ -2,33 +2,34 @@
 
 void Collision::collision(bool flag, Person& p, GameMap& map)
 {
-	for (int i = p.getRectangleTop() / 16; i < (p.getRectangleTop() + p.getRectangleHeight()) / 16; i++)
-		for (int j = p.getRectangleLeft() / 16; j < (p.getRectangleLeft() + p.getRectangleWidth()) / 16; j++)
+	const int pixelsInTile = 16;
+	for (int i = p.getPersonHitbox().top / pixelsInTile; i < (p.getPersonHitbox().top + p.getPersonHitbox().height) / pixelsInTile; i++)
+		for (int j = p.getPersonHitbox().left / pixelsInTile; j < (p.getPersonHitbox().left + p.getPersonHitbox().width) / pixelsInTile; j++)
 		{
 			if (map.GetLethality(j, i))
 				p.Death(250);
 			if (map.get_Hardness(j,i))
 			{
-				if (p.getY() > 0 && flag == 1)
+				if (p.getYvelocity() > 0 && flag == 1)
 				{
-					p.setRectangleTop(i * 16 - p.getRectangleHeight());
-					p.getY() = 0;
+					p.setPersonHitboxTop(i * 16 - p.getPersonHitbox().height);
+					p.setYvelocity(0);
 					p.setOnGround(true);
 				}
-				if (p.getY() < 0 && flag == 1)
+				if (p.getYvelocity() < 0 && flag == 1)
 				{
 					if (map.GetBreakable(j, i))
 						map.SetEmptySpace(j, i);
-					p.setRectangleTop(i * 16 + 16);
-					p.getY() = 0;
+					p.setPersonHitboxTop(i * pixelsInTile + pixelsInTile);
+					p.setYvelocity(0);
 				}
-				if (p.getX() > 0 && flag == 0)
+				if (p.getXvelocity() > 0 && flag == 0)
 				{
-					p.setRectangleLeft(j * 16 - p.getRectangleWidth());
+					p.setPersonHitboxLeft(j * pixelsInTile - p.getPersonHitbox().width);
 				}
-				if (p.getX() < 0 && flag == 0)
+				if (p.getXvelocity() < 0 && flag == 0)
 				{
-					p.setRectangleLeft(j * 16 + 16);
+					p.setPersonHitboxLeft(j * pixelsInTile + pixelsInTile);
 				}
 			}
 
@@ -37,34 +38,35 @@ void Collision::collision(bool flag, Person& p, GameMap& map)
 
 bool Collision::npcCollision(bool flag, Enemy& n, GameMap& map)
 {
-	for (int i = n.getRectangleTop() / 16; i < (n.getRectangleTop() + n.getRectangleHeight()) / 16; i++)
-		for (int j = n.getRectangleLeft() / 16; j < (n.getRectangleLeft() + n.getRectangleWidth()) / 16; j++){
+	const int pixelsInTile = 16;
+	for (int i = n.getEnemyHitbox().top / pixelsInTile; i < (n.getEnemyHitbox().top + n.getEnemyHitbox().height) / pixelsInTile; i++)
+		for (int j = n.getEnemyHitbox().left / pixelsInTile; j < (n.getEnemyHitbox().left + n.getEnemyHitbox().width) / pixelsInTile; j++) {
 			if (map.GetLethality(j, i))
 				n.setLife(0);
 			if (map.get_Hardness(j, i) == true)
 			{
-				if (n.getY() > 0 && flag == 1)
+				if (n.getYvelocity() > 0 && flag == 1)
 				{
-					n.setRectangleTop(i * 16 - n.getRectangleHeight());
-					n.getY() = 0;
+					n.setEnemyHitboxTop(i * 16 - n.getEnemyHitbox().height);
+					n.setYvelocity(0);
 					n.setOnGround(true);
 				}
-				if (n.getY() < 0 && flag == 1)
+				if (n.getYvelocity() < 0 && flag == 1)
 				{
-					n.setRectangleTop(i * 16 + 16);
-					n.getY() = 0;
+					n.setEnemyHitboxTop(i * 16 + 16);
+					n.setYvelocity(0);
 				}
-				if (n.getX() > 0 && flag == 0)
+				if (n.getXvelocity() > 0 && flag == 0)
 				{
-					n.setRectangleLeft(j * 16 - n.getRectangleWidth());
+					n.setEnemyHitboxLeft(j * 16 - n.getEnemyHitbox().width);
 					return true;
 				}
-				else if (n.getX() < 0 && flag == 0)
+				else if (n.getXvelocity() < 0 && flag == 0)
 				{
-					n.setRectangleLeft(j * 16 + 16);
+					n.setEnemyHitboxLeft(j * 16 + 16);
 					return true;
 				}
 			}
-			}
+		}
 	return false;
 }

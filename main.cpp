@@ -3,7 +3,8 @@
 #include "Animation.h"
 #include"GameMap.h"
 #include"Person.h"
-#include "Enemy.h"
+#include "Gumba.h"
+#include "Turtle.h"
 #include "Interface.h"
 #include "background.h"
 #include <map>
@@ -185,27 +186,28 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	int level = 1;
 	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
-	Player.setRectangleLeft(100);
-	Player.setRectangleTop(180);
+	Player.setPersonHitboxLeft(100);
+	Player.setPersonHitboxTop(180);
 	Player.clearOffSet();
 	level_init(level, Bg, map, TileMap);
 
-	Enemy enemy[7]
-	{
-		Enemy("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, "Turtle", 0.27),
-		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005, "Lenin", 0),
-		//Enemy("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005, "Lenin", 0),
-		Enemy("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005, "Lenin", 0),
+	Turtle turtle[1]{ 
+		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, 0.27) 
 	};
-	for (int i = 0; i < 7; i++) {
-		if (enemy[i].getName() == "Lenin")
-			enemy[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-		else if (enemy[i].getName() == "Turtle")
-			enemy[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
+	Gumba gumba[6]
+	{
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005),
+		//Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005),
+		Gumba("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005),
+	};
+	for (int i = 0; i < 6; i++) {
+			gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+	for (int i = 0; i < 1; i++)		
+			turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	}
 	
 	sf::Music music;
@@ -244,9 +246,9 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (Player.getRectangleLeft() > 2650)
+		if (Player.getPersonHitbox().left > 2650)
 			isTriggered = 1;
-		if (isTriggered && Player.getRectangleLeft() < 90) {
+		if (isTriggered && Player.getPersonHitbox().left < 90) {
 			isLevelPassed = true;
 			return;
 		}
@@ -254,12 +256,15 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			Player.move();
 			Player.update(time, map);
 			Player.isEdgeOfMap(400);
-			for (int i = 0; i < 7; i++) {
-				enemy[i].move(map);
-				enemy[i].update(time, Player);
-				enemy[i].Death(Player, interface);
-				
-
+			for (int i = 0; i < 6; i++) {
+				gumba[i].move(map);
+				gumba[i].update(time, Player);
+				gumba[i].Death(Player, interface);
+			}
+			for (int i = 0; i < 1; i++) {
+				turtle[i].move(map);
+				turtle[i].update(time, Player);
+				turtle[i].Death(Player, interface);
 			}
 			if (lives > 1)
 				death.play();
@@ -281,9 +286,11 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
-		for (int i = 0; i < 7; i++)
-			window.draw(enemy[i].getSprite());
-		window.draw(Player.getSprite());
+		for (int i = 0; i < 6; i++)
+			gumba[i].draw(window);
+		for (int i = 0; i < 1; i++)
+			turtle[i].draw(window);
+		Player.draw(window);
 		interface.draw(window);
 		window.display();
 	}
