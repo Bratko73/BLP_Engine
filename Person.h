@@ -8,8 +8,8 @@ class Person
 private:
 	float speed;
 	sf::Vector2f offset;
-	sf::Vector2f coordinates;
-	sf::FloatRect rectangle;
+	sf::Vector2f velocity;
+	sf::FloatRect personHitbox;
 	Animation animation;
 	bool onGround;
 	float gravitation;
@@ -22,25 +22,21 @@ public:
 	void update(float time, GameMap& map);
 	void isEdgeOfMap(const int screenWidth);
 	bool Death(const int screenHeight);
-	//void play(float time, const int screenWidth, const int screenHeight, GameMap& map);
+	void setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, int rangeBetweenFrames = 0, float speed = 0.005);
+	void draw(sf::RenderWindow& window);
 
-	float& getX();
-	float& getY();
+	float& getXvelocity();
+	float& getYvelocity();
 	float& getOffsetX();
 	float& getOffsetY();
-	float getRectangleLeft();
-	float getRectangleTop();
-	float getRectangleHeight();
-	float getRectangleWidth();
-	sf::Sprite getSprite();
-	sf::FloatRect getRectangle();
+	sf::FloatRect getPersonHitbox();
 	bool getLife();
 	bool isOnGround();
+	void setYvelocity(float velocityY);
 	void clearOffSet();
 	void setLife(bool life);
 	void setOnGround(bool val);
-	void setRectangleLeft(float left);
-	void setRectangleTop(float top);
-	void setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames = 0, int rangeBetweenFrames = 0, float speed = 0.005);
+	void setPersonHitboxLeft(float personHitboxLeft);
+	void setPersonHitboxTop(float personHitboxTop);
 };
 
