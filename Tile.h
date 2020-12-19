@@ -13,7 +13,9 @@ protected:
 
 public:
 	Tile();
-	Tile(bool hardness, std::string path_to_texture, bool lethality = 0, bool breacable = 0);
+	Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality = 0, bool breacable = 0);
+	Tile(sf::Vector2i size, std::string path_to_texture);
+	Tile(std::string path_to_texture);
 	Tile(const Tile& obj);
 	~Tile();
 	bool& GetLethality();
