@@ -26,7 +26,7 @@ void MainMenu(sf::RenderWindow& window) {
 	music.setLoop(true);
 	music.setVolume(50);
 	music.play();
-	while (isMenu)
+	while (window.isOpen())
 	{
 		window.clear();
 		sf::Event event;
@@ -61,7 +61,7 @@ void MainMenu(sf::RenderWindow& window) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
 			if (menuNum == 1)
-				isMenu = false;
+				return;
 			if (menuNum == 2) {
 				window.close();
 				return;
@@ -109,11 +109,11 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 	Bg.addTexture("Tramp", "sourses/sprites/tramp.jpg");
 	Bg.addImageObj("Tramp");
 	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
-	sf::Clock clock;
+
 
 	while (window.isOpen())
 	{
-		time -= clock.getElapsedTime().asSeconds();
+		time -= 0.05;
 		if (time < 0)
 			return;
 		sf::Event event;
@@ -127,15 +127,41 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 	}
 }
 
+void WinScreen(sf::RenderWindow& window) {
+	background Bg("sourses/fonts/19783.ttf");
+	Bg.SetBgColor(sf::Color::Cyan);
+	Bg.addTexture("Tramp", "sourses/sprites/Grazies.png");
+	Bg.addImageObj("Tramp");
+	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
+	sf::Music music;
+	music.openFromFile("sourses/sounds/WhalShark.ogg");
+	music.setLoop(true);
+	music.setVolume(30);
+	music.play();
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+			if (event.key.code == sf::Keyboard::Enter)
+				return;
+		}
+		Bg.drawBackground(window, 0);
+		window.display();
+	}
+}
+
 void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(0, sf::Vector2f(25, 20));
-	interface.setTitlePosition(1, sf::Vector2f(135, 20));
-	interface.setTitlePosition(2, sf::Vector2f(200, 20));
-	interface.setTitlePosition(3, sf::Vector2f(300, 20));
-	interface.setTitlePosition(4, sf::Vector2f(25, 2));
-	interface.setTitlePosition(5, sf::Vector2f(125, 2));
-	interface.setTitlePosition(6, sf::Vector2f(200, 2));
-	interface.setTitlePosition(7, sf::Vector2f(300, 2));
+	interface.setTitlePosition(1, sf::Vector2f(190, 20));
+	interface.setTitlePosition(2, sf::Vector2f(300, 20));
+	interface.setTitlePosition(3, sf::Vector2f(25, 2));
+	interface.setTitlePosition(4, sf::Vector2f(175, 2));
+	interface.setTitlePosition(5, sf::Vector2f(300, 2));
+	//interface.setTitlePosition(1, sf::Vector2f(135, 20));
+	//interface.setTitlePosition(5, sf::Vector2f(125, 2));
 }
 void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
 	map.ClearMap();
@@ -184,6 +210,8 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 
 void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
 	int level = 1;
+	interface.RestartScore();
+	interface.RestartTime();
 	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setPersonHitboxLeft(100);
@@ -196,7 +224,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	};
 	Gumba gumba[6]
 	{
-		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005),
+			Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005),
@@ -216,7 +244,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	music.setVolume(30);
 	music.play();
 	static sf::Music death;
-	death.openFromFile("sourses/sounds/death.ogg");
+	death.openFromFile("sourses/sounds/death1.ogg");
 	death.setLoop(false);
 	death.setVolume(30);
 	death.play();
@@ -296,9 +324,6 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	}
 }
 
-void level_2(sf::RenderWindow& window, int& lives) {
-
-}
 
 
 
@@ -346,12 +371,14 @@ int main()
 		if (lives) {
 			BlackScreen(window, lives, 1000);
 			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1);
-			if (isLevelPassed_1)
-				level_2(window, lives);
+			if (isLevelPassed_1){
+				WinScreen(window);
+				isLevelPassed_1 = false;
+			}
 		}
 		else
 		{
-			LoseScreen(window, 1000);
+			LoseScreen(window, 1800);
 			MainMenu(window);
 			lives = 3;
 			isLevelPassed_1 = false;
