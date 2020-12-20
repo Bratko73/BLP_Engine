@@ -10,10 +10,10 @@ Tile::Tile()
 	lethality = false;
 }
 
-Tile::Tile(bool hardness, std::string path_to_texture, bool lethality, bool breakable)
+Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breacable)
 {
-	SizeOfTile.x = 16;
-	SizeOfTile.y = 16;
+	SizeOfTile.x = size.x;
+	SizeOfTile.y = size.y;
 	this->hardness = hardness;
 	PathToTexture = path_to_texture;
 	this->texture.loadFromFile(PathToTexture);
@@ -21,6 +21,28 @@ Tile::Tile(bool hardness, std::string path_to_texture, bool lethality, bool brea
 	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
 	this->lethality = lethality;
 	this->breakable = breakable;
+}
+
+Tile::Tile(sf::Vector2i size, std::string path_to_texture)
+{
+	SizeOfTile.x = size.x;
+	SizeOfTile.y = size.y;
+	hardness = 0;
+	PathToTexture = path_to_texture;
+	texture.loadFromFile(PathToTexture);
+	sprite = sf::Sprite(texture);
+	lethality = 0;
+	breakable = 0;
+}
+
+Tile::Tile(std::string path_to_texture)
+{
+	hardness = 0;
+	PathToTexture = path_to_texture;
+	texture.loadFromFile(PathToTexture);
+	sprite = sf::Sprite(texture);
+	lethality = 0;
+	breakable = 0;
 }
 
 Tile::Tile(const Tile& obj)
