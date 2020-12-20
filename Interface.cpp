@@ -4,9 +4,9 @@ Interface::Interface()
 {
 	this->score = 0;
 	this->time = 999;
-	//this->money = 0;
+	this->money = 0;
 	this->level = "1-1";
-	this->countOfTitles = 6;
+	this->countOfTitles = 8;
 }
 
 Interface::Interface(std::string pathToFont, int score, std::string level, float time)
@@ -14,9 +14,9 @@ Interface::Interface(std::string pathToFont, int score, std::string level, float
 
 	this->score = score;
 	this->time = time;
-	//this->money = money;
+	this->money = money;
 	this->level = level;
-	this->countOfTitles = 6;
+	this->countOfTitles = 8;
 	font.loadFromFile(pathToFont);
 	for (int i = 0; i < countOfTitles; i++) {
 		titles[i].setFont(font);
@@ -27,17 +27,17 @@ Interface::Interface(std::string pathToFont, int score, std::string level, float
 	titles[3].setString("MARIO");
 	titles[4].setString("WORLD");
 	titles[5].setString("TIME");
-	//titles[6].setString("00");
-	//titles[7].setString("COINS");
+	titles[6].setString("00");
+	titles[7].setString("COINS");
 }
 
 Interface::Interface(std::string pathToFont)
 {
 	this->score = 0;
 	this->time = 999;
-	//this->money = 0;
+	this->money = 0;
 	this->level = "1-1";
-	this->countOfTitles = 6;
+	this->countOfTitles = 8;
 	font.loadFromFile(pathToFont);
 	for (int i = 0; i < countOfTitles; i++) {
 		titles[i].setFont(font);
@@ -48,8 +48,8 @@ Interface::Interface(std::string pathToFont)
 	titles[3].setString("MARIO");
 	titles[4].setString("WORLD");
 	titles[5].setString("TIME");
-	//titles[6].setString("00");
-	//titles[7].setString("MONEY");
+	titles[6].setString("00");
+	titles[7].setString("MONEY");
 }
 
 void Interface::increaceScore(int scoreIncrement)
@@ -61,10 +61,10 @@ void Interface::increaceScore(int scoreIncrement)
 	int strScoreSize = 6 - score.size();
 	for (int i = 0; i < strScoreSize; i++)
 		score = '0' + score;
-	//std::string temp = std::to_string(score);
+	std::string temp = score;
 	titles[0].setString(score);
 }
-/*
+
 void Interface::increaceMoney(int moneyIncrement)
 {
 	
@@ -72,7 +72,7 @@ void Interface::increaceMoney(int moneyIncrement)
 	if (money >= 100)
 		money = 99;
 	titles[1].setString(std::to_string(money));
-}*/
+}
 
 void Interface::changeLevel(std::string level)
 {

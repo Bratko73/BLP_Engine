@@ -64,7 +64,7 @@ sf::Sprite Animation::mirrorUpdate(float time)
 void Animation::startOver()
 {
 	currentFrame = 0;
-	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates.x * int(currentFrame), firstFrameCoordinates.y, frameSize.x, frameSize.y));
+	sprite.setTextureRect(sf::IntRect(firstFrameCoordinates,frameSize));
 }
 
 void Animation::setPosition(sf::Vector2f position)
