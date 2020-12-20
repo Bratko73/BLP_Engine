@@ -1,11 +1,10 @@
 #include "Turtle.h"
 #include "Collision.h"
 
-
 Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect enemyHitbox, float gravitation, float heightOfJump)
 {
 	this->gravitation = gravitation;
-	this->enemyHitbox = enemyHitbox;
+	this->entityHitbox = enemyHitbox;
 	velocity.x = speed;
 	life = 3;
 	animation.setPosition(velocity);
@@ -16,11 +15,11 @@ Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect en
 
 void Turtle::update(float time, Person& p)
 {
-	enemyHitbox.left += velocity.x * time;
+	entityHitbox.left += velocity.x * time;
 
 	if (!onGround)
 		velocity.y += gravitation * time;
-	enemyHitbox.top += velocity.y * time;
+	entityHitbox.top += velocity.y * time;
 	onGround = false;
 
 	if (velocity.x > 0)
@@ -35,26 +34,26 @@ void Turtle::update(float time, Person& p)
 	else if (life == 0)
 		animation.makeInvisible();
 
-	animation.setPosition(enemyHitbox.left - p.getOffsetX(), enemyHitbox.top - p.getOffsetY());
+	animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
 }
 
 void Turtle::move(GameMap& map)
 {
 	const int pixelsInTile = 16;
 	const int visibilityOfTurtle = 2;
-	Collision::npcCollision(1, *this, map);
-	if (Collision::npcCollision(0, *this, map))
+	Collision::collision(1, *this, map);
+	if (Collision::collision(0, *this, map))
 		velocity.x *= -1;
 	if (life == 3) {
 		if (velocity.x > 0) {
-			if (map.get_Hardness(int(enemyHitbox.left) / pixelsInTile + visibilityOfTurtle, int(enemyHitbox.top) / pixelsInTile + 1) == true)
+			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile + visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)
 				if (onGround) {
 					velocity.y = -heightOfJump;
 					onGround = false;
 				}
 		}
 		else if (velocity.x < 0)
-			if (map.get_Hardness(int(enemyHitbox.left) / pixelsInTile - visibilityOfTurtle, int(enemyHitbox.top) / pixelsInTile + 1) == true)
+			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile - visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)
 				if (onGround) {
 					velocity.y = -heightOfJump;
 					onGround = false;
@@ -67,7 +66,7 @@ void Turtle::Death(Person& p, Interface& i)
 	const float MarioYvelocityAfterKill = -0.2;
 	const int numberOfPointsPerKill = 15;
 	const float shellSpeed = 0.15;
-	if (p.getPersonHitbox().intersects(Enemy::enemyHitbox))
+	if (p.getEntityHitbox().intersects(Enemy::entityHitbox))
 		if (life)
 			if (p.getYvelocity() > 0) {
 				p.setYvelocity(MarioYvelocityAfterKill);
@@ -89,16 +88,4 @@ void Turtle::Death(Person& p, Interface& i)
 			{
 				p.setLife(false);
 			}
-}
-
-void Turtle::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
-{
-	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, rangeBetweenFrames, speed);
-	enemyHitbox.height = size.y;
-	enemyHitbox.width = size.x;
-}
-
-void Turtle::draw(sf::RenderWindow& window)
-{
-	window.draw(animation.getSprite());
 }

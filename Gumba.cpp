@@ -5,7 +5,7 @@
 Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enemyHitbox, float gravitation)
 {
 	this->gravitation = gravitation;
-	this->enemyHitbox = enemyHitbox;
+	this->entityHitbox = enemyHitbox;
 	velocity.x = speed;
 	life = 1;
 	animation.setPosition(velocity);
@@ -15,11 +15,11 @@ Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enem
 
 void Gumba::update(float time, Person& p)
 {
-	enemyHitbox.left += velocity.x * time;
+	entityHitbox.left += velocity.x * time;
 
 	if (!onGround)
 		velocity.y += gravitation * time;
-	enemyHitbox.top += velocity.y * time;
+	entityHitbox.top += velocity.y * time;
 	onGround = false;
 
 	if (velocity.x > 0)
@@ -37,13 +37,13 @@ void Gumba::update(float time, Person& p)
 			timeToDisappear = 250;
 		}
 	}
-	animation.setPosition(enemyHitbox.left - p.getOffsetX(), enemyHitbox.top - p.getOffsetY());
+	animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
 }
 
 void Gumba::move(GameMap& map)
 {
-	Collision::npcCollision(1, *this, map);
-	if (Collision::npcCollision(0, *this, map))
+	Collision::collision(1, *this, map);
+	if (Collision::collision(0, *this, map))
 		velocity.x *= -1;
 }
 
@@ -51,7 +51,7 @@ void Gumba::Death(Person& p, Interface& i)
 {
 	const float MarioYvelocityAfterKill = -0.2;
 	const int numberOfPointsPerKill = 10;
-	if (p.getPersonHitbox().intersects(Enemy::enemyHitbox))
+	if (p.getEntityHitbox().intersects(Enemy::entityHitbox))
 		if (life)
 			if (p.getYvelocity() > 0) {
 				p.setYvelocity(MarioYvelocityAfterKill);
@@ -63,16 +63,4 @@ void Gumba::Death(Person& p, Interface& i)
 			{
 				p.setLife(false);
 			}
-}
-
-void Gumba::setAnimationSettings(sf::Vector2i size, sf::Vector2i firstFrameCoordinates, int countOfFrames, int rangeBetweenFrames, float speed)
-{
-	animation.setAnimationParametres(size, firstFrameCoordinates, countOfFrames, rangeBetweenFrames, speed);
-	enemyHitbox.height = size.y;
-	enemyHitbox.width = size.x;
-}
-
-void Gumba::draw(sf::RenderWindow& window)
-{
-	window.draw(animation.getSprite());
 }

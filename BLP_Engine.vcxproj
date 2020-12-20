@@ -158,7 +158,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="background.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Gumba.cpp" />
@@ -174,6 +174,7 @@
     <ClInclude Include="background.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Gumba.h" />

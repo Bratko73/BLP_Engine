@@ -214,8 +214,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	interface.RestartTime();
 	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
-	Player.setPersonHitboxLeft(100);
-	Player.setPersonHitboxTop(180);
+	Player.setEntityHitboxLeft(100);
+	Player.setEntityHitboxTop(180);
 	Player.clearOffSet();
 	level_init(level, Bg, map, TileMap);
 
@@ -274,9 +274,9 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (Player.getPersonHitbox().left > 2650)
+		if (Player.getEntityHitbox().left > 2650)
 			isTriggered = 1;
-		if (isTriggered && Player.getPersonHitbox().left < 90) {
+		if (isTriggered && Player.getEntityHitbox().left < 90) {
 			isLevelPassed = true;
 			return;
 		}
