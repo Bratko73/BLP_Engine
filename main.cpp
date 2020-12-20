@@ -338,18 +338,18 @@ int main()
 	int volume = 100;
 	InterfaceInit(interface);
 
-	Tile Bricks(1, "sourses/sprites/bricks.png",0,1);
-	Tile Block(1, "sourses/sprites/block.png");
-	Tile OStone(1, "sourses/sprites/orangestone.png");
-	Tile invOStone(0, "sourses/sprites/orangestone.png");
-	Tile GPTL(1, "sourses/sprites/grassplatformTopLeft.png");
-	Tile GPL(1, "sourses/sprites/grassplatformLeft.png");
-	Tile GPTR(1, "sourses/sprites/grassplatformTopRight.png");
-	Tile GPR(1, "sourses/sprites/grassplatformRight.png");
-	Tile GPTC(1, "sourses/sprites/grassplatformTopCenter.png");
-	Tile GPC(1, "sourses/sprites/grassplatformCenter.png");
-	Tile FreeSpace(1, "sourses/sprites/freespace.png");
-	Tile DeathBlock(1, "sourses/sprites/freespace.png", 1);
+	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);
+	Tile Block(sf::Vector2i(16, 16), 1, "sourses/sprites/block.png");
+	Tile OStone(sf::Vector2i(16, 16), 1, "sourses/sprites/orangestone.png");
+	Tile invOStone(sf::Vector2i(16, 16), 0, "sourses/sprites/orangestone.png");
+	Tile GPTL(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopLeft.png");
+	Tile GPL(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformLeft.png");
+	Tile GPTR(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopRight.png");
+	Tile GPR(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformRight.png");
+	Tile GPTC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopCenter.png");
+	Tile GPC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformCenter.png");
+	Tile FreeSpace(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png");
+	Tile DeathBlock(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
 	{'b', Bricks},
