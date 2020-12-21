@@ -171,7 +171,7 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	switch (level)
 	{
 	case 1:
-		map.loadFromFile("D:/Libraries/sourses/level_1.txt", TileMap);
+		map.loadFromFile("/sourses/level/level_1.txt", TileMap);
 		Bg.addTexture("cloudS","sourses/sprites/cloudS.png");
 		Bg.addTexture("cloudXXL","sourses/sprites/cloudXXL.png");
 		Bg.addTexture("holm","sourses/sprites/holm.png");
