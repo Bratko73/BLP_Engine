@@ -220,8 +220,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	Player.clearOffSet();
 	level_init(level, Bg, map, TileMap);
 
-	/*Turtle turtle[1]{ 
-		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, 0.27) 
+	Turtle turtle[1]{ 
+		Turtle("sourses/sprites/Turtle.png", 0, sf::FloatRect(300, 208, 16, 26), 0.0005, 0.27) 
 	};
 	Gumba gumba[6]
 	{
@@ -238,7 +238,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	for (int i = 0; i < 1; i++)		
 			turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	}
-	*/
+	
 	sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
 	music.setLoop(true);
@@ -285,7 +285,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			Player.move();
 			Player.update(time, map);
 			Player.isEdgeOfMap(400);
-			/*for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < 6; i++) {
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
 				gumba[i].Death(Player, interface);
@@ -301,7 +301,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			{
 				death.stop();
 				LastDeath.play();
-			}*/
+			}
 		}
 		else {
 			music.stop();
@@ -315,10 +315,10 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
-		/*for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 6; i++)
 			gumba[i].draw(window);
 		for (int i = 0; i < 1; i++)
-			turtle[i].draw(window);*/
+			turtle[i].draw(window);
 		Player.draw(window);
 		interface.draw(window);
 		window.display();

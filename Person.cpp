@@ -48,7 +48,7 @@ void Person::update(float time, GameMap& map)
 			this->animation.update(time);
 		if (velocity.x < 0)
 			this->animation.mirrorUpdate(time);
-
+    
 	animation.setPosition(entityHitbox.left - offset.x, entityHitbox.top - offset.y);
 
 	velocity.x = 0;

@@ -15,29 +15,31 @@ Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enem
 
 void Gumba::update(float time, Person& p)
 {
-	entityHitbox.left += velocity.x * time;
+	if (this->entityHitbox.left - p.getOffsetX() < 400 && this->entityHitbox.left - p.getOffsetX() >= -entityHitbox.width) {
+		entityHitbox.left += velocity.x * time;
 
-	if (!onGround)
-		velocity.y += gravitation * time;
-	entityHitbox.top += velocity.y * time;
-	onGround = false;
+		if (!onGround)
+			velocity.y += gravitation * time;
+		entityHitbox.top += velocity.y * time;
+		onGround = false;
 
-	if (velocity.x > 0)
-		animation.update(time);
-	if (velocity.x < 0)
-		animation.mirrorUpdate(time);
-	static int timeToDisappear = 250;
-	if (!life) {
-		if (timeToDisappear > 0) {
-			Gumba::setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(58, 0), 2, 0, 0);
-			timeToDisappear--;
+		if (velocity.x > 0)
+			animation.update(time);
+		if (velocity.x < 0)
+			animation.mirrorUpdate(time);
+		static int timeToDisappear = 250;
+		if (!life) {
+			if (timeToDisappear > 0) {
+				Gumba::setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(58, 0), 2, 0, 0);
+				timeToDisappear--;
+			}
+			else if (timeToDisappear == 0) {
+				animation.makeInvisible();
+				timeToDisappear = 250;
+			}
 		}
-		else if (timeToDisappear == 0) {
-			animation.makeInvisible();
-			timeToDisappear = 250;
-		}
+		animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
 	}
-	animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
 }
 
 void Gumba::move(GameMap& map)

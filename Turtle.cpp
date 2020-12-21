@@ -15,26 +15,28 @@ Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect en
 
 void Turtle::update(float time, Person& p)
 {
-	entityHitbox.left += velocity.x * time;
+	if (this->entityHitbox.left - p.getOffsetX() < 400 && this->entityHitbox.left - p.getOffsetX() >= -entityHitbox.width) {
+		entityHitbox.left += velocity.x * time;
 
-	if (!onGround)
-		velocity.y += gravitation * time;
-	entityHitbox.top += velocity.y * time;
-	onGround = false;
+		if (!onGround)
+			velocity.y += gravitation * time;
+		entityHitbox.top += velocity.y * time;
+		onGround = false;
 
-	if (velocity.x > 0)
-		animation.update(time);
-	if (velocity.x < 0)
-		animation.mirrorUpdate(time);
-	static int timeToDisappear = 250;
-	if (life == 2)
-		Turtle::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 2, 0, 0);
-	else if (life == 1)
-		Turtle::setAnimationSettings(sf::Vector2i(17, 14), sf::Vector2i(387, 267), 5, 0, 0.005);
-	else if (life == 0)
-		animation.makeInvisible();
+		if (velocity.x > 0)
+			animation.update(time);
+		if (velocity.x < 0)
+			animation.mirrorUpdate(time);
 
-	animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
+		if (life == 2)
+			Turtle::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 2, 0, 0);
+		else if (life == 1)
+			Turtle::setAnimationSettings(sf::Vector2i(17, 14), sf::Vector2i(387, 267), 5, 0, 0.005);
+		else if (life == 0)
+			animation.makeInvisible();
+
+		animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
+	}
 }
 
 void Turtle::move(GameMap& map)
