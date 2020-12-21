@@ -10,7 +10,7 @@ Tile::Tile()
 	lethality = false;
 }
 
-Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breacable)
+Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable)
 {
 	SizeOfTile.x = size.x;
 	SizeOfTile.y = size.y;
