@@ -10,7 +10,7 @@ Tile::Tile()
 	lethality = false;
 }
 
-Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable)
+Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable, bool bonus)
 {
 	SizeOfTile.x = size.x;
 	SizeOfTile.y = size.y;
@@ -21,6 +21,7 @@ Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool l
 	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
 	this->lethality = lethality;
 	this->breakable = breakable;
+	this->bonus = bonus;
 }
 
 Tile::Tile(sf::Vector2i size, std::string path_to_texture)
@@ -33,17 +34,10 @@ Tile::Tile(sf::Vector2i size, std::string path_to_texture)
 	sprite = sf::Sprite(texture);
 	lethality = 0;
 	breakable = 0;
+	bonus = 0;
 }
 
-Tile::Tile(std::string path_to_texture)
-{
-	hardness = 0;
-	PathToTexture = path_to_texture;
-	texture.loadFromFile(PathToTexture);
-	sprite = sf::Sprite(texture);
-	lethality = 0;
-	breakable = 0;
-}
+
 
 Tile::Tile(const Tile& obj)
 {
@@ -55,6 +49,7 @@ Tile::Tile(const Tile& obj)
 	this->sprite = obj.sprite;
 	this->lethality = obj.lethality;
 	this->breakable = obj.breakable;
+	this->bonus = obj.bonus;
 }
 
 Tile::~Tile()
@@ -71,6 +66,19 @@ bool& Tile::GetLethality()
 bool& Tile::GetBreakable()
 {
 	return this->breakable;
+}
+
+bool& Tile::IsBonus()
+{
+	return this->bonus;
+}
+
+void Tile::SetBrick(std::string path_to_texture)
+{
+	PathToTexture = path_to_texture;
+	this->texture.loadFromFile(PathToTexture);
+	this->sprite = sf::Sprite(texture);
+	this->sprite.setTextureRect(sf::IntRect(0, 0, this->SizeOfTile.x, this->SizeOfTile.y));
 }
 
 sf::Sprite& Tile::Get_Sprite()

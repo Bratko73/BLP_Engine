@@ -20,9 +20,12 @@ public:
 	const int GetSizeX();
 	const int GetSizeY();
 	const sf::Vector2f& GetTilePos(int x_xoord, int y_coord);
+	
+	bool IsBonus(int x_coord, int y_coord);
 	bool GetLethality(int x_coord, int y_coord);
 	bool GetBreakable(int x_coord, int y_coord);
 	void SetEmptySpace(int x_coord, int y_coord);
+	void SetBrick(int x_coord, int y_coord);
 	void CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile);
 	void DrawMap(sf::RenderWindow& window, float a);
 	void loadFromFile(const std::string& filePath, std::map<char, Tile>& dictionary);

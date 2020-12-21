@@ -20,6 +20,8 @@ bool Collision::collision(bool flag, Entity& e, GameMap& map)
 				{
 					if (map.GetBreakable(j, i))
 						map.SetEmptySpace(j, i);
+					if (map.IsBonus(j,i) == true)
+						map.SetBrick(j, i);
 					e.setEntityHitboxTop(i * pixelsInTile + pixelsInTile);
 					e.setYvelocity(0);
 				}
