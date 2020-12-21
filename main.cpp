@@ -99,6 +99,7 @@ void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		window.clear();
 		Bg.drawBackground(window,0);
 		window.display();
 	}
@@ -160,8 +161,8 @@ void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(3, sf::Vector2f(25, 2));
 	interface.setTitlePosition(4, sf::Vector2f(175, 2));
 	interface.setTitlePosition(5, sf::Vector2f(300, 2));
-	//interface.setTitlePosition(1, sf::Vector2f(135, 20));
-	//interface.setTitlePosition(5, sf::Vector2f(125, 2));
+	interface.setTitlePosition(6, sf::Vector2f(135, 20));
+	interface.setTitlePosition(7, sf::Vector2f(125, 2));
 }
 void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
 	map.ClearMap();
@@ -219,7 +220,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	Player.clearOffSet();
 	level_init(level, Bg, map, TileMap);
 
-	Turtle turtle[1]{ 
+	/*Turtle turtle[1]{ 
 		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 208, 16, 26), 0.0005, 0.27) 
 	};
 	Gumba gumba[6]
@@ -237,7 +238,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	for (int i = 0; i < 1; i++)		
 			turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	}
-	
+	*/
 	sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
 	music.setLoop(true);
@@ -284,7 +285,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			Player.move();
 			Player.update(time, map);
 			Player.isEdgeOfMap(400);
-			for (int i = 0; i < 6; i++) {
+			/*for (int i = 0; i < 6; i++) {
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
 				gumba[i].Death(Player, interface);
@@ -309,15 +310,15 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 				Player.setLife(true);
 				isLevelPassed = false;
 				return;
-			}
+			}*/
 		}
 		
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
-		for (int i = 0; i < 6; i++)
+		/*for (int i = 0; i < 6; i++)
 			gumba[i].draw(window);
 		for (int i = 0; i < 1; i++)
-			turtle[i].draw(window);
+			turtle[i].draw(window);*/
 		Player.draw(window);
 		interface.draw(window);
 		window.display();
