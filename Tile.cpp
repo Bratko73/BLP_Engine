@@ -70,7 +70,7 @@ bool& Tile::GetLethality()
 
 bool& Tile::GetBreakable()
 {
-	return breakable;
+	return this->breakable;
 }
 
 sf::Sprite& Tile::Get_Sprite()

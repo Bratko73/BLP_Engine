@@ -171,7 +171,7 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	switch (level)
 	{
 	case 1:
-		map.loadFromFile("sourses/levels/level_1.txt", TileMap);
+		map.loadFromFile("D:/Libraries/sourses/level_1.txt", TileMap);
 		Bg.addTexture("cloudS","sourses/sprites/cloudS.png");
 		Bg.addTexture("cloudXXL","sourses/sprites/cloudXXL.png");
 		Bg.addTexture("holm","sourses/sprites/holm.png");
@@ -213,7 +213,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	int level = 1;
 	interface.RestartScore();
 	interface.RestartTime();
-	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.23, sf::FloatRect(100, 180, 16, 16));
+	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
 	Player.setEntityHitboxLeft(100);
 	Player.setEntityHitboxTop(180);
@@ -301,16 +301,16 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			{
 				death.stop();
 				LastDeath.play();
-			}
+			}*/
 		}
 		else {
 			music.stop();
-			if (Player.Death(250)) {
+			if (Player.Death(240)) {
 				lives--;
 				Player.setLife(true);
 				isLevelPassed = false;
 				return;
-			}*/
+			}
 		}
 		
 		Bg.drawBackground(window, Player.getOffsetX());
@@ -330,26 +330,28 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 
 int main()
 {
-	sf::Vector2i windowSize(400,250);
+	sf::Vector2i windowSize(400,240);
 	sf::RenderWindow window(sf::VideoMode(windowSize.x,windowSize.y), "Fuk yea!");
+	window.setFramerateLimit(60);
 	int lives = 3;
 	background Bg("sourses/fonts/19783.ttf");
-	GameMap map(200, 17);	
+	GameMap map(240, 17);	
 	Interface interface("sourses/fonts/19783.ttf");
 	int volume = 100;
 	InterfaceInit(interface);
 
-	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);
+	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);//Tile Bricks(sf::Vector2i(16,16), "sourses/sprites/bricks.png",Breakable);
 	Tile Block(sf::Vector2i(16, 16), 1, "sourses/sprites/block.png");
 	Tile OStone(sf::Vector2i(16, 16), 1, "sourses/sprites/orangestone.png");
 	Tile invOStone(sf::Vector2i(16, 16), 0, "sourses/sprites/orangestone.png");
-	Tile GPTL(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopLeft.png");
-	Tile GPL(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformLeft.png");
-	Tile GPTR(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopRight.png");
-	Tile GPR(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformRight.png");
+	Tile GPTL(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeTopLeft.png");
+	Tile GPL(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeLeft.png");
+	Tile GPTR(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeTopRight.png");
+	Tile GPR(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeRight.png");
 	Tile GPTC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopCenter.png");
 	Tile GPC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformCenter.png");
 	Tile FreeSpace(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png");
+	Tile Question(sf::Vector2i(16, 16), 1, "sourses/sprites/question.png", 0, 1);
 	Tile DeathBlock(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
@@ -364,6 +366,7 @@ int main()
 	{'C', GPTC},
 	{'c', GPC},
 	{'0', FreeSpace},
+	{'q',Question}
 	};
 	bool isLevelPassed_1 = false;
 	MainMenu(window);
