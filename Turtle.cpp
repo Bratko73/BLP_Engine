@@ -15,7 +15,6 @@ Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect en
 
 void Turtle::update(float time, Person& p)
 {
-	if (this->entityHitbox.left - p.getOffsetX() < 400 && this->entityHitbox.left - p.getOffsetX() >= -entityHitbox.width) {
 		entityHitbox.left += velocity.x * time;
 
 		if (!onGround)
@@ -36,7 +35,6 @@ void Turtle::update(float time, Person& p)
 			animation.makeInvisible();
 
 		animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
-	}
 }
 
 void Turtle::move(GameMap& map)

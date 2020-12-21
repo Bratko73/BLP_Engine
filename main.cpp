@@ -219,27 +219,37 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	Player.setEntityHitboxTop(180);
 	Player.clearOffSet();
 	level_init(level, Bg, map, TileMap);
-
-	Turtle turtle[1]{ 
-		Turtle("sourses/sprites/Turtle.png", 0, sf::FloatRect(300, 208, 16, 26), 0.0005, 0.27) 
+	const int countOfTurtles = 1;
+	Turtle turtle[countOfTurtles]{ 
+		Turtle("sourses/sprites/Turtle.png", 0, sf::FloatRect(1728, 200, 16, 26), 0.0005, 0.27) 
 	};
-	Gumba gumba[6]
+	const int countOfGumbas = 16;
+	Gumba gumba[countOfGumbas]
 	{
-		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(400, 176, 16, 16), 0.0005),
-		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(512, 176, 16, 16), 0.0005),
-		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1760, 176, 16, 16), 0.0005),
-		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1872, 176, 16, 16), 0.0005),
-		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 176, 16, 16), 0.0005),
-		//Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2512, 176, 16, 16), 0.0005),
-		Gumba("D:/Libraries/sourses/Mario_tileset.png", 0.05, sf::FloatRect(2816, 176, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(368, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(688, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1328, 64, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1360, 64, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1568, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1600, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1840, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(1864, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2016, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2048, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2064, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2816, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2688, 200, 16, 16), 0.0005),
+		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2800, 176, 16, 16), 0.0005)
 	};
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < countOfGumbas; i++) {
 			gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-	for (int i = 0; i < 1; i++)		
+	for (int i = 0; i < countOfTurtles; i++)		
 			turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	}
 	
-	sf::Music music;
+	/*sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
 	music.setLoop(true);
 	music.setVolume(30);
@@ -252,7 +262,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	static sf::Music LastDeath;
 	LastDeath.openFromFile("sourses/sounds/LastlifeLost.ogg");
 	LastDeath.setLoop(false);
-	LastDeath.setVolume(30);
+	LastDeath.setVolume(30);*/
 	sf::Font font;
 	sf::Clock clock;
 	bool Islevel = true;
@@ -275,36 +285,36 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (Player.getEntityHitbox().left > 2650)
+		/*if (Player.getEntityHitbox().left > 2650)
 			isTriggered = 1;
 		if (isTriggered && Player.getEntityHitbox().left < 90) {
 			isLevelPassed = true;
 			return;
-		}
+		}*/
 		if (Player.getLife() == true) {
 			Player.move();
 			Player.update(time, map);
-			Player.isEdgeOfMap(400);
-			for (int i = 0; i < 6; i++) {
+			Player.isEdgeOfMap(window.getSize().x);
+			for (int i = 0; i < countOfGumbas; i++) {
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
 				gumba[i].Death(Player, interface);
 			}
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < countOfTurtles; i++) {
 				turtle[i].move(map);
 				turtle[i].update(time, Player);
 				turtle[i].Death(Player, interface);
 			}
-			if (lives > 1)
-				death.play();
-			else
-			{
-				death.stop();
-				LastDeath.play();
-			}
+			//if (lives > 1)
+			//	//death.play();
+			//else
+			//{
+			//	death.stop();
+			//	LastDeath.play();
+			//}
 		}
 		else {
-			music.stop();
+			//music.stop();
 			if (Player.Death(240)) {
 				lives--;
 				Player.setLife(true);
@@ -315,9 +325,9 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < countOfGumbas; i++)
 			gumba[i].draw(window);
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i < countOfTurtles; i++)
 			turtle[i].draw(window);
 		Player.draw(window);
 		interface.draw(window);
@@ -337,10 +347,9 @@ int main()
 	background Bg("sourses/fonts/19783.ttf");
 	GameMap map(240, 17);	
 	Interface interface("sourses/fonts/19783.ttf");
-	int volume = 100;
 	InterfaceInit(interface);
 
-	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);//Tile Bricks(sf::Vector2i(16,16), "sourses/sprites/bricks.png",Breakable);
+	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);
 	Tile Block(sf::Vector2i(16, 16), 1, "sourses/sprites/block.png");
 	Tile OStone(sf::Vector2i(16, 16), 1, "sourses/sprites/orangestone.png");
 	Tile invOStone(sf::Vector2i(16, 16), 0, "sourses/sprites/orangestone.png");
@@ -373,7 +382,7 @@ int main()
 	while (window.isOpen())
 	{
 		if (lives) {
-			BlackScreen(window, lives, 1000);
+			BlackScreen(window, lives, 50);
 			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1);
 			if (isLevelPassed_1){
 				WinScreen(window);

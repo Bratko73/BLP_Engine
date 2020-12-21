@@ -15,7 +15,6 @@ Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enem
 
 void Gumba::update(float time, Person& p)
 {
-	if (this->entityHitbox.left - p.getOffsetX() < 400 && this->entityHitbox.left - p.getOffsetX() >= -entityHitbox.width) {
 		entityHitbox.left += velocity.x * time;
 
 		if (!onGround)
@@ -39,7 +38,6 @@ void Gumba::update(float time, Person& p)
 			}
 		}
 		animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
-	}
 }
 
 void Gumba::move(GameMap& map)
