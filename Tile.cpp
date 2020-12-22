@@ -36,6 +36,7 @@ Tile::Tile(sf::Vector2i size, std::string path_to_texture)
 	lethality = 0;
 	breakable = 0;
 	bonus = 0;
+	money = 0;
 }
 
 
