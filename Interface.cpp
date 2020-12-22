@@ -125,3 +125,7 @@ void Interface::draw(sf::RenderWindow& window)
 	for (int i = 0; i < countOfTitles; i++)
 		window.draw(titles[i]);
 }
+
+Interface::~Interface()
+{
+}

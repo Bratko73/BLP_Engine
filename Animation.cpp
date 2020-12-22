@@ -86,3 +86,7 @@ void Animation::makeInvisible()
 {
 	sprite.setColor(sf::Color(0, 0, 0, 0));
 }
+
+Animation::~Animation()
+{
+}

@@ -6,4 +6,5 @@
 class Collision {
 public:
 	static int collision(bool flag, Entity& e, GameMap& map);
+	~Collision();
 };

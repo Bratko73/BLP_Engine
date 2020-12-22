@@ -59,3 +59,7 @@ void BonusMushroom::Death(Person& p, Interface& i)
 			p.changeLife(2);
 		}
 }
+
+BonusMushroom::~BonusMushroom()
+{
+}

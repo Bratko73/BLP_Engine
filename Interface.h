@@ -27,6 +27,7 @@ public:
 	void setTitlePosition(int item, sf::Vector2f Position);
 	void setFont(std::string pathToFont);
 	void draw(sf::RenderWindow& window);
+	~Interface();
 };
 
 //DOES NOT WORK!Leave HOPE everyone who enters here
