@@ -142,7 +142,7 @@ void WinScreen(sf::RenderWindow& window) {
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.key.code == sf::Keyboard::Enter)
+			if (event.key.code == sf::Keyboard::Space)
 				return;
 		}
 		Bg.drawBackground(window, 0);
