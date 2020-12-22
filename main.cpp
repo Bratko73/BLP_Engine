@@ -103,6 +103,7 @@ void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
 	}
 }
 void LoseScreen(sf::RenderWindow& window, float time) {
+	sf::Clock clock;
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Black);
 	Bg.addTexture("Tramp", "sourses/sprites/tramp.jpg");
@@ -111,7 +112,7 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 
 	while (window.isOpen())
 	{
-		time -= 0.05;
+		time -= clock.getElapsedTime().asSeconds();
 		if (time < 0)
 			return;
 		sf::Event event;
@@ -311,20 +312,20 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	
 	
-	/*sf::Music music;
+	sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
 	music.setLoop(true);
-	music.setVolume(30);
+	music.setVolume(10);
 	music.play();
 	static sf::Music death;
 	death.openFromFile("sourses/sounds/death1.ogg");
 	death.setLoop(false);
-	death.setVolume(30);
+	death.setVolume(10);
 	death.play();
 	static sf::Music LastDeath;
 	LastDeath.openFromFile("sourses/sounds/LastlifeLost.ogg");
 	LastDeath.setLoop(false);
-	LastDeath.setVolume(30);*/
+	LastDeath.setVolume(10);
 	sf::Font font;
 	sf::Clock clock;
 	bool Islevel = true;
@@ -352,7 +353,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 					return;
 				}
 		}
-		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().top > 176) {
+		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().top > 160) {
 			isLevelPassed = true;
 			return;
 		}
@@ -375,16 +376,16 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 				turtle[i].update(time, Player);
 				turtle[i].Death(Player, interface);
 			}
-			//if (lives > 1)
-			//	//death.play();
-			//else
-			//{
-			//	death.stop();
-			//	LastDeath.play();
-			//}
+			if (lives > 1)
+				death.play();
+			else
+			{
+				death.stop();
+				LastDeath.play();
+			}
 		}
 		else {
-			//music.stop();
+			music.stop();
 			if (Player.Death(240)) {
 				lives--;
 				Player.setLife(true);
