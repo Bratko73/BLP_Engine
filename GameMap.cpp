@@ -91,6 +91,13 @@ const sf::Vector2f& GameMap::GetTilePos(int x_xoord, int y_coord)
 	return Map[x_xoord][y_coord].Get_Sprite().getPosition();
 }
 
+
+
+bool GameMap::IsBonus(int x_coord, int y_coord)
+{
+	return Map[x_coord][y_coord].IsBonus();
+}
+
 bool GameMap::GetLethality(int x_coord, int y_coord)
 {
 	return Map[x_coord][y_coord].GetLethality();
@@ -104,6 +111,11 @@ bool GameMap::GetBreakable(int x_coord, int y_coord)
 void GameMap::SetEmptySpace(int x_coord, int y_coord)
 {
 	Map[x_coord][y_coord] = Tile();
+}
+
+void GameMap::SetBrick(int x_coord, int y_coord)
+{
+	Map[x_coord][y_coord].SetBrick("sourses/sprites/bricks.png");
 }
 
 void GameMap::CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile)

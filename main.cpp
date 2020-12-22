@@ -360,7 +360,7 @@ int main()
 	Tile GPTC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopCenter.png");
 	Tile GPC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformCenter.png");
 	Tile FreeSpace(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png");
-	Tile Question(sf::Vector2i(16, 16), 1, "sourses/sprites/question.png", 0, 1);
+	Tile Question(sf::Vector2i(16, 16), 1, "sourses/sprites/question.png", 0, 0, 1);
 	Tile DeathBlock(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
