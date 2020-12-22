@@ -128,8 +128,8 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 void WinScreen(sf::RenderWindow& window) {
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Cyan);
-	Bg.addTexture("Tramp", "sourses/sprites/Grazies.png");
-	Bg.addImageObj("Tramp", sf::Vector2f(0, 0));
+	Bg.addTexture("Thanks", "sourses/sprites/Win.png");
+	Bg.addImageObj("Thanks", sf::Vector2f(0, 0));
 	sf::Music music;
 	music.openFromFile("sourses/sounds/WhalShark.ogg");
 	music.setLoop(true);
