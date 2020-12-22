@@ -22,6 +22,8 @@ public:
 	void updateTime(float time);
 	void RestartTime();
 	void RestartScore();
+	void RestartMoney();
+	float& getTime();
 	void setTitlePosition(int item, sf::Vector2f Position);
 	void setFont(std::string pathToFont);
 	void draw(sf::RenderWindow& window);

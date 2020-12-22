@@ -44,11 +44,11 @@ Interface::Interface(std::string pathToFont)
 	}
 	titles[0].setString("000000");
 	titles[1].setString(level);
-	titles[2].setString("999");
+	titles[2].setString("400");
 	titles[3].setString("MARIO");
 	titles[4].setString("WORLD");
 	titles[5].setString("TIME");
-	titles[6].setString("00");
+	titles[6].setString("0");
 	titles[7].setString("MONEY");
 }
 
@@ -88,7 +88,7 @@ void Interface::updateTime(float time)
 
 void Interface::RestartTime()
 {
-	this->time = 999;
+	this->time = 400;
 	titles[2].setString(std::to_string(int(this->time)));
 }
 
@@ -97,6 +97,17 @@ void Interface::RestartScore()
 	titles[0].setString("000000");
 	this->score = 0;
 
+}
+
+void Interface::RestartMoney()
+{
+	this->money = 0;
+	titles[6].setString(std::to_string(money));
+}
+
+float& Interface::getTime()
+{
+	return this->time;
 }
 
 void Interface::setTitlePosition(int item, sf::Vector2f Position)

@@ -254,8 +254,7 @@ void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background&
 
 void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
 	int level = 1;
-	interface.RestartScore();
-	interface.RestartTime();
+
 	interface.changeLevel("1-1");
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
@@ -264,10 +263,14 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Player.setEntityHitboxLeft(100);
 		Player.setEntityHitboxTop(180);
 		Player.clearOffSet();
+		interface.RestartMoney();
+		interface.RestartScore();
+		interface.RestartTime();
 	}
 	else {
 		Player.setEntityHitboxLeft(2608);
 		Player.setEntityHitboxTop(176);
+		isBonusLevel = false;
 	}
 	level_init(level, Bg, map, TileMap);
 	const int countOfBonusMushroom = 1;
