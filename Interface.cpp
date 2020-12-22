@@ -105,7 +105,7 @@ void Interface::RestartMoney()
 	titles[6].setString(std::to_string(money));
 }
 
-float& Interface::getTime()
+float Interface::getTime()
 {
 	return this->time;
 }

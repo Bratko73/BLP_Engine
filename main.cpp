@@ -484,7 +484,7 @@ int main()
 		}
 		else
 		{
-			LoseScreen(window, 1800);
+			LoseScreen(window, 50);
 			MainMenu(window);
 			lives = 3;
 			isLevelPassed_1 = false;
