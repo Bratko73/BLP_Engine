@@ -10,7 +10,7 @@ Tile::Tile()
 	lethality = false;
 }
 
-Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable, bool bonus)
+Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable, bool bonus, bool money)
 {
 	SizeOfTile.x = size.x;
 	SizeOfTile.y = size.y;
@@ -22,6 +22,7 @@ Tile::Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool l
 	this->lethality = lethality;
 	this->breakable = breakable;
 	this->bonus = bonus;
+	this->money = money;
 }
 
 Tile::Tile(sf::Vector2i size, std::string path_to_texture)
@@ -35,6 +36,7 @@ Tile::Tile(sf::Vector2i size, std::string path_to_texture)
 	lethality = 0;
 	breakable = 0;
 	bonus = 0;
+	money = 0;
 }
 
 
@@ -50,6 +52,7 @@ Tile::Tile(const Tile& obj)
 	this->lethality = obj.lethality;
 	this->breakable = obj.breakable;
 	this->bonus = obj.bonus;
+	this->money = obj.money;
 }
 
 Tile::~Tile()

@@ -11,9 +11,10 @@ protected:
 	bool lethality = 0;
 	bool breakable = 0;
 	bool bonus;
+	bool money;
 public:
 	Tile();
-	Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality = 0, bool breakable = 0, bool bonus = 0);
+	Tile(sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality = 0, bool breakable = 0, bool bonus = 0, bool money = 0);
 	Tile(sf::Vector2i size, std::string path_to_texture);
 	Tile(const Tile& obj);
 	~Tile();
