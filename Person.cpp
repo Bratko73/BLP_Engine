@@ -45,10 +45,11 @@ void Person::update(float time, GameMap& map)
 
 
 	if (velocity.x > 0)
-			this->animation.update(time);
-		if (velocity.x < 0)
-			this->animation.mirrorUpdate(time);
-    
+		this->animation.update(time);
+	if (velocity.x < 0)
+		this->animation.mirrorUpdate(time);
+	if (velocity.x == 0)
+		this->animation.startOver();
 	animation.setPosition(entityHitbox.left - offset.x, entityHitbox.top - offset.y);
 
 	velocity.x = 0;
@@ -112,3 +113,10 @@ void Person::clearOffSet()
 	offset.x = 0;
 	offset.y = 0;
 }
+
+void Person::createJump(std::string pathToFile)
+{
+	jumpTexture.loadFromFile(pathToFile);
+	jumpSprite.setTexture(jumpTexture);
+}
+

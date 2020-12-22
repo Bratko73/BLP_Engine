@@ -213,8 +213,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	int level = 1;
 	interface.RestartScore();
 	interface.RestartTime();
-	Person Player("sourses/sprites/spacemanWalk.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
-	Player.setAnimationSettings(sf::Vector2i(16, 13), sf::Vector2i(0, 0), 14, 0, 0.01);
+	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
+	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.setEntityHitboxLeft(100);
 	Player.setEntityHitboxTop(180);
 	Player.clearOffSet();

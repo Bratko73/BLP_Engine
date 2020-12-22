@@ -9,6 +9,8 @@ private:
 	float speed;
 	sf::Vector2f offset;
 	float heightOfJump;
+	sf::Texture jumpTexture;
+	sf::Sprite jumpSprite;
 public:
 	Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox);
 
@@ -22,5 +24,6 @@ public:
 	bool getLife();
 	bool isOnGround();
 	void clearOffSet();
+	void createJump(std::string pathToFile);
 };
 
