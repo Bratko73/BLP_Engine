@@ -1,6 +1,6 @@
 #include "Collision.h"
 
-bool Collision::collision(bool flag, Entity& e, GameMap& map)
+int Collision::collision(bool flag, Entity& e, GameMap& map)
 {
 	const int pixelsInTile = 16;
 	for (int i = e.getEntityHitbox().top / pixelsInTile; i < (e.getEntityHitbox().top + e.getEntityHitbox().height) / pixelsInTile; i++)
@@ -20,23 +20,30 @@ bool Collision::collision(bool flag, Entity& e, GameMap& map)
 				{
 					if (map.GetBreakable(j, i))
 						map.SetEmptySpace(j, i);
-					if (map.IsBonus(j,i) == true)
-						map.SetBrick(j, i);
 					e.setEntityHitboxTop(i * pixelsInTile + pixelsInTile);
 					e.setYvelocity(0);
+					if (map.IsBonus(j, i) == true) {
+						map.SetBrick(j, i);
+						return 2;
+					}
+					if (map.isMoney(j, i) == true) {
+						map.SetBrick(j, i);
+						map.setMoney(j, i, false);
+						return 3;
+					}
 				}
 				if (e.getXvelocity() > 0 && flag == 0)
 				{
 					e.setEntityHitboxLeft(j * pixelsInTile - e.getEntityHitbox().width);
-					return true;
+					return 1;
 				}
 				if (e.getXvelocity() < 0 && flag == 0)
 				{
 					e.setEntityHitboxLeft(j * pixelsInTile + pixelsInTile);
-					return true;
+					return 1;
 				}
 			}
 
 		}
-	return false;
+	return 0;
 }

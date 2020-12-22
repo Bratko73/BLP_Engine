@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="BonusMushroom.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameMap.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="background.h" />
+    <ClInclude Include="BonusMushroom.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />

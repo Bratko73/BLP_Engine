@@ -32,7 +32,7 @@ void Person::move()
 		}
 }
 
-void Person::update(float time, GameMap& map)
+void Person::update(float time, GameMap& map, Interface& i)
 {
 	entityHitbox.left += velocity.x * time;
 	Collision::collision(0, *this, map);
@@ -41,7 +41,8 @@ void Person::update(float time, GameMap& map)
 		velocity.y += gravitation * time;
 	entityHitbox.top += velocity.y * time;
 	onGround = false;
-	Collision::collision(1, *this, map);
+	if (Collision::collision(1, *this, map) == 3)
+		i.increaceMoney(1);
 
 
 	if (velocity.x > 0)
@@ -88,6 +89,15 @@ bool Person::Death(const int screenHeight)
 	}
 }
 
+void Person::changeLife(const int parametr)
+{
+	life = parametr;
+	if (life == 1)
+		setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
+	else if (life == 2)
+		setAnimationSettings(sf::Vector2i(16, 32), sf::Vector2i(80, 128), 4, 15, 0.005);
+}
+
 float& Person::getOffsetX()
 {
 	return offset.x;
@@ -98,7 +108,7 @@ float& Person::getOffsetY()
 	return offset.y;
 }
 
-bool Person::getLife()
+int Person::getLife()
 {
 	return life;
 }
