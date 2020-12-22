@@ -67,7 +67,6 @@ void Interface::increaceScore(int scoreIncrement)
 
 void Interface::increaceMoney(int moneyIncrement)
 {
-	
 	this->money += moneyIncrement;
 	if (money >= 100)
 		money = 99;
