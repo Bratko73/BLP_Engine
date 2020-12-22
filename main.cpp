@@ -435,6 +435,7 @@ int main()
 	Tile GPC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformCenter.png");
 	Tile FreeSpace(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png");
 	Tile Question(sf::Vector2i(16, 16), 1, "sourses/sprites/question.png", 0, 0, 1);
+	Tile mQuestion(sf::Vector2i(16, 16), 1, "sourses/sprites/question.png", 0, 0, 0, 1);
 	Tile DeathBlock(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
@@ -455,7 +456,8 @@ int main()
 	{'C', GPTC},
 	{'c', GPC},
 	{'0', FreeSpace},
-	{'q', Question}
+	{'q', Question},
+	{'Q', mQuestion}
 	};
 	bool isLevelPassed_1 = false;
 	bool isBonusLevel = false;
