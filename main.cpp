@@ -204,7 +204,9 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	
 }
 
-void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
+void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
+	GameMap map(240, 17);
+	background Bg("sourses/fonts/19783.ttf");
 	int level = 0;
 	interface.changeLevel("???");
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
@@ -237,7 +239,7 @@ void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background&
 			//isBonusLevel = false;
 			return;
 		}
-		if (Player.getLife() == true) {
+		if (Player.getLife()) {
 			Player.move();
 			Player.update(time, map, interface);
 			Player.isEdgeOfMap(window.getSize().x);
@@ -253,9 +255,10 @@ void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background&
 
 
 
-void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
+void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
 	int level = 1;
-
+	GameMap map(240, 17);
+	background Bg("sourses/fonts/19783.ttf");
 	interface.changeLevel("1-1");
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
@@ -319,7 +322,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	static sf::Music death;
 	death.openFromFile("sourses/sounds/death1.ogg");
 	death.setLoop(false);
-	death.setVolume(10);
+	death.setVolume(20);
 	death.play();
 	static sf::Music LastDeath;
 	LastDeath.openFromFile("sourses/sounds/LastlifeLost.ogg");
@@ -405,6 +408,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		interface.draw(window);
 		window.display();
 	}
+
 }
 
 
@@ -416,8 +420,6 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(windowSize.x,windowSize.y), "Fuk yea!");
 	window.setFramerateLimit(60);
 	int lives = 3;
-	background Bg("sourses/fonts/19783.ttf");
-	GameMap map(240, 17);	
 	Interface interface("sourses/fonts/19783.ttf");
 	InterfaceInit(interface);
 	Tile GBricks(sf::Vector2i(16, 16), 1, "sourses/sprites/greenbrick.png");
@@ -470,7 +472,7 @@ int main()
 	{
 		if (lives) {
 			BlackScreen(window, lives, 50);
-			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1, isBonusLevel);
+			level_1(window, lives, interface, TileMap, isLevelPassed_1, isBonusLevel);
 			if (isLevelPassed_1){
 				WinScreen(window);
 				isLevelPassed_1 = false;
@@ -478,7 +480,7 @@ int main()
 			if (isBonusLevel && !isTriggered)
 			{
 				BlackScreen(window, lives, 50);
-				level_Bonus(window, lives, map,Bg, interface,TileMap,isBonusLevel);
+				level_Bonus(window, lives,interface,TileMap,isBonusLevel);
 				isTriggered = true;
 			}
 		}

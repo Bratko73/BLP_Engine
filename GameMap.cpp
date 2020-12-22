@@ -44,13 +44,12 @@ GameMap::GameMap(const GameMap& obj)
 
 GameMap::~GameMap()
 {
-	if (Map != NULL) {
-		for (int i = 0; i < Size.x; i++)
-		{
-			delete[] Map[i];
-		}
-		delete[] Map;
+
+	for (int i = 0; i < Size.x; i++)
+	{
+		delete[] Map[i];
 	}
+	delete[] Map;
 }
 
 void GameMap::SetCell(unsigned int x, unsigned int y, Tile tile)

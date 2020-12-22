@@ -19,7 +19,7 @@ public:
 	float& getXvelocity();
 	float& getYvelocity();
 	sf::FloatRect getEntityHitbox();
-
+	~Entity();
 	void setYvelocity(float velocityY);
 	void setLife(bool life);
 	void setOnGround(bool val);

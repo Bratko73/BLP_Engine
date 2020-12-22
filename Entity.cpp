@@ -27,6 +27,10 @@ sf::FloatRect Entity::getEntityHitbox()
 	return entityHitbox;
 }
 
+Entity::~Entity()
+{
+}
+
 void Entity::setYvelocity(float velocityY)
 {
 	this->velocity.y = velocityY;
