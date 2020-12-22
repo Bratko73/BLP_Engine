@@ -12,7 +12,7 @@ int Collision::collision(bool flag, Entity& e, GameMap& map)
 			{
 				if (e.getYvelocity() > 0 && flag == 1)
 				{
-					e.setEntityHitboxTop(i * 16 - e.getEntityHitbox().height);
+					e.setEntityHitboxTop(i * pixelsInTile - e.getEntityHitbox().height);
 					e.setYvelocity(0);
 					e.setOnGround(true);
 				}
@@ -20,7 +20,7 @@ int Collision::collision(bool flag, Entity& e, GameMap& map)
 				{
 					if (map.GetBreakable(j, i))
 						map.SetEmptySpace(j, i);
-					e.setEntityHitboxTop(i * pixelsInTile + pixelsInTile);
+					e.setEntityHitboxTop(i * pixelsInTile + e.getEntityHitbox().height);
 					e.setYvelocity(0);
 					if (map.IsBonus(j, i) == true) {
 						map.SetBrick(j, i);
@@ -39,7 +39,7 @@ int Collision::collision(bool flag, Entity& e, GameMap& map)
 				}
 				if (e.getXvelocity() < 0 && flag == 0)
 				{
-					e.setEntityHitboxLeft(j * pixelsInTile + pixelsInTile);
+					e.setEntityHitboxLeft(j * pixelsInTile + e.getEntityHitbox().width);
 					return 1;
 				}
 			}
@@ -49,5 +49,4 @@ int Collision::collision(bool flag, Entity& e, GameMap& map)
 }
 
 Collision::~Collision()
-{
-}
+{}
