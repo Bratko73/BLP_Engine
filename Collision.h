@@ -5,5 +5,5 @@
 
 class Collision {
 public:
-	static bool collision(bool flag, Entity& e, GameMap& map);
+	static int collision(bool flag, Entity& e, GameMap& map);
 };

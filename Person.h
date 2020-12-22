@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameMap.h"
 #include "Entity.h"
+#include "Interface.h"
 
 class Person : public Entity
 {
@@ -18,10 +19,11 @@ public:
 	void update(float time, GameMap& map);
 	void isEdgeOfMap(const int screenWidth);
 	bool Death(const int screenHeight);
+	void changeLife(const int parametr);
 
 	float& getOffsetX();
 	float& getOffsetY();
-	bool getLife();
+	int getLife();
 	bool isOnGround();
 	void clearOffSet();
 	void createJump(std::string pathToFile);
