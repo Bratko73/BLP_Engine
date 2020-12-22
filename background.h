@@ -25,5 +25,6 @@ public:
 	void clearBg();
 	void TextObjSetPosition(int index, sf::Vector2f Pos);
 	void drawBackground(sf::RenderWindow& window, float offsetX);
+	~background();
 };
 

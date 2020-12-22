@@ -25,5 +25,6 @@ public:
 	void setPosition(float x, float y);
 	sf::Sprite getSprite();
 	void makeInvisible();
+	~Animation();
 };
 

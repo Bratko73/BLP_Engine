@@ -47,3 +47,7 @@ int Collision::collision(bool flag, Entity& e, GameMap& map)
 		}
 	return 0;
 }
+
+Collision::~Collision()
+{
+}

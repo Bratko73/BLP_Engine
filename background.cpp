@@ -91,3 +91,7 @@ void background::drawBackground(sf::RenderWindow& window, float offsetX)
 		window.draw(TextObj[i]);
 	}
 }
+
+background::~background()
+{
+}
