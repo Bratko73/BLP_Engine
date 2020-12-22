@@ -70,7 +70,7 @@ void Interface::increaceMoney(int moneyIncrement)
 	this->money += moneyIncrement;
 	if (money >= 100)
 		money = 99;
-	titles[1].setString(std::to_string(money));
+	titles[6].setString(std::to_string(money));
 }
 
 void Interface::changeLevel(std::string level)

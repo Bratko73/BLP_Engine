@@ -151,10 +151,10 @@ void WinScreen(sf::RenderWindow& window) {
 
 void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(0, sf::Vector2f(25, 20));
-	interface.setTitlePosition(1, sf::Vector2f(190, 20));
+	interface.setTitlePosition(1, sf::Vector2f(200, 20));
 	interface.setTitlePosition(2, sf::Vector2f(300, 20));
 	interface.setTitlePosition(3, sf::Vector2f(25, 2));
-	interface.setTitlePosition(4, sf::Vector2f(175, 2));
+	interface.setTitlePosition(4, sf::Vector2f(200, 2));
 	interface.setTitlePosition(5, sf::Vector2f(300, 2));
 	interface.setTitlePosition(6, sf::Vector2f(135, 20));
 	interface.setTitlePosition(7, sf::Vector2f(125, 2));
@@ -193,22 +193,25 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 		break;
 	case 0:
 		map.loadFromFile("sourses/levels/level_Bonus.txt", TileMap);
-		Bg.SetBgColor(sf::Color(100, 100, 255));
+		Bg.SetBgColor(sf::Color::Black);
+		Bg.addTextObj(15, "The money has not been realized,", sf::Vector2f(30, 60));
+		Bg.addTextObj(15, "but the account now has + 19 coins", sf::Vector2f(30, 70));
 		break;
 	}
 
 	
 }
 
-void level_Bonus(sf::RenderWindow& window, int& lives, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
+void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
 	int level = 0;
+	interface.changeLevel("???");
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
-	Player.setEntityHitboxLeft(100);
-	Player.setEntityHitboxTop(180);
+	Player.setEntityHitboxLeft(20);
+	Player.setEntityHitboxTop(40);
 	Player.clearOffSet();
-	GameMap map(18,17);
+	interface.increaceMoney(19);
 	level_init(level, Bg, map, TileMap);
 	sf::Event event;
 	sf::Clock clock;
@@ -228,8 +231,8 @@ void level_Bonus(sf::RenderWindow& window, int& lives, background& Bg, Interface
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().top > 176) {
-			isBonusLevel = false;
+		if (Player.getEntityHitbox().left > 224 && Player.getEntityHitbox().top > 176) {
+			//isBonusLevel = false;
 			return;
 		}
 		if (Player.getLife() == true) {
@@ -239,8 +242,8 @@ void level_Bonus(sf::RenderWindow& window, int& lives, background& Bg, Interface
 		}
 
 		Bg.drawBackground(window, Player.getOffsetX());
-		map.DrawMap(window, Player.getOffsetX());
 		Player.draw(window);
+		map.DrawMap(window, Player.getOffsetX());
 		interface.draw(window);
 		window.display();
 	}
@@ -252,6 +255,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	int level = 1;
 	interface.RestartScore();
 	interface.RestartTime();
+	interface.changeLevel("1-1");
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
@@ -261,8 +265,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Player.clearOffSet();
 	}
 	else {
-		Player.setEntityHitboxLeft(100);
-		Player.setEntityHitboxTop(180);
+		Player.setEntityHitboxLeft(2608);
+		Player.setEntityHitboxTop(176);
 	}
 	level_init(level, Bg, map, TileMap);
 	const int countOfTurtles = 1;
@@ -397,7 +401,8 @@ int main()
 	GameMap map(240, 17);	
 	Interface interface("sourses/fonts/19783.ttf");
 	InterfaceInit(interface);
-
+	Tile GBricks(sf::Vector2i(16, 16), 1, "sourses/sprites/greenbrick.png");
+	Tile GStone(sf::Vector2i(16, 16), 1, "sourses/sprites/greenstone.png");
 	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);
 	Tile Block(sf::Vector2i(16, 16), 1, "sourses/sprites/block.png");
 	Tile OStone(sf::Vector2i(16, 16), 1, "sourses/sprites/orangestone.png");
@@ -406,6 +411,10 @@ int main()
 	Tile GPL(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeLeft.png");
 	Tile GPTR(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeTopRight.png");
 	Tile GPR(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeRight.png");
+	Tile TubeUp(sf::Vector2i(16, 16), 1, "sourses/sprites/TubeUp.png");
+	Tile TubeDown(sf::Vector2i(16, 16), 0, "sourses/sprites/tubeDown.png");
+	Tile TubeTopUp(sf::Vector2i(16, 16), 1, "sourses/sprites/TubeTopUp.png");
+	Tile TubeTopDown(sf::Vector2i(16, 16), 0, "sourses/sprites/TubeTopDown.png");
 	Tile GPTC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopCenter.png");
 	Tile GPC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformCenter.png");
 	Tile FreeSpace(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png");
@@ -413,6 +422,8 @@ int main()
 	Tile DeathBlock(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
+	{'g', GBricks},
+	{'G', GStone},
 	{'b', Bricks},
 	{'P', Block},
 	{'s', OStone},
@@ -421,10 +432,14 @@ int main()
 	{'l', GPL},
 	{'R', GPTR},
 	{'r', GPR},
+	{'Z', TubeTopUp},
+	{'X', TubeTopDown},
+	{'z', TubeUp},
+	{'x', TubeDown},
 	{'C', GPTC},
 	{'c', GPC},
 	{'0', FreeSpace},
-	{'q',Question}
+	{'q', Question}
 	};
 	bool isLevelPassed_1 = false;
 	bool isBonusLevel = false;
@@ -441,6 +456,8 @@ int main()
 			}
 			if (isBonusLevel && !isTriggered)
 			{
+				BlackScreen(window, lives, 50);
+				level_Bonus(window, lives, map,Bg, interface,TileMap,isBonusLevel);
 				isTriggered = true;
 			}
 		}
