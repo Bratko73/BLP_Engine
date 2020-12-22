@@ -26,7 +26,7 @@ void BonusMushroom::update(float time, Person& p)
 		if (life == 0)
 			animation.makeInvisible();
 		else
-			setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
+			setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(0, 0), 4, 15, 0.005);
 
 		animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
 	}
@@ -46,7 +46,7 @@ void BonusMushroom::Death(Person& p, Interface& i)
 	const int numberOfPointsPerKill = 100;
 	if (p.getEntityHitbox().intersects(Entity::entityHitbox))
 		if (life == 2) {
-			entityHitbox.top -= 18;
+			entityHitbox.top -= 16;
 			velocity.x = 0.03;
 			life--;
 		}

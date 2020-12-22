@@ -8,6 +8,7 @@
 #include "Interface.h"
 #include "background.h"
 #include <map>
+#include "BonusMushroom.h"
 
 void MainMenu(sf::RenderWindow& window) {
 	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
@@ -237,7 +238,7 @@ void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background&
 		}
 		if (Player.getLife() == true) {
 			Player.move();
-			Player.update(time, map);
+			Player.update(time, map, interface);
 			Player.isEdgeOfMap(window.getSize().x);
 		}
 
@@ -269,10 +270,16 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Player.setEntityHitboxTop(176);
 	}
 	level_init(level, Bg, map, TileMap);
+	const int countOfBonusMushroom = 1;
+	BonusMushroom bonuses[countOfBonusMushroom]{
+		BonusMushroom("sourses/sprites/Mario_tileset.png", 0.0005, sf::FloatRect(384, 160, 16, 16))
+	};
+
 	const int countOfTurtles = 1;
 	Turtle turtle[countOfTurtles]{ 
 		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(1728, 200, 16, 26), 0.0005, 0.27) 
 	};
+
 	const int countOfGumbas = 16;
 	Gumba gumba[countOfGumbas]
 	{
@@ -293,11 +300,13 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2688, 200, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2800, 176, 16, 16), 0.0005)
 	};
-	for (int i = 0; i < countOfGumbas; i++) {
+	for (int i = 0; i < countOfBonusMushroom; i++) 
+		bonuses[i].setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+	for (int i = 0; i < countOfGumbas; i++) 
 			gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
 	for (int i = 0; i < countOfTurtles; i++)		
 			turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
-	}
+	
 	
 	/*sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");
@@ -344,10 +353,15 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			isLevelPassed = true;
 			return;
 		}
-		if (Player.getLife() == true) {
+		if (Player.getLife() !=0 ) {
 			Player.move();
-			Player.update(time, map);
+			Player.update(time, map, interface);
 			Player.isEdgeOfMap(window.getSize().x);
+			for (int i = 0; i < countOfBonusMushroom; i++) {
+				bonuses[i].Death(Player, interface);
+				bonuses[i].move(map);
+				bonuses[i].update(time, Player);
+			}
 			for (int i = 0; i < countOfGumbas; i++) {
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
@@ -378,6 +392,8 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
+		for (int i = 0; i < countOfBonusMushroom; i++)
+			bonuses[i].draw(window);
 		for (int i = 0; i < countOfGumbas; i++)
 			gumba[i].draw(window);
 		for (int i = 0; i < countOfTurtles; i++)

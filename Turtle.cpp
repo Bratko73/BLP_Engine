@@ -86,13 +86,13 @@ void Turtle::Death(Person& p, Interface& i)
 			}
 			else
 			{
-				static int immortalTime;
+				static int immortalTime = 10;
 				if (p.getLife() == 2) {
 					p.changeLife(1);
-					immortalTime = 250;
+					immortalTime = 10;
 				}
 				else
-					if(immortalTime == 0)
+					if (immortalTime < 0)
 						p.setLife(0);
 				immortalTime--;
 			}

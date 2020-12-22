@@ -16,7 +16,7 @@ public:
 	Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox);
 
 	void move();
-	void update(float time, GameMap& map);
+	void update(float time, GameMap& map, Interface& i);
 	void isEdgeOfMap(const int screenWidth);
 	bool Death(const int screenHeight);
 	void changeLife(const int parametr);

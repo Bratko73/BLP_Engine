@@ -61,10 +61,10 @@ void Gumba::Death(Person& p, Interface& i)
 			}
 			else
 			{
-				static int immortalTime = 25;
+				static int immortalTime = 10;
 				if (p.getLife() == 2) {
 					p.changeLife(1);
-					immortalTime = 25;
+					immortalTime = 10;
 				}
 				else
 					if (immortalTime < 0)

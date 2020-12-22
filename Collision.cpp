@@ -26,6 +26,11 @@ int Collision::collision(bool flag, Entity& e, GameMap& map)
 						map.SetBrick(j, i);
 						return 2;
 					}
+					if (map.isMoney(j, i) == true) {
+						map.SetBrick(j, i);
+						map.setMoney(j, i, false);
+						return 3;
+					}
 				}
 				if (e.getXvelocity() > 0 && flag == 0)
 				{
