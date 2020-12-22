@@ -303,9 +303,9 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	for (int i = 0; i < countOfBonusMushroom; i++) 
 		bonuses[i].setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(16, 0), 3, 2, 0.005);
 	for (int i = 0; i < countOfGumbas; i++) 
-			gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
+		gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
 	for (int i = 0; i < countOfTurtles; i++)		
-			turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
+		turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	
 	
 	/*sf::Music music;
