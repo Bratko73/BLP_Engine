@@ -265,7 +265,6 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		Player.clearOffSet();
 		interface.RestartMoney();
 		interface.RestartScore();
-		interface.RestartTime();
 	}
 	else {
 		Player.setEntityHitboxLeft(2608);
@@ -484,6 +483,7 @@ int main()
 		}
 		else
 		{
+			interface.RestartTime();
 			LoseScreen(window, 50);
 			MainMenu(window);
 			lives = 3;
