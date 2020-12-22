@@ -115,7 +115,7 @@ void GameMap::SetEmptySpace(int x_coord, int y_coord)
 
 void GameMap::SetBrick(int x_coord, int y_coord)
 {
-	Map[x_coord][y_coord].SetBrick("sourses/sprites/bricks.png");
+	Map[x_coord][y_coord].SetBrick("sourses/sprites/questionUsed.png");
 }
 
 void GameMap::CreateRect(sf::Vector2u startCoord, sf::Vector2u sizeOfRect, Tile tile)

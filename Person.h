@@ -25,5 +25,6 @@ public:
 	bool isOnGround();
 	void clearOffSet();
 	void createJump(std::string pathToFile);
+	void draw(sf::RenderWindow& window);
 };
 

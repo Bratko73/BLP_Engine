@@ -215,6 +215,7 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 	interface.RestartTime();
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
+	Player.createJump("sourses/sprites/Mario_tileset.png");
 	Player.setEntityHitboxLeft(100);
 	Player.setEntityHitboxTop(180);
 	Player.clearOffSet();
@@ -284,6 +285,9 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.key.code == sf::Keyboard::Down)
+				if (Player.getEntityHitbox().left > 912 && Player.getEntityHitbox().left < 928)
+					interface.RestartTime();
 		}
 		/*if (Player.getEntityHitbox().left > 2650)
 			isTriggered = 1;

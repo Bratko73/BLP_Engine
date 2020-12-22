@@ -51,7 +51,7 @@ void Person::update(float time, GameMap& map)
 	if (velocity.x == 0)
 		this->animation.startOver();
 	animation.setPosition(entityHitbox.left - offset.x, entityHitbox.top - offset.y);
-
+	jumpSprite.setPosition(entityHitbox.left - offset.x, entityHitbox.top - offset.y);
 	velocity.x = 0;
 }
 
@@ -64,7 +64,7 @@ void Person::isEdgeOfMap(const int screenWidth)
 bool Person::Death(const int screenHeight)
 {
 	life = false;
-	const float speedOfDeath = 0.4; //скорость, с которой спрайт персонажа "уходит" под карту
+	const float speedOfDeath = 2; //скорость, с которой спрайт персонажа "уходит" под карту
 	const int jumpCoeff = 237;      //с помощью этого параметра поднимаю спрайт персонажа примерно на высоту его прыжка, чтобы было ка кв оригинал марио
 	static float  pixelCounter = 0.1;
 	if ((pixelCounter > 0) && (pixelCounter < heightOfJump * jumpCoeff))
@@ -118,5 +118,14 @@ void Person::createJump(std::string pathToFile)
 {
 	jumpTexture.loadFromFile(pathToFile);
 	jumpSprite.setTexture(jumpTexture);
+	jumpSprite.setTextureRect(sf::IntRect(231,144,16,16));
+}
+
+void Person::draw(sf::RenderWindow& window)
+{
+	//if (this->onGround)
+		window.draw(animation.getSprite());
+	//else
+		//window.draw(jumpSprite);
 }
 
