@@ -34,14 +34,16 @@ void background::ChangeText(int index, std::string text)
 		TextObj[index].setString(text);
 }
 
-void background::addTextObj(int kernel, std::string text, sf::Font font)
+void background::addTextObj(int kernel, std::string text, sf::Font font, sf::Vector2f Pos)
 {
 	TextObj.push_back(sf::Text(text, font, kernel));
+	TextObj[TextObj.size() - 1].setPosition(Pos);
 }
 
-void background::addTextObj(int kernel, std::string text)
+void background::addTextObj(int kernel, std::string text, sf::Vector2f Pos)
 {
 	TextObj.push_back(sf::Text(text, StandartFont, kernel));
+	TextObj[TextObj.size() - 1].setPosition(Pos);
 }
 
 void background::addTexture(std::string name, std::string PathToFile)
@@ -52,11 +54,13 @@ void background::addTexture(std::string name, std::string PathToFile)
 	textures.push_back(texture);
 }
 
-void background::addImageObj(std::string name)
+void background::addImageObj(std::string name, sf::Vector2f pos)
 {
 	for(int i = 0; i < textures.size(); i++)
-		if(ImageNames[i] == name)
+		if (ImageNames[i] == name) {
 			ImageObj.push_back(sf::Sprite(textures[i]));
+			ImageObj[ImageObj.size() - 1].setPosition(pos);
+		}
 }
 
 void background::clearBg()
@@ -65,12 +69,6 @@ void background::clearBg()
 	ImageObj.clear();
 	textures.clear();
 	TextObj.clear();
-}
-
-void background::ImageObjSetPosition(int index, sf::Vector2f Pos)
-{
-	if (index < ImageObj.size())
-		ImageObj[index].setPosition(Pos);
 }
 
 void background::TextObjSetPosition(int index, sf::Vector2f Pos)

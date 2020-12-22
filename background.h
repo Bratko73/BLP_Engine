@@ -18,12 +18,11 @@ public:
 	void clearOffSet();
 	void SetFont(std::string PathToFont);
 	void ChangeText(int index, std::string text);
-	void addTextObj(int kernel, std::string text, sf::Font font);
-	void addTextObj(int kernel, std::string text);
+	void addTextObj(int kernel, std::string text, sf::Font font, sf::Vector2f Pos);
+	void addTextObj(int kernel, std::string text, sf::Vector2f Pos);
 	void addTexture(std::string name, std::string PathToFile);
-	void addImageObj(std::string name);
+	void addImageObj(std::string name, sf::Vector2f pos);
 	void clearBg();
-	void ImageObjSetPosition(int index, sf::Vector2f Pos);
 	void TextObjSetPosition(int index, sf::Vector2f Pos);
 	void drawBackground(sf::RenderWindow& window, float offsetX);
 };

@@ -78,14 +78,11 @@ void MainMenu(sf::RenderWindow& window) {
 
 void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
 	background Bg("sourses/fonts/19783.ttf");
-	Bg.addTextObj(15, "X");
-	Bg.addTextObj(30, std::to_string(lives));
+	Bg.addTextObj(15, "X", sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2 - 5));
+	Bg.addTextObj(30, std::to_string(lives), sf::Vector2f(window.getSize().x / 2 + 16, window.getSize().y / 2 - 16));
 	Bg.SetBgColor(sf::Color::Black);
 	Bg.addTexture("Zefir", "sourses/sprites/zefir.png");
-	Bg.addImageObj("Zefir");
-	Bg.TextObjSetPosition(0, sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2 - 5));
-	Bg.TextObjSetPosition(1, sf::Vector2f(window.getSize().x / 2+16, window.getSize().y / 2 - 16));
-	Bg.ImageObjSetPosition(0, sf::Vector2f(window.getSize().x / 2-26, window.getSize().y / 2));
+	Bg.addImageObj("Zefir", sf::Vector2f(window.getSize().x / 2 - 26, window.getSize().y / 2));
 	sf::Clock clock;
 
 	while (window.isOpen())
@@ -108,8 +105,7 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Black);
 	Bg.addTexture("Tramp", "sourses/sprites/tramp.jpg");
-	Bg.addImageObj("Tramp");
-	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
+	Bg.addImageObj("Tramp", sf::Vector2f(0, 0));
 
 
 	while (window.isOpen())
@@ -132,8 +128,7 @@ void WinScreen(sf::RenderWindow& window) {
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Cyan);
 	Bg.addTexture("Tramp", "sourses/sprites/Grazies.png");
-	Bg.addImageObj("Tramp");
-	Bg.ImageObjSetPosition(0, sf::Vector2f(0, 0));
+	Bg.addImageObj("Tramp", sf::Vector2f(0, 0));
 	sf::Music music;
 	music.openFromFile("sourses/sounds/WhalShark.ogg");
 	music.setLoop(true);
@@ -168,61 +163,111 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	map.ClearMap();
 	Bg.clearBg();
 	Bg.clearOffSet();
+	int countOfRepeats = 5;
 	switch (level)
 	{
 	case 1:
 		map.loadFromFile("sourses/levels/level_1.txt", TileMap);
 		Bg.addTexture("cloudS","sourses/sprites/cloudS.png");
+		Bg.addTexture("cloudXL", "sourses/sprites/cloudXL.png");
 		Bg.addTexture("cloudXXL","sourses/sprites/cloudXXL.png");
+		Bg.addTexture("shrubS", "sourses/sprites/shrubS.png");
+		Bg.addTexture("shrubXL", "sourses/sprites/shrubXL.png");
+		Bg.addTexture("shrubXXL", "sourses/sprites/shrubXXL.png");
 		Bg.addTexture("holm","sourses/sprites/holm.png");
 		Bg.addTexture("castle","sourses/sprites/castle.png");
-		Bg.addImageObj("cloudS");
-		Bg.addImageObj("cloudS");
-		Bg.addImageObj("cloudS");
-		Bg.addImageObj("cloudXXL");
-		Bg.addImageObj("castle");
-		Bg.addImageObj("cloudS");
-		Bg.addImageObj("cloudXXL");
-		Bg.addImageObj("cloudXXL");
-		Bg.addImageObj("holm");
-		Bg.addImageObj("holm");
-		Bg.addImageObj("cloudS");
-		Bg.ImageObjSetPosition(0, sf::Vector2f(1232, 152));//cloudS
-		Bg.ImageObjSetPosition(1, sf::Vector2f(1360, 152));//cloudS
-		Bg.ImageObjSetPosition(2, sf::Vector2f(2304, 104));//cloudS
-		Bg.ImageObjSetPosition(3, sf::Vector2f(1808, 100));//cloudXXL
-		Bg.ImageObjSetPosition(4, sf::Vector2f(2835, 104));//castle
-		Bg.ImageObjSetPosition(5, sf::Vector2f(32, 88));//cloudS
-		Bg.ImageObjSetPosition(6, sf::Vector2f(512, 60));//cloudXXL
-		Bg.ImageObjSetPosition(7, sf::Vector2f(1000, 50));//cloudXXL
-		Bg.ImageObjSetPosition(8, sf::Vector2f(250, 190));//holm
-		Bg.ImageObjSetPosition(9, sf::Vector2f(50, 175));//holm
-		Bg.ImageObjSetPosition(10, sf::Vector2f(866,106));//cloudS
-		Bg.addTextObj(20, "Instead of moving forward, we must move back.");
-		Bg.TextObjSetPosition(0, sf::Vector2f(2800, 50));
+
+		for (int i = 0; i < countOfRepeats; i++) {
+			Bg.addImageObj("cloudS", sf::Vector2f(160 + 800 * i, 60));
+			Bg.addImageObj("cloudS", sf::Vector2f(300 + 800 * i, 32));
+			Bg.addImageObj("cloudXL", sf::Vector2f(608 + 800 * i, 48));
+			Bg.addImageObj("cloudXXL", sf::Vector2f(450 + 800 * i, 20));
+			Bg.addImageObj("shrubS", sf::Vector2f(384 + 770 * i, 186));
+			Bg.addImageObj("shrubXL", sf::Vector2f(656 + 770 * i, 186));
+			Bg.addImageObj("shrubXXL", sf::Vector2f(185 + 770 * i, 186));
+			Bg.addImageObj("holm", sf::Vector2f(0 + 775 * i, 175));
+			Bg.addImageObj("holm", sf::Vector2f(256 + 770 * i, 190));
+		}
+		Bg.addImageObj("castle", sf::Vector2f(3219,105));
 		Bg.SetBgColor(sf::Color(100, 100, 255));		
 		break;
-	case 2:
+	case 0:
+		map.loadFromFile("sourses/levels/level_Bonus.txt", TileMap);
+		Bg.SetBgColor(sf::Color(100, 100, 255));
 		break;
 	}
 
 	
 }
 
-void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed) {
-	int level = 1;
-	interface.RestartScore();
-	interface.RestartTime();
+void level_Bonus(sf::RenderWindow& window, int& lives, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
+	int level = 0;
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
 	Player.setEntityHitboxLeft(100);
 	Player.setEntityHitboxTop(180);
 	Player.clearOffSet();
+	GameMap map(18,17);
+	level_init(level, Bg, map, TileMap);
+	sf::Event event;
+	sf::Clock clock;
+	while (window.isOpen())
+	{
+		interface.updateTime(clock.getElapsedTime().asSeconds());
+		float time = clock.getElapsedTime().asMicroseconds();
+		clock.restart();
+
+		time = time / 800;
+
+		if (time > 20)
+			time = 20;
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().top > 176) {
+			isBonusLevel = false;
+			return;
+		}
+		if (Player.getLife() == true) {
+			Player.move();
+			Player.update(time, map);
+			Player.isEdgeOfMap(window.getSize().x);
+		}
+
+		Bg.drawBackground(window, Player.getOffsetX());
+		map.DrawMap(window, Player.getOffsetX());
+		Player.draw(window);
+		interface.draw(window);
+		window.display();
+	}
+}
+
+
+
+void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
+	int level = 1;
+	interface.RestartScore();
+	interface.RestartTime();
+	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
+	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
+	Player.createJump("sourses/sprites/Mario_tileset.png");
+	if (!isBonusLevel) {
+		Player.setEntityHitboxLeft(100);
+		Player.setEntityHitboxTop(180);
+		Player.clearOffSet();
+	}
+	else {
+		Player.setEntityHitboxLeft(100);
+		Player.setEntityHitboxTop(180);
+	}
 	level_init(level, Bg, map, TileMap);
 	const int countOfTurtles = 1;
 	Turtle turtle[countOfTurtles]{ 
-		Turtle("sourses/sprites/Turtle.png", 0, sf::FloatRect(1728, 200, 16, 26), 0.0005, 0.27) 
+		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(1728, 200, 16, 26), 0.0005, 0.27) 
 	};
 	const int countOfGumbas = 16;
 	Gumba gumba[countOfGumbas]
@@ -286,15 +331,15 @@ void level_1(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg,
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.key.code == sf::Keyboard::Down)
-				if (Player.getEntityHitbox().left > 912 && Player.getEntityHitbox().left < 928)
-					interface.RestartTime();
+				if (Player.getEntityHitbox().left > 912 && Player.getEntityHitbox().left < 928) {
+					isBonusLevel = true;
+					return;
+				}
 		}
-		/*if (Player.getEntityHitbox().left > 2650)
-			isTriggered = 1;
-		if (isTriggered && Player.getEntityHitbox().left < 90) {
+		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().top > 176) {
 			isLevelPassed = true;
 			return;
-		}*/
+		}
 		if (Player.getLife() == true) {
 			Player.move();
 			Player.update(time, map);
@@ -382,15 +427,21 @@ int main()
 	{'q',Question}
 	};
 	bool isLevelPassed_1 = false;
+	bool isBonusLevel = false;
+	bool isTriggered = false;
 	MainMenu(window);
 	while (window.isOpen())
 	{
 		if (lives) {
 			BlackScreen(window, lives, 50);
-			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1);
+			level_1(window, lives, map, Bg, interface, TileMap, isLevelPassed_1, isBonusLevel);
 			if (isLevelPassed_1){
 				WinScreen(window);
 				isLevelPassed_1 = false;
+			}
+			if (isBonusLevel && !isTriggered)
+			{
+				isTriggered = true;
 			}
 		}
 		else
