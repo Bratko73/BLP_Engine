@@ -193,22 +193,22 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 		break;
 	case 0:
 		map.loadFromFile("sourses/levels/level_Bonus.txt", TileMap);
-		Bg.SetBgColor(sf::Color(100, 100, 255));
+		Bg.SetBgColor(sf::Color::Black);
+
 		break;
 	}
 
 	
 }
 
-void level_Bonus(sf::RenderWindow& window, int& lives, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
+void level_Bonus(sf::RenderWindow& window, int& lives, GameMap& map, background& Bg, Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
 	int level = 0;
 	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
-	Player.setEntityHitboxLeft(100);
-	Player.setEntityHitboxTop(180);
+	Player.setEntityHitboxLeft(20);
+	Player.setEntityHitboxTop(40);
 	Player.clearOffSet();
-	GameMap map(18,17);
 	level_init(level, Bg, map, TileMap);
 	sf::Event event;
 	sf::Clock clock;
@@ -397,7 +397,8 @@ int main()
 	GameMap map(240, 17);	
 	Interface interface("sourses/fonts/19783.ttf");
 	InterfaceInit(interface);
-
+	Tile GBricks(sf::Vector2i(16, 16), 1, "sourses/sprites/greenbrick.png");
+	Tile GStone(sf::Vector2i(16, 16), 1, "sourses/sprites/greenstone.png");
 	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);
 	Tile Block(sf::Vector2i(16, 16), 1, "sourses/sprites/block.png");
 	Tile OStone(sf::Vector2i(16, 16), 1, "sourses/sprites/orangestone.png");
@@ -406,6 +407,10 @@ int main()
 	Tile GPL(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeLeft.png");
 	Tile GPTR(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeTopRight.png");
 	Tile GPR(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeRight.png");
+	Tile TubeUp(sf::Vector2i(16, 16), 1, "sourses/sprites/TubeUp.png");
+	Tile TubeDown(sf::Vector2i(16, 16), 1, "sourses/sprites/tubeDown.png");
+	Tile TubeTopUp(sf::Vector2i(16, 16), 1, "sourses/sprites/TubeTopUp.png");
+	Tile TubeTopDown(sf::Vector2i(16, 16), 1, "sourses/sprites/TubeTopDown.png");
 	Tile GPTC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformTopCenter.png");
 	Tile GPC(sf::Vector2i(16, 16), 1, "sourses/sprites/grassplatformCenter.png");
 	Tile FreeSpace(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png");
@@ -413,6 +418,8 @@ int main()
 	Tile DeathBlock(sf::Vector2i(16, 16), 1, "sourses/sprites/freespace.png", 1);
 	std::map<char, Tile> TileMap ={ {' ', Tile()},
 	{'d', DeathBlock},
+	{'g', GBricks},
+	{'G', GStone},
 	{'b', Bricks},
 	{'P', Block},
 	{'s', OStone},
@@ -421,10 +428,14 @@ int main()
 	{'l', GPL},
 	{'R', GPTR},
 	{'r', GPR},
+	{'Z', TubeTopUp},
+	{'X', TubeTopDown},
+	{'z', TubeUp},
+	{'x', TubeDown},
 	{'C', GPTC},
 	{'c', GPC},
 	{'0', FreeSpace},
-	{'q',Question}
+	{'q', Question}
 	};
 	bool isLevelPassed_1 = false;
 	bool isBonusLevel = false;
@@ -441,6 +452,8 @@ int main()
 			}
 			if (isBonusLevel && !isTriggered)
 			{
+				BlackScreen(window, lives, 50);
+				level_Bonus(window, lives, map,Bg, interface,TileMap,isBonusLevel);
 				isTriggered = true;
 			}
 		}
