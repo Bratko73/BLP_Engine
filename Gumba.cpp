@@ -13,6 +13,9 @@ Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enem
 	onGround = 0;
 }
 
+Gumba::~Gumba()
+{}
+
 void Gumba::update(float time, Person& p)
 {
 		entityHitbox.left += velocity.x * time;

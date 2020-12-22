@@ -17,6 +17,9 @@ Person::Person(std::string pathToFile, const float speed, const float gravitatio
 	life = true;
 }
 
+Person::~Person()
+{}
+
 void Person::move()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -131,11 +134,4 @@ void Person::createJump(std::string pathToFile)
 	jumpSprite.setTextureRect(sf::IntRect(231,144,16,16));
 }
 
-void Person::draw(sf::RenderWindow& window)
-{
-	//if (this->onGround)
-		window.draw(animation.getSprite());
-	//else
-		//window.draw(jumpSprite);
-}
 

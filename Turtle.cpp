@@ -13,6 +13,10 @@ Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect en
 	this->heightOfJump = heightOfJump;
 }
 
+Turtle::~Turtle()
+{
+}
+
 void Turtle::update(float time, Person& p)
 {
 		entityHitbox.left += velocity.x * time;
