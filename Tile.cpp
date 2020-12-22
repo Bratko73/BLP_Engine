@@ -76,6 +76,16 @@ bool& Tile::IsBonus()
 	return this->bonus;
 }
 
+bool& Tile::isMoney()
+{
+	return this->money;
+}
+
+void Tile::setMoney(bool money)
+{
+	this->money = money;
+}
+
 void Tile::SetBrick(std::string path_to_texture)
 {
 	PathToTexture = path_to_texture;

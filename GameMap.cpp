@@ -98,6 +98,16 @@ bool GameMap::IsBonus(int x_coord, int y_coord)
 	return Map[x_coord][y_coord].IsBonus();
 }
 
+bool GameMap::isMoney(int x_coord, int y_coord)
+{
+	return Map[x_coord][y_coord].isMoney();
+}
+
+void GameMap::setMoney(int x_coord, int y_coord, bool money)
+{
+	Map[x_coord][y_coord].setMoney(money);
+}
+
 bool GameMap::GetLethality(int x_coord, int y_coord)
 {
 	return Map[x_coord][y_coord].GetLethality();

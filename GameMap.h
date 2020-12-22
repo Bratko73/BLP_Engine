@@ -22,6 +22,8 @@ public:
 	const sf::Vector2f& GetTilePos(int x_xoord, int y_coord);
 	
 	bool IsBonus(int x_coord, int y_coord);
+	bool isMoney(int x_coord, int y_coord);
+	void setMoney(int x_coord, int y_coord, bool money);
 	bool GetLethality(int x_coord, int y_coord);
 	bool GetBreakable(int x_coord, int y_coord);
 	void SetEmptySpace(int x_coord, int y_coord);
