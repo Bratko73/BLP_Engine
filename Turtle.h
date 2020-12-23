@@ -9,4 +9,5 @@ public:
 	void update(float time, Person& p);
 	void move(GameMap& map);
 	void Death(Person& p, Interface& i);
+	int getLife();
 };

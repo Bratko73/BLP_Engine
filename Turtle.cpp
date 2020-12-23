@@ -101,3 +101,8 @@ void Turtle::Death(Person& p, Interface& i)
 				immortalTime--;
 			}
 }
+
+int Turtle::getLife()
+{
+	return life;
+}

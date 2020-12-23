@@ -283,7 +283,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 
 	const int countOfTurtles = 1;
 	Turtle turtle[countOfTurtles]{ 
-		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(1728, 200, 16, 26), 0.0005, 0.27) 
+		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 180, 16, 26), 0.0005, 0.27) 
 	};
 
 	const int countOfGumbas = 16;
@@ -371,7 +371,8 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 			for (int i = 0; i < countOfGumbas; i++) {
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
-				gumba[i].Death(Player, interface);
+				for (int j = 0; j < countOfBonusMushroom; j++)
+					gumba[i].Death(Player, interface, turtle[j]);
 			}
 			for (int i = 0; i < countOfTurtles; i++) {
 				turtle[i].move(map);

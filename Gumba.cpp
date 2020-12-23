@@ -50,7 +50,7 @@ void Gumba::move(GameMap& map)
 		velocity.x *= -1;
 }
 
-void Gumba::Death(Person& p, Interface& i)
+void Gumba::Death(Person& p, Interface& i, Turtle& t)
 {
 	const float MarioYvelocityAfterKill = -0.2;
 	const int numberOfPointsPerKill = 10;
@@ -73,5 +73,12 @@ void Gumba::Death(Person& p, Interface& i)
 					if (immortalTime < 0)
 						p.setLife(0);
 				immortalTime--;
+			}
+	if (t.getEntityHitbox().intersects(Enemy::entityHitbox))
+		if (life)
+            if (t.getLife() == 1)
+			{
+				life--;
+				velocity.x = 0;
 			}
 }
