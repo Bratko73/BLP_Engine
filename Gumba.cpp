@@ -46,8 +46,8 @@ void Gumba::update(float time, Person& p)
 void Gumba::move(GameMap& map)
 {
 	Collision::collision(1, *this, map);
-	if (Collision::collision(0, *this, map))
-		velocity.x *= -1;
+		if (Collision::collision(0, *this, map))
+			velocity.x *= -1;
 }
 
 void Gumba::Death(Person& p, Interface& i, Turtle& t)
@@ -67,7 +67,7 @@ void Gumba::Death(Person& p, Interface& i, Turtle& t)
 				static int immortalTime = -1;
 				if (p.getLife() == 2) {
 					p.changeLife(1);
-					immortalTime = 13;
+					immortalTime = 5;
 				}
 				else
 					if (immortalTime < 0)

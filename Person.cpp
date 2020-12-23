@@ -95,10 +95,14 @@ bool Person::Death(const int screenHeight)
 void Person::changeLife(const int parametr)
 {
 	life = parametr;
-	if (life == 1)
+	if (life == 1) {
+		animation.setSpriteSheet("sourses/sprites/Mario_tileset.png");
 		setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
-	else if (life == 2)
-		setAnimationSettings(sf::Vector2i(16, 32), sf::Vector2i(80, 128), 4, 15, 0.005);
+	}
+	else if (life == 2) {
+		animation.setSpriteSheet("sourses/sprites/Turtle.png");
+		setAnimationSettings(sf::Vector2i(15, 32), sf::Vector2i(293, 264), 4, 15, 0.005);
+	}
 }
 
 float& Person::getOffsetX()

@@ -278,7 +278,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	level_init(level, Bg, map, TileMap);
 	const int countOfBonusMushroom = 1;
 	BonusMushroom bonuses[countOfBonusMushroom]{
-		BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(383, 160, 16, 16), 0.03)
+		BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(372, 160, 16, 16), 0.03)
 	};
 
 	const int countOfTurtles = 1;
