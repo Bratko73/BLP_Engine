@@ -49,6 +49,7 @@ void BonusMushroom::activate(Person& p, Interface& i)
 	if (p.getEntityHitbox().intersects(Entity::entityHitbox))
 		if (life == 2) {
 			entityHitbox.top -= tileSize;
+			entityHitbox.width = tileSize;
 			velocity.x = -speed;
 			life--;
 		}
