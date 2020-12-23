@@ -264,6 +264,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
 	if (!isBonusLevel) {
+		interface.RestartTime();
 		Player.setEntityHitboxLeft(100);
 		Player.setEntityHitboxTop(180);
 		Player.clearOffSet();
@@ -344,7 +345,11 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 
 		if (time > 20)
 			time = 20;
-		
+		if (interface.getTime() == 0) {
+			lives = 0;
+			return;
+		}
+
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)

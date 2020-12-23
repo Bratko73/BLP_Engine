@@ -3,7 +3,7 @@
 Interface::Interface()
 {
 	this->score = 0;
-	this->time = 999;
+	this->time = 400;
 	this->money = 0;
 	this->level = "1-1";
 	this->countOfTitles = 8;
@@ -34,7 +34,7 @@ Interface::Interface(std::string pathToFont, int score, std::string level, float
 Interface::Interface(std::string pathToFont)
 {
 	this->score = 0;
-	this->time = 999;
+	this->time = 400;
 	this->money = 0;
 	this->level = "1-1";
 	this->countOfTitles = 8;
