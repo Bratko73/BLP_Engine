@@ -18,19 +18,23 @@ Gumba::~Gumba()
 
 void Gumba::update(float time, Person& p)
 {
-		entityHitbox.left += velocity.x * time;
+	const int screenWidth = 400;
+	if (entityHitbox.left - p.getOffsetX() <= screenWidth) {
+		if (life == 1) {
+			entityHitbox.left += velocity.x * time;
 
-		if (!onGround)
-			velocity.y += gravitation * time;
-		entityHitbox.top += velocity.y * time;
-		onGround = false;
+			if (!onGround)
+				velocity.y += gravitation * time;
+			entityHitbox.top += velocity.y * time;
+			onGround = false;
 
-		if (velocity.x > 0)
-			animation.update(time);
-		if (velocity.x < 0)
-			animation.mirrorUpdate(time);
+			if (velocity.x > 0)
+				animation.update(time);
+			if (velocity.x < 0)
+				animation.mirrorUpdate(time);
+		}
 		static int timeToDisappear = 250;
-		if (!life) {
+		if (life == 0) {
 			if (timeToDisappear > 0) {
 				Gumba::setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(58, 0), 2, 0, 0);
 				timeToDisappear--;
@@ -40,7 +44,8 @@ void Gumba::update(float time, Person& p)
 				timeToDisappear = 250;
 			}
 		}
-		animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
+	}
+	animation.setPosition(entityHitbox.left - p.getOffsetX(), entityHitbox.top - p.getOffsetY());
 }
 
 void Gumba::move(GameMap& map)

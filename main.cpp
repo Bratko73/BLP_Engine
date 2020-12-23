@@ -129,7 +129,7 @@ void LoseScreen(sf::RenderWindow& window, float time) {
 void WinScreen(sf::RenderWindow& window) {
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.SetBgColor(sf::Color::Cyan);
-	Bg.addTexture("Thanks", "sourses/sprites/Win.png");
+	Bg.addTexture("Thanks", "sourses/sprites/Grazies.png");
 	Bg.addImageObj("Thanks", sf::Vector2f(0, 0));
 	sf::Music music;
 	music.openFromFile("sourses/sounds/WhalShark.ogg");
@@ -283,7 +283,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 
 	const int countOfTurtles = 1;
 	Turtle turtle[countOfTurtles]{ 
-		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(300, 180, 16, 26), 0.0005, 0.27) 
+		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(2032, 180, 16, 26), 0.0005, 0.27) 
 	};
 
 	const int countOfGumbas = 16;
@@ -355,7 +355,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 					return;
 				}
 		}
-		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().top > 160) {
+		if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().left < 3265 && Player.getEntityHitbox().top > 160) {
 			isLevelPassed = true;
 			return;
 		}
