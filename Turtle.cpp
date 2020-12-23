@@ -50,14 +50,14 @@ void Turtle::move(GameMap& map)
 		velocity.x *= -1;
 	if (life == 3) {
 		if (velocity.x > 0) {
-			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile + visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)
+			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile + visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)//высота черепахи 1.5 тайла, +1, чтобы она находила препятствие 
 				if (onGround) {
 					velocity.y = -heightOfJump;
 					onGround = false;
 				}
 		}
 		else if (velocity.x < 0)
-			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile - visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)
+			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile - visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)//высота черепахи 1.5 тайла, +1, чтобы она находила препятствие
 				if (onGround) {
 					velocity.y = -heightOfJump;
 					onGround = false;
@@ -93,7 +93,7 @@ void Turtle::death(Person& p, Interface& i)
 				static int immortalTime = -1;
 				if (p.getLife() == 2) {
 					p.changeLife(1);
-					immortalTime = 5;
+					immortalTime = 5;       //5 - число, которое хорошо подходит для бессмертия на 1 секунду
 				}
 				else
 					if (immortalTime < 0)

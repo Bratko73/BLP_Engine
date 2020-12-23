@@ -72,7 +72,7 @@ void Gumba::death(Person& p, Interface& i, Turtle& t)
 				static int immortalTime = -1;
 				if (p.getLife() == 2) {
 					p.changeLife(1);
-					immortalTime = 5;
+					immortalTime = 5;      //5 - число, которое хорошо подходит для бессмертия на 1 секунду
 				}
 				else
 					if (immortalTime < 0)

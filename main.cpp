@@ -389,7 +389,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		}
 		else {
 			music.stop();
-			if (Player.death(240)) {
+			if (Player.death(window.getSize().y)) {
 				lives--;
 				Player.setLife(true);
 				isLevelPassed = false;
