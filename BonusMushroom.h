@@ -11,6 +11,6 @@ public:
 	BonusMushroom(std::string pathToFile, const float gravitation, const sf::FloatRect personHitbox, float speed);
 	void update(float time, Person& p);
 	void move(GameMap& map);
-	void Death(Person& p, Interface& i);
+	void activate(Person& p, Interface& i);
 	~BonusMushroom();
 };

@@ -18,7 +18,7 @@ public:
 	void move();
 	void update(float time, GameMap& map, Interface& i);
 	void isEdgeOfMap(const int screenWidth);
-	bool Death(const int screenHeight);
+	bool death(const int screenHeight);
 	void changeLife(const int parametr);
 
 	float& getOffsetX();

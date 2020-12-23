@@ -42,7 +42,7 @@ void BonusMushroom::move(GameMap& map)
 	}
 }
 
-void BonusMushroom::Death(Person& p, Interface& i)
+void BonusMushroom::activate(Person& p, Interface& i)
 {
 	const int numberOfPointsPerKill = 100;
 	const int tileSize = 16;

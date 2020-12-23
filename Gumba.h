@@ -8,5 +8,5 @@ public:
 	~Gumba();
 	void update(float time, Person& p);
 	void move(GameMap& map);
-	void Death(Person& p, Interface& i, Turtle& t);
+	void death(Person& p, Interface& i, Turtle& t);
 };

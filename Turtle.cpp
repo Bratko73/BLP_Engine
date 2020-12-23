@@ -65,7 +65,7 @@ void Turtle::move(GameMap& map)
 	}
 }
 
-void Turtle::Death(Person& p, Interface& i)
+void Turtle::death(Person& p, Interface& i)
 {
 	const float MarioYvelocityAfterKill = -0.2;
 	const int numberOfPointsPerKill = 15;

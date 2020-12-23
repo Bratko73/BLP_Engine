@@ -364,7 +364,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 			Player.update(time, map, interface);
 			Player.isEdgeOfMap(window.getSize().x);
 			for (int i = 0; i < countOfBonusMushroom; i++) {
-				bonuses[i].Death(Player, interface);
+				bonuses[i].activate(Player, interface);
 				bonuses[i].move(map);
 				bonuses[i].update(time, Player);
 			}
@@ -372,12 +372,12 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
 				for (int j = 0; j < countOfBonusMushroom; j++)
-					gumba[i].Death(Player, interface, turtle[j]);
+					gumba[i].death(Player, interface, turtle[j]);
 			}
 			for (int i = 0; i < countOfTurtles; i++) {
 				turtle[i].move(map);
 				turtle[i].update(time, Player);
-				turtle[i].Death(Player, interface);
+				turtle[i].death(Player, interface);
 			}
 			if (lives > 1)
 				death.play();
@@ -389,7 +389,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		}
 		else {
 			music.stop();
-			if (Player.Death(240)) {
+			if (Player.death(240)) {
 				lives--;
 				Player.setLife(true);
 				isLevelPassed = false;
