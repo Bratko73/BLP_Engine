@@ -21,7 +21,7 @@ https://trello.com/b/wgXnBs5T/stankintalebmlaps-engine
 ------------------
 - Compile this code.
 - Сreate a separate folder
-- Download to this folder: "sourse" folder, compiled ".exe" file and <sfml-<category name>>.dll libraries
+- Download to this folder: "sourse" folder, compiled files and <sfml-<category name>>.dll libraries
  - sfml-<category names>: window, system, graphics, audio.
  - And also <openal32>.dll
  
