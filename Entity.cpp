@@ -70,3 +70,8 @@ void Entity::setEntityHitboxLeft(int personHitboxLeft)
 {
 	this->entityHitbox.left = personHitboxLeft;
 }
+
+void Entity::setSpriteSheet(std::string pathToFile)
+{
+	animation.setSpriteSheet(pathToFile);
+}

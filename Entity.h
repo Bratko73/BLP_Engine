@@ -29,4 +29,5 @@ public:
 	void setOnGround(bool val);
 	void setEntityHitboxLeft(int personHitboxLeft);
 	void setEntityHitboxTop(int personHitboxTop);
+	void setSpriteSheet(std::string pathToFile);
 };

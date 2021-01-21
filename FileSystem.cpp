@@ -50,7 +50,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				{
 					fin >> coordX;
 					fin >> coordY;
-					gumbas.push_back(Gumba(pathToSprite, speed, sf::FloatRect(coordX, coordY, size, size), gravity));
+					gumbas.push_back(Gumba(speed, sf::FloatRect(coordX, coordY, size, size), gravity));
 					gumbas[i].setAnimationSettings(sf::Vector2i(size, size), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
 				}
 			}
@@ -86,7 +86,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				{
 					fin >> coordX;
 					fin >> coordY;
-					turtle.push_back(Turtle(pathToSprite, speed, sf::FloatRect(coordX, coordY, sizeX, sizeY), gravity, jump));
+					turtle.push_back(Turtle(speed, sf::FloatRect(coordX, coordY, sizeX, sizeY), gravity, jump));
 					turtle[i].setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
 				}
 			}
@@ -118,7 +118,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				{
 					fin >> coordX;
 					fin >> coordY;
-					bonus.push_back(BonusMushroom(pathToSprite, speed, sf::FloatRect(coordX, coordY, size, size), gravity));
+					bonus.push_back(BonusMushroom(speed, sf::FloatRect(coordX, coordY, size, size), gravity));
 				    bonus[i].setAnimationSettings(sf::Vector2i(size, size), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
 				}
 			}

@@ -2,7 +2,7 @@
 #include "Collision.h"
 
 
-BonusMushroom::BonusMushroom(std::string pathToFile, const float gravitation, const sf::FloatRect enemyHitbox, float speed)
+BonusMushroom::BonusMushroom(const float gravitation, const sf::FloatRect enemyHitbox, float speed)
 {
 	this->speed = speed;
 	this->gravitation = gravitation;
@@ -10,7 +10,6 @@ BonusMushroom::BonusMushroom(std::string pathToFile, const float gravitation, co
 	velocity.y = 0;
 	this->entityHitbox = enemyHitbox;
 	animation.setPosition(velocity);
-	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
 	life = 2;
 	heightOfJump = 0;

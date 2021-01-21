@@ -2,14 +2,13 @@
 #include "Collision.h"
 
 
-Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enemyHitbox, float gravitation)
+Gumba::Gumba(const float speed, const sf::FloatRect enemyHitbox, float gravitation)
 {
 	this->gravitation = gravitation;
 	this->entityHitbox = enemyHitbox;
 	velocity.x = speed;
 	life = 1;
 	animation.setPosition(velocity);
-	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
 	heightOfJump = 0;
 }
@@ -52,3 +51,4 @@ void Gumba::update(float time, Person& p)
 void Gumba::move(GameMap& map)
 {
 }
+

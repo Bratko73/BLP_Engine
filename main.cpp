@@ -10,6 +10,7 @@
 #include <map>
 #include "BonusMushroom.h"
 #include "Collision.h"
+#include <list>
 
 void MainMenu(sf::RenderWindow& window) {
 	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
@@ -380,7 +381,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	GameMap map(240, 17);
 	background Bg("sourses/fonts/19783.ttf");
 	interface.changeLevel("1-1");
-	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 17, 16));
+	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
 	if (!isBonusLevel) {
@@ -403,7 +404,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	int bonusCoordX[1]{376};
 	int bonuscoordY[1]{160};
 	for (int i = 0; i < 1; i++)
-		bonus.push_back(BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(bonusCoordX[i], bonuscoordY[i], 4, 16), 0.03));
+		bonus.push_back(BonusMushroom(0.0005, sf::FloatRect(bonusCoordX[i], bonuscoordY[i], 4, 16), 0.03));
 	//const int countOfBonusMushroom = 1;
 	//BonusMushroom bonuses[countOfBonusMushroom]{
 	//	BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(376, 160, 4, 16), 0.03)
@@ -413,13 +414,12 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	int turtleCoordX[1]{ 230 };
 	int turtleCoordY[1]{ 200 };
 	for (int i = 0; i < 1; i++)
-		turtle.push_back(Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(turtleCoordX[i], turtleCoordY[i], 16, 26), 0.0005, 0.26));
+		turtle.push_back(Turtle(0.05, sf::FloatRect(turtleCoordX[i], turtleCoordY[i], 16, 26), 0.0005, 0.26));
 
 	//const int countOfTurtles = 1;
 	//Turtle turtle[countOfTurtles]{ 
 	//	Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(2032, 180, 16, 26), 0.0005, 0.27) 
 	//};
-
 	std::vector<Gumba> gumba;
 	std::vector<std::vector<int>>gumbaCoordinates
 	{{ 368,200 },
@@ -442,7 +442,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	//int gumbaCoordX[16]{ 268,688,1328,1360,1568,1600,1840,1864,2000,2016,2048,2064,2816,2000,2688,2800 };
 	//int gumbaCoordY[16]{ 200,200,64,64,200,200,200,200,200,200,200,200,200,200,200,176 };
 	for (int i = 0; i < 1; i++)
-		gumba.push_back(Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(gumbaCoordX[i], gumbaCoordY[i], 16, 16), 0.0005));
+		gumba.push_back(Gumba(0.05, sf::FloatRect(gumbaCoordX[i], gumbaCoordY[i], 16, 16), 0.0005));
 	/*const int countOfGumbas = 16;
 	Gumba gumba[countOfGumbas]
 	{
@@ -463,12 +463,18 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2688, 200, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2800, 176, 16, 16), 0.0005)
 	};*/
-	for (int i = 0; i < bonus.size(); i++) 
+	for (int i = 0; i < bonus.size(); i++) {
 		bonus[i].setAnimationSettings(sf::Vector2i(4, 16), sf::Vector2i(16, 0), 3, 2, 0.005);
-	for (int i = 0; i < gumba.size(); i++)
+		bonus[i].setSpriteSheet("sourses/sprites/BonusMushrom.png");
+	}
+	for (int i = 0; i < gumba.size(); i++) {
 		gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-	for (int i = 0; i < turtle.size(); i++)		
+		gumba[i].setSpriteSheet("sourses/sprites/Mario_tileset.png");
+	}
+	for (int i = 0; i < turtle.size(); i++) {
 		turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
+		turtle[i].setSpriteSheet("sourses/sprites/Turtle.png");
+	}
 	
 	
 	sf::Music music;

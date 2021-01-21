@@ -1,14 +1,13 @@
 #include "Turtle.h"
 #include "Collision.h"
 
-Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect enemyHitbox, float gravitation, float heightOfJump)
+Turtle::Turtle(const float speed, const sf::FloatRect enemyHitbox, float gravitation, float heightOfJump)
 {
 	this->gravitation = gravitation;
 	this->entityHitbox = enemyHitbox;
 	velocity.x = speed;
 	life = 11;
 	animation.setPosition(velocity);
-	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
 	this->heightOfJump = heightOfJump;
 }
@@ -31,9 +30,9 @@ void Turtle::update(float time, Person& p)
 		if (velocity.x < 0)
 			animation.mirrorUpdate(time);
 
-		if (life == 2)
+		if (life % 2 == 0 && life != 0)
 			Turtle::setAnimationSettings(sf::Vector2i(18, 14), sf::Vector2i(387, 267), 2, 0, 0);
-		else if (life == 1)
+		else if (life % 2 == 1 && life != 11)
 			Turtle::setAnimationSettings(sf::Vector2i(17, 14), sf::Vector2i(387, 267), 5, 0, 0.005);
 		else if (life == 0)
 			animation.makeInvisible();
