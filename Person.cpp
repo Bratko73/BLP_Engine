@@ -35,16 +35,8 @@ void Person::move()
 		}
 }
 
-void Person::update(float time, GameMap& map, Interface& i)
+void Person::update(float time)
 {
-	entityHitbox.left += velocity.x * time;
-
-	if (!onGround)
-		velocity.y += gravitation * time;
-	entityHitbox.top += velocity.y * time;
-	onGround = false;
-
-
 	if (velocity.x > 0)
 		this->animation.update(time);
 	if (velocity.x < 0)
@@ -101,6 +93,16 @@ void Person::changeModel(const int parametr)
 	}
 }
 
+bool Person::getOnGround()
+{
+	return onGround;
+}
+
+float Person::getGravitation()
+{
+	return gravitation;
+}
+
 float& Person::getOffsetX()
 {
 	return offset.x;
@@ -127,4 +129,14 @@ void Person::createJump(std::string pathToFile)
 	jumpTexture.loadFromFile(pathToFile);
 	jumpSprite.setTexture(jumpTexture);
 	jumpSprite.setTextureRect(sf::IntRect(231,144,16,16));
+}
+
+void Person::setEntityHitboxLeft(float hitboxLeft)
+{
+	entityHitbox.left = hitboxLeft;
+}
+
+void Person::setEntityHitboxTop(float hitboxTop)
+{
+	entityHitbox.top = hitboxTop;
 }

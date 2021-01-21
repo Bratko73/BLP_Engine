@@ -242,7 +242,7 @@ void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, st
 		}
 		if (Player.getLife()) {
 			Player.move();
-			Player.update(time, map, interface);
+			Player.update(time);
 			Player.isEdgeOfMap(window.getSize().x);
 		}
 
@@ -310,8 +310,8 @@ void handleCollision(Person& player, BonusMushroom* bonus, Enemy* enemy, Interfa
 	if (bonus != NULL) {
 		if (player.getEntityHitbox().intersects(bonus->getEntityHitbox()))
 			if (bonus->getLife() == 2) {
-				bonus->setEntityHitboxTop(tileSize);
-				bonus->setMushroomHitboxWidth(tileSize);
+				bonus->setEntityHitboxTop(bonus->getEntityHitbox().top - tileSize);
+				bonus->setMushroomHitboxWidth(bonus->getEntityHitbox().width - tileSize);
 				bonus->setVelocity(bonus->getSpeed(), bonus->getYvelocity());
 				bonus->loseLife();
 			}
@@ -324,7 +324,7 @@ void handleCollision(Person& player, BonusMushroom* bonus, Enemy* enemy, Interfa
 	}
 }
 
-void mapCollision(Entity* e, GameMap& map, bool flag, Interface& interface) {
+bool mapCollision(Entity* e, GameMap& map, bool flag, Interface& interface) {
 	const int pixelsInTile = 16;
 	for (int i = e->getEntityHitbox().top / pixelsInTile; i < (e->getEntityHitbox().top + e->getEntityHitbox().height) / pixelsInTile; i++)
 		for (int j = e->getEntityHitbox().left / pixelsInTile; j < (e->getEntityHitbox().left + e->getEntityHitbox().width) / pixelsInTile; j++)
@@ -360,16 +360,19 @@ void mapCollision(Entity* e, GameMap& map, bool flag, Interface& interface) {
 					{
 						e->setEntityHitboxLeft(j * pixelsInTile - e->getEntityHitbox().width);
 						e->setVelocity(e->getXvelocity() * (-1), e->getYvelocity());
+						return true;
 					}
 					if (e->getXvelocity() < 0 && flag == 0)
 					{
 						e->setEntityHitboxLeft(j * pixelsInTile + e->getEntityHitbox().width);
 						e->setVelocity(e->getXvelocity() * (-1), e->getYvelocity());
+						return true;
 					}
 				}
 
 			}
 		}
+	return false;
 }
 
 void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
@@ -377,7 +380,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	GameMap map(240, 17);
 	background Bg("sourses/fonts/19783.ttf");
 	interface.changeLevel("1-1");
-	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
+	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 17, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
 	if (!isBonusLevel) {
@@ -410,7 +413,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	int turtleCoordX[1]{ 230 };
 	int turtleCoordY[1]{ 200 };
 	for (int i = 0; i < 1; i++)
-		turtle.push_back(Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(turtleCoordX[i], turtleCoordY[i], 16, 26), 0.0005, 0.27));
+		turtle.push_back(Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(turtleCoordX[i], turtleCoordY[i], 16, 26), 0.0005, 0.26));
 
 	//const int countOfTurtles = 1;
 	//Turtle turtle[countOfTurtles]{ 
@@ -519,9 +522,14 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		}
 		if (Player.getLife() > 0 ) {
 			Player.move();
-			Player.update(time, map, interface);
-			mapCollision(&Player, map, 1, interface);
+			Player.setEntityHitboxLeft(Player.getEntityHitbox().left + Player.getXvelocity() * time);
 			mapCollision(&Player, map, 0, interface);
+			if (!Player.getOnGround())
+				Player.setVelocity(Player.getXvelocity(),Player.getYvelocity() + Player.getGravitation() * time);
+			Player.setEntityHitboxTop(Player.getEntityHitbox().top + Player.getYvelocity() * time);
+			Player.setOnGround(false);
+			mapCollision(&Player, map, 1, interface);
+			Player.update(time);
 			Player.isEdgeOfMap(window.getSize().x);
 			for (int i = 0; i < bonus.size(); i++) {
 				if (Collision::collision(Player.getEntityHitbox(), bonus[i].getEntityHitbox()))
@@ -576,7 +584,6 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		interface.draw(window);
 		window.display();
 	}
-
 }
 
 
