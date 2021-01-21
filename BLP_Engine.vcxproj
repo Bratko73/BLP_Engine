@@ -160,6 +160,7 @@
     <ClCompile Include="BonusMushroom.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Gumba.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FileSystem.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Gumba.h" />
