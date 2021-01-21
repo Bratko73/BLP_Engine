@@ -1,0 +1,110 @@
+Gumba
+16
+sourses/sprites/Mario_tileset.png
+0.05 17 16 0.0005 3 0 0 2 0.005
+368 200
+688 200
+1328 64
+1360 64
+1568 200
+1600 200
+1840 200
+1864 200
+2000 200
+2016 200
+2048 200
+2064 200
+2816 200
+2688 200
+2800 176
+Turtle
+1
+sourses/sprites/Turtle.png
+0.05 17 27 0.0005 3 387 239 0 0.005
+2032 180
+Bonus
+1
+sourses/sprites/BonusMushrom.png
+0.03 4 16 0.0005 3 16 0 2 0.005
+376 160
+Bg
+8
+10 sourses/sprites/cloudS.png
+160 60
+960 60
+1760 60
+2560 60
+3360 60
+300 32
+1100 32
+1900 32
+2700 32
+3500 32
+5 sourses/sprites/cloudXL.png
+608 48
+1408 48
+2208 48
+3008 48
+3808 48
+5 sourses/sprites/cloudXXL.png
+450 20
+1250 20
+2050 20
+2850 20
+3650 20
+5 sourses/sprites/shrubS.png
+384 186
+1154 186
+1924 186
+2694 186
+3464 186
+5 sourses/sprites/shrubXL.png
+656 186
+1426 186
+2196 186
+2966 186
+3736 186
+5 sourses/sprites/shrubXXL.png
+185 186
+955 186
+1725 186
+2495 186
+3265 186
+10 sourses/sprites/holm.png
+0 175
+775 175
+1550 175
+2325 175
+3100 175
+256 190
+1026 190
+1796 190
+2566 190
+3336 190
+1 sourses/sprites/castle.png
+3219 105
+tileMap
+20
+d 16 1 sourses/sprites/freespace.png 1 0 0 0
+g 16 1 sourses/sprites/greenbrick.png 0 0 0 0
+G 16 1 sourses/sprites/greenstone.png 0 0 0 0
+b 16 1 sourses/sprites/bricks.png 0 1 0 0
+P 16 1 sourses/sprites/block.png 0 0 0 0
+s 16 1 sourses/sprites/orangestone.png 0 0 0 0
+S 16 0 sourses/sprites/orangestone.png 0 0 0 0
+L 16 1 sourses/sprites/tubeTopLeft.png 0 0 0 0
+l 16 1 sourses/sprites/tubeLeft.png 0 0 0 0
+R 16 1 sourses/sprites/tubeTopRight 0 0 0 0
+r 16 1 sourses/sprites/tubeRight.png 0 0 0 0
+Z 16 1 sourses/sprites/TubeTopUp.png 0 0 0 0
+X 16 0 sourses/sprites/TubeTopDown.png 0 0 0 0
+z 16 1 sourses/sprites/TubeUp.png 0 0 0 0
+x 16 0 sourses/sprites/tubeDown.png 0 0 0 0
+C 16 1 sourses/sprites/grassplatformTopCenter.png 0 0 0 0
+c 16 1 sourses/sprites/grassplatformCenter.png 0 0 0 0
+0 16 1 sourses/sprites/freespace.png 0 0 0 0
+q 16 1 sourses/sprites/question.png 0 0 1 0
+Q 16 1 sourses/sprites/question.png 0 0 0 1
+gameMap
+240 17
+sourses/levels/level_1.txt

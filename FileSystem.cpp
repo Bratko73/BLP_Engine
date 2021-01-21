@@ -31,8 +31,10 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				fin >> pathToSprite;
 				float speed;
 				fin >> speed;
-				int size;
-				fin >> size;
+				int sizeX;
+				fin >> sizeX;
+				int sizeY;
+				fin >> sizeY;
 				float gravity;
 				fin >> gravity;
 				int countOfFrames;
@@ -51,8 +53,8 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				{
 					fin >> coordX;
 					fin >> coordY;
-					gumbas.push_back(Gumba(speed, sf::FloatRect(coordX, coordY, size, size), gravity));
-					gumbas[i].setAnimationSettings(sf::Vector2i(size, size), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
+					gumbas.push_back(Gumba(speed, sf::FloatRect(coordX, coordY, sizeX, sizeY), gravity));
+					gumbas[i].setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
 					gumbas[i].setSpriteSheet(pathToSprite);
 				}
 			}
@@ -103,8 +105,10 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				fin >> pathToSprite;
 				float speed;
 				fin >> speed;
-				int size;
-				fin >> size;
+				int sizeX;
+				fin >> sizeX;
+				int sizeY;
+				fin >> sizeY;
 				float gravity;
 				fin >> gravity;
 				int countOfFrames;
@@ -123,8 +127,8 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				{
 					fin >> coordX;
 					fin >> coordY;
-					bonus.push_back(BonusMushroom(speed, sf::FloatRect(coordX, coordY, size, size), gravity));
-				    bonus[i].setAnimationSettings(sf::Vector2i(size, size), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
+					bonus.push_back(BonusMushroom(speed, sf::FloatRect(coordX, coordY, sizeX, sizeY), gravity));
+				    bonus[i].setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
 					bonus[i].setSpriteSheet(pathToSprite);
 				}
 			}
