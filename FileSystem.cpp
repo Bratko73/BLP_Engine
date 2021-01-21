@@ -124,15 +124,44 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 			}
 			if (tmp == "Bg")
 			{
-				
+				fin >> tmp;
+				if (tmp == "Textures")
+				{
+					int kinds;
+					fin >> kinds;
+					for (int i = 0; i < kinds; i++)
+					{
+						int count;
+						fin >> count;
+						std::string pathToTexture;
+						fin >> pathToTexture;
+						bg.addTexture(std::to_string(i), pathToTexture);
+						for (int j = 0; j < count; j++)
+						{
+							int coordX;
+							fin >> coordX;
+							int coordY;
+							fin >> coordY;
+							bg.addImageObj(std::to_string(i), sf::Vector2f(coordX, coordY));
+						}
+
+					}
+				}
 			}
 			if (tmp == "tileMap")
 			{
-
+				
 			}
 			if (tmp == "gameMap")
 			{
-
+				int sizeX;
+				fin >> sizeX;
+				int sizeY;
+				fin >> sizeY;
+				std::string path;
+				fin >> path;
+				map = GameMap(sf::Vector2i(sizeX, sizeY));
+				map.loadFromFile(path, tileMap);
 			}
 
 		}
