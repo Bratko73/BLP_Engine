@@ -51,40 +51,4 @@ void Gumba::update(float time, Person& p)
 
 void Gumba::move(GameMap& map)
 {
-	Collision::collision(1, *this, map);
-		if (Collision::collision(0, *this, map))
-			velocity.x *= -1;
-}
-
-void Gumba::death(Person& p, Interface& i, Turtle& t)
-{
-	const float MarioYvelocityAfterKill = -0.2;
-	const int numberOfPointsPerKill = 10;
-	if (p.getEntityHitbox().intersects(Enemy::entityHitbox))
-		if (life)
-			if (p.getYvelocity() > 0) {
-				p.setYvelocity(MarioYvelocityAfterKill);
-				i.increaceScore(numberOfPointsPerKill);
-				life--;
-				velocity.x = 0;
-			}
-			else
-			{
-				static int immortalTime = -1;
-				if (p.getLife() == 2) {
-					p.changeLife(1);
-					immortalTime = 5;      //5 - число, которое хорошо подходит для бессмертия на 1 секунду
-				}
-				else
-					if (immortalTime < 0)
-						p.setLife(0);
-				immortalTime--;
-			}
-	if (t.getEntityHitbox().intersects(Enemy::entityHitbox))
-		if (life)
-            if (t.getLife() == 1)
-			{
-				life--;
-				velocity.x = 0;
-			}
 }

@@ -45,10 +45,7 @@ void Turtle::move(GameMap& map)
 {
 	const int pixelsInTile = 16;
 	const int visibilityOfTurtle = 2;
-	Collision::collision(1, *this, map);
-	if (Collision::collision(0, *this, map))
-		velocity.x *= -1;
-	if (life == 3) {
+	if (life == 11) {
 		if (velocity.x > 0) {
 			if (map.get_Hardness(int(entityHitbox.left) / pixelsInTile + visibilityOfTurtle, int(entityHitbox.top) / pixelsInTile + 1) == true)//высота черепахи 1.5 тайла, +1, чтобы она находила препятствие 
 				if (onGround) {
@@ -65,39 +62,3 @@ void Turtle::move(GameMap& map)
 	}
 }
 
-void Turtle::death(Person& p, Interface& i)
-{
-	const float MarioYvelocityAfterKill = -0.2;
-	const int numberOfPointsPerKill = 15;
-	const float shellSpeed = 0.15;
-	if (p.getEntityHitbox().intersects(Enemy::entityHitbox))
-		if (life)
-			if (p.getYvelocity() > 0) {
-				p.setYvelocity(MarioYvelocityAfterKill);
-				if (life == 3) {
-					i.increaceScore(numberOfPointsPerKill);
-					life--;
-					velocity.x = 0;
-				}
-				else if (life == 2) {
-					life--;
-					velocity.x += shellSpeed;
-				}
-				else if (life == 1) {
-					life++;
-					velocity.x = 0;
-				}
-			}
-			else
-			{
-				static int immortalTime = -1;
-				if (p.getLife() == 2) {
-					p.changeLife(1);
-					immortalTime = 5;       //5 - число, которое хорошо подходит для бессмертия на 1 секунду
-				}
-				else
-					if (immortalTime < 0)
-						p.setLife(0);
-				immortalTime--;
-			}
-}

@@ -34,34 +34,6 @@ void BonusMushroom::update(float time, Person& p)
 	}
 }
 
-void BonusMushroom::move(GameMap& map)
-{
-	if (life == 1) {
-		Collision::collision(1, *this, map);
-		if (Collision::collision(this->entityHitbox, map, 0))
-			velocity.x *= -1;
-	}
-}
-
-void BonusMushroom::activate(Person& p, Interface& i)
-{
-	const int numberOfPointsPerKill = 100;
-	const int tileSize = 16;
-	if (p.getEntityHitbox().intersects(Entity::entityHitbox))
-		if (life == 2) {
-			entityHitbox.top -= tileSize;
-			entityHitbox.width = tileSize;
-			velocity.x = -speed;
-			life--;
-		}
-		else if (life == 1) {
-			i.increaceScore(numberOfPointsPerKill);
-			life--;
-			velocity.x = 0;
-			p.changeLife(2);
-		}
-}
-
 BonusMushroom::~BonusMushroom()
 {
 }

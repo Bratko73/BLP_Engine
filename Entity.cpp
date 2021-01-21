@@ -22,7 +22,7 @@ float& Entity::getYvelocity()
 	return velocity.y;
 }
 
-sf::IntRect Entity::getEntityHitbox()
+sf::FloatRect Entity::getEntityHitbox()
 {
 	return entityHitbox;
 }

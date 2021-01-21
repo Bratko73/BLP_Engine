@@ -1,6 +1,6 @@
 #include "Collision.h"
 
-bool Collision::collision(sf::IntRect first, sf::IntRect second)
+bool Collision::collision(sf::FloatRect first, sf::FloatRect second)
 {
 	if (first.intersects(second))
 		return true;

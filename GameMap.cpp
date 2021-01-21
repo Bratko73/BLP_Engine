@@ -85,12 +85,10 @@ const int GameMap::GetSizeY()
 	return Size.y;
 }
 
-const sf::IntRect& GameMap::GetTilePos(int x_xoord, int y_coord)
+const sf::FloatRect& GameMap::GetTilePos(int x_xoord, int y_coord)
 {
-	return Map[x_xoord][y_coord].Get_Sprite().getTextureRect();
+	return sf::FloatRect(Map[x_xoord][y_coord].Get_Sprite().getPosition(), sf::Vector2f(16,16));
 }
-
-
 
 bool GameMap::IsBonus(int x_coord, int y_coord)
 {

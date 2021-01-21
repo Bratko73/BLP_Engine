@@ -5,6 +5,6 @@
 
 class Collision {
 public:
-	static bool collision(sf::IntRect first, sf::IntRect second);
+	static bool collision(sf::FloatRect first, sf::FloatRect second);
 	~Collision();
 };

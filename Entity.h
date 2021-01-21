@@ -7,7 +7,7 @@ class Entity
 {
 protected:
 	sf::Vector2f velocity;
-	sf::IntRect entityHitbox;
+	sf::FloatRect entityHitbox;
 	Animation animation;
 	bool onGround;
 	float gravitation;
@@ -19,7 +19,7 @@ public:
 
 	float& getXvelocity();
 	float& getYvelocity();
-	sf::IntRect getEntityHitbox();
+	sf::FloatRect getEntityHitbox();
 	int getLife();
 	float getHeightOfJump();
 	~Entity();

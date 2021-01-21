@@ -7,5 +7,4 @@ public:
 	~Turtle();
 	void update(float time, Person& p);
 	void move(GameMap& map);
-	void death(Person& p, Interface& i);
 };
