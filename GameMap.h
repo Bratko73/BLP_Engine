@@ -19,7 +19,7 @@ public:
 	void ClearMap(Tile tile = Tile());
 	const int GetSizeX();
 	const int GetSizeY();
-	const sf::Vector2f& GetTilePos(int x_xoord, int y_coord);
+	const sf::IntRect& GetTilePos(int x_xoord, int y_coord);
 	
 	bool IsBonus(int x_coord, int y_coord);
 	bool isMoney(int x_coord, int y_coord);

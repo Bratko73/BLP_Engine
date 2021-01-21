@@ -9,6 +9,7 @@
 #include "background.h"
 #include <map>
 #include "BonusMushroom.h"
+#include "Collision.h"
 
 void MainMenu(sf::RenderWindow& window) {
 	sf::Texture startTexture, exitTexture, titleTexture, menuBackground;
@@ -253,14 +254,127 @@ void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, st
 	}
 }
 
+bool handleCollision(Person& player, BonusMushroom* bonus, Enemy* enemy, Interface& i) {
+	const int tileSize = 16;
+	const float MarioYvelocityAfterKill = -0.2;
+	const int numberOfPointsPerKillTurtle = 15;
+	const int numberOfPointsPerKillGumba = 10;
+	const int numberOfPointsPerKillBonus = 100;
+	const float shellSpeed = 0.15;
+	if (player.getEntityHitbox().intersects(enemy->getEntityHitbox()))
+		if (enemy->getLife())
+			if (player.getYvelocity() > 0) {
+				if (enemy->getHeightOfJump() != 0) {
+					player.setVelocity(player.getXvelocity(), MarioYvelocityAfterKill);
+					if (enemy->getLife() == 11) {
+						i.increaceScore(numberOfPointsPerKillTurtle);
+						enemy->loseLife();
+						enemy->setVelocity(0, enemy->getYvelocity());
+					}
+					else if (enemy->getLife() % 2 == 0) {
+						enemy->loseLife();
+						enemy->setVelocity(shellSpeed, enemy->getYvelocity());
+					}
+					else if (enemy->getLife() % 2 == 1) {
+						enemy->loseLife();
+						enemy->setVelocity(0, enemy->getYvelocity());
+					}
+				}
+				else {
+					player.setVelocity(player.getXvelocity(), MarioYvelocityAfterKill);
+					i.increaceScore(numberOfPointsPerKillGumba);
+					enemy->loseLife();
+					enemy->setVelocity(0, enemy->getYvelocity());
+				}
+			}
+			else {
+				static int immortalTime = -1;
+				if (player.getLife() == 2) {
+					player.changeModel(1);
+					immortalTime = 5;       //5 - число, которое хорошо подходит для бессмертия на 1 секунду
+				}
+				else
+					if (immortalTime < 0)
+						player.loseLife();
+				immortalTime--;
+			}
+				/*if (t.getEntityHitbox().intersects(Enemy::entityHitbox))
+					if (life)
+						if (t.getLife() == 1)
+						{
+							life--;
+							velocity.x = 0;
+						}*/
+	if (player.getEntityHitbox().intersects(bonus->getEntityHitbox()))
+		if (bonus->getLife() == 2) {
+			bonus->setEntityHitboxTop(tileSize);
+			bonus->setMushroomHitboxWidth(tileSize);
+			bonus->setVelocity(bonus->getSpeed(), bonus->getYvelocity());
+			bonus->loseLife();
+		}
+		else if (bonus->getLife() == 1) {
+			i.increaceScore(numberOfPointsPerKillBonus);
+			bonus->loseLife();
+			bonus->setVelocity(0, bonus->getYvelocity());
+			player.changeModel(2);
+		}
+}
 
+bool mapCollision(Entity* e, GameMap& map, bool flag, Interface& interface) {
+	const int pixelsInTile = 16;
+	for (int i = e->getEntityHitbox().top / pixelsInTile; i < (e->getEntityHitbox().top + e->getEntityHitbox().height) / pixelsInTile; i++)
+		for (int j = e->getEntityHitbox().left / pixelsInTile; j < (e->getEntityHitbox().left + e->getEntityHitbox().width) / pixelsInTile; j++)
+		{
+			if (Collision::collision(e->getEntityHitbox(), map.GetTilePos(j, i)));
+			{
+				if (map.GetLethality(j, i))
+					e->loseLife();
+				if (map.get_Hardness(j, i))
+				{
+					if (e->getYvelocity() > 0 && flag == 1)
+					{
+						e->setEntityHitboxTop(i * pixelsInTile - e->getEntityHitbox().height);
+						e->setVelocity(e->getXvelocity(), 0);
+						e->setOnGround(true);
+					}
+					if (e->getYvelocity() < 0 && flag == 1)
+					{
+						if (map.GetBreakable(j, i))
+							map.SetEmptySpace(j, i);
+						e->setEntityHitboxTop(i * pixelsInTile + e->getEntityHitbox().height);
+						e->setVelocity(e->getXvelocity(), 0);
+						if (map.IsBonus(j, i) == true) {
+							map.SetBrick(j, i);
+						}
+						if (map.isMoney(j, i) == true) {
+							map.SetBrick(j, i);
+							map.setMoney(j, i, false);
+							interface.increaceMoney(1);
+						}
+					}
+					if (e->getXvelocity() > 0 && flag == 0)
+					{
+						e->setEntityHitboxLeft(j * pixelsInTile - e->getEntityHitbox().width);
+						return true;
+					}
+					if (e->getXvelocity() < 0 && flag == 0)
+					{
+						e->setEntityHitboxLeft(j * pixelsInTile + e->getEntityHitbox().width);
+						return true;
+					}
+				}
+
+			}
+		}
+	return false;
+}
 
 void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
 	int level = 1;
 	GameMap map(240, 17);
 	background Bg("sourses/fonts/19783.ttf");
 	interface.changeLevel("1-1");
-	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.0005, 0.27, sf::FloatRect(100, 180, 16, 16));
+	Person Player("sourses/sprites/Mario_tileset.png", 0.1, 0.5, 0.27, sf::FloatRect(100, 180, 16, 16));
 	Player.setAnimationSettings(sf::Vector2i(16, 16), sf::Vector2i(80, 144), 4, 15, 0.005);
 	Player.createJump("sourses/sprites/Mario_tileset.png");
 	if (!isBonusLevel) {
@@ -277,17 +391,51 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		isBonusLevel = false;
 	}
 	level_init(level, Bg, map, TileMap);
-	const int countOfBonusMushroom = 1;
-	BonusMushroom bonuses[countOfBonusMushroom]{
-		BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(376, 160, 4, 16), 0.03)
-	};
 
-	const int countOfTurtles = 1;
-	Turtle turtle[countOfTurtles]{ 
-		Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(2032, 180, 16, 26), 0.0005, 0.27) 
-	};
 
-	const int countOfGumbas = 16;
+	std::vector<BonusMushroom> bonus;
+	int bonusCoordX[1]{376};
+	int bonuscoordY[1]{160};
+	for (int i = 0; i < 1; i++)
+		bonus.push_back(BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(bonusCoordX[i], bonuscoordY[i], 4, 16), 0.03));
+	//const int countOfBonusMushroom = 1;
+	//BonusMushroom bonuses[countOfBonusMushroom]{
+	//	BonusMushroom("sourses/sprites/BonusMushrom.png", 0.0005, sf::FloatRect(376, 160, 4, 16), 0.03)
+	//};
+
+	std::vector<Turtle> turtle;
+	int turtleCoordX[1]{ 2032 };
+	int turtleCoordY[1]{ 180 };
+	for (int i = 0; i < 1; i++)
+		turtle.push_back(Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(turtleCoordX[i], turtleCoordY[i], 16, 26), 0.0005, 0.27));
+
+	//const int countOfTurtles = 1;
+	//Turtle turtle[countOfTurtles]{ 
+	//	Turtle("sourses/sprites/Turtle.png", 0.05, sf::FloatRect(2032, 180, 16, 26), 0.0005, 0.27) 
+	//};
+
+	std::vector<Gumba> gumba;
+	std::vector<std::vector<int>>gumbaCoordinates
+	{{ 368,200 },
+	 { 688,200 },
+	 { 1328,64 },
+	 { 1360,64 },
+	 { 1568,200 },
+	 { 1600,200 },
+	 { 1840,200 },
+	 { 1864,200 },
+	 { 2000,200 },
+	 { 2016,200 },
+	 { 2048,200 },
+	 { 2064,200 },
+	 { 2816,200 },
+	 { 2688,200 },
+	 { 2800,176} };
+	int gumbaCoordX[16]{ 368,688,1328,1360,1568,1600,1840,1864,2000,2016,2048,2064,2816,2000,2688,2800 };
+	int gumbaCoordY[16]{ 200,200,64,64,200,200,200,200,200,200,200,200,200,200,200,176 };
+	for (int i = 0; i < gumbaCoordinates.size(); i+=2)
+		gumba.push_back(Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(gumbaCoordX[i], gumbaCoordY[i+1], 16, 16), 0.0005));
+	/*const int countOfGumbas = 16;
 	Gumba gumba[countOfGumbas]
 	{
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(368, 200, 16, 16), 0.0005),
@@ -306,12 +454,12 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 200, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2688, 200, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2800, 176, 16, 16), 0.0005)
-	};
-	for (int i = 0; i < countOfBonusMushroom; i++) 
-		bonuses[i].setAnimationSettings(sf::Vector2i(4, 16), sf::Vector2i(16, 0), 3, 2, 0.005);
-	for (int i = 0; i < countOfGumbas; i++) 
+	};*/
+	for (int i = 0; i < bonus.size(); i++) 
+		bonus[i].setAnimationSettings(sf::Vector2i(4, 16), sf::Vector2i(16, 0), 3, 2, 0.005);
+	for (int i = 0; i < gumba.size(); i++)
 		gumba[i].setAnimationSettings(sf::Vector2i(17, 16), sf::Vector2i(0, 0), 3, 2, 0.005);
-	for (int i = 0; i < countOfTurtles; i++)		
+	for (int i = 0; i < turtle.size(); i++)		
 		turtle[i].setAnimationSettings(sf::Vector2i(17, 27), sf::Vector2i(387, 239), 3, 0, 0.005);
 	
 	
@@ -368,18 +516,18 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 			Player.move();
 			Player.update(time, map, interface);
 			Player.isEdgeOfMap(window.getSize().x);
-			for (int i = 0; i < countOfBonusMushroom; i++) {
-				bonuses[i].activate(Player, interface);
-				bonuses[i].move(map);
-				bonuses[i].update(time, Player);
+			for (int i = 0; i < bonus.size(); i++) {
+				bonus[i].activate(Player, interface);
+				bonus[i].move(map);
+				bonus[i].update(time, Player);
 			}
-			for (int i = 0; i < countOfGumbas; i++) {
+			for (int i = 0; i < gumba.size(); i++) {
 				gumba[i].move(map);
 				gumba[i].update(time, Player);
-				for (int j = 0; j < countOfBonusMushroom; j++)
+				for (int j = 0; j < bonus.size(); j++)
 					gumba[i].death(Player, interface, turtle[j]);
 			}
-			for (int i = 0; i < countOfTurtles; i++) {
+			for (int i = 0; i < turtle.size(); i++) {
 				turtle[i].move(map);
 				turtle[i].update(time, Player);
 				turtle[i].death(Player, interface);
@@ -396,7 +544,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 			music.stop();
 			if (Player.death(window.getSize().y)) {
 				lives--;
-				Player.setLife(true);
+				Player.increaseLife();
 				isLevelPassed = false;
 				return;
 			}
@@ -404,11 +552,11 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		
 		Bg.drawBackground(window, Player.getOffsetX());
 		map.DrawMap(window, Player.getOffsetX());
-		for (int i = 0; i < countOfBonusMushroom; i++)
-			bonuses[i].draw(window);
-		for (int i = 0; i < countOfGumbas; i++)
+		for (int i = 0; i < bonus.size(); i++)
+			bonus[i].draw(window);
+		for (int i = 0; i < gumba.size(); i++)
 			gumba[i].draw(window);
-		for (int i = 0; i < countOfTurtles; i++)
+		for (int i = 0; i < turtle.size(); i++)
 			turtle[i].draw(window);
 		Player.draw(window);
 		interface.draw(window);

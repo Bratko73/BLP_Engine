@@ -6,7 +6,7 @@ Turtle::Turtle(std::string pathToFile, const float speed, const sf::FloatRect en
 	this->gravitation = gravitation;
 	this->entityHitbox = enemyHitbox;
 	velocity.x = speed;
-	life = 3;
+	life = 11;
 	animation.setPosition(velocity);
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
@@ -100,9 +100,4 @@ void Turtle::death(Person& p, Interface& i)
 						p.setLife(0);
 				immortalTime--;
 			}
-}
-
-int Turtle::getLife()
-{
-	return life;
 }

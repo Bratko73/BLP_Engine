@@ -5,6 +5,6 @@
 
 class Collision {
 public:
-	static int collision(bool flag, Entity& e, GameMap& map);
+	static bool collision(sf::IntRect first, sf::IntRect second);
 	~Collision();
 };

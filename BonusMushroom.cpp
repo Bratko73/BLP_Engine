@@ -13,6 +13,7 @@ BonusMushroom::BonusMushroom(std::string pathToFile, const float gravitation, co
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
 	life = 2;
+	heightOfJump = 0;
 }
 
 void BonusMushroom::update(float time, Person& p)
@@ -37,7 +38,7 @@ void BonusMushroom::move(GameMap& map)
 {
 	if (life == 1) {
 		Collision::collision(1, *this, map);
-		if (Collision::collision(0, *this, map))
+		if (Collision::collision(this->entityHitbox, map, 0))
 			velocity.x *= -1;
 	}
 }
@@ -63,4 +64,14 @@ void BonusMushroom::activate(Person& p, Interface& i)
 
 BonusMushroom::~BonusMushroom()
 {
+}
+
+void BonusMushroom::setMushroomHitboxWidth(float hitBoxWidth)
+{
+	entityHitbox.width = hitBoxWidth;
+}
+
+float BonusMushroom::getSpeed()
+{
+	return speed;
 }

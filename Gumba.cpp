@@ -11,6 +11,7 @@ Gumba::Gumba(std::string pathToFile, const float speed, const sf::FloatRect enem
 	animation.setPosition(velocity);
 	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
+	heightOfJump = 0;
 }
 
 Gumba::~Gumba()

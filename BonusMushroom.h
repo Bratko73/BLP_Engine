@@ -13,4 +13,6 @@ public:
 	void move(GameMap& map);
 	void activate(Person& p, Interface& i);
 	~BonusMushroom();
+	void setMushroomHitboxWidth(float hitBoxWidth);
+	float getSpeed();
 };

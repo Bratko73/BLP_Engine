@@ -85,9 +85,9 @@ const int GameMap::GetSizeY()
 	return Size.y;
 }
 
-const sf::Vector2f& GameMap::GetTilePos(int x_xoord, int y_coord)
+const sf::IntRect& GameMap::GetTilePos(int x_xoord, int y_coord)
 {
-	return Map[x_xoord][y_coord].Get_Sprite().getPosition();
+	return Map[x_xoord][y_coord].Get_Sprite().getTextureRect();
 }
 
 

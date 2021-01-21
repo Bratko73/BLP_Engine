@@ -22,23 +22,39 @@ float& Entity::getYvelocity()
 	return velocity.y;
 }
 
-sf::FloatRect Entity::getEntityHitbox()
+sf::IntRect Entity::getEntityHitbox()
 {
 	return entityHitbox;
+}
+
+int Entity::getLife()
+{
+	return life;
+}
+
+float Entity::getHeightOfJump()
+{
+	return heightOfJump;
 }
 
 Entity::~Entity()
 {
 }
 
-void Entity::setYvelocity(float velocityY)
+void Entity::setVelocity(float velocityX, float velocityY)
 {
-	this->velocity.y = velocityY;
+	velocity.x = velocityX;
+	velocity.y = velocityY;
 }
 
-void Entity::setLife(bool life)
+void Entity::loseLife()
 {
-	this->life = life;
+	life--;
+}
+
+void Entity::increaseLife()
+{
+	life++;
 }
 
 void Entity::setOnGround(bool val)
@@ -46,11 +62,11 @@ void Entity::setOnGround(bool val)
 	onGround = val;
 }
 
-void Entity::setEntityHitboxTop(float personHitboxTop)
+void Entity::setEntityHitboxTop(int personHitboxTop)
 {
 	this->entityHitbox.top = personHitboxTop;
 }
-void Entity::setEntityHitboxLeft(float personHitboxLeft)
+void Entity::setEntityHitboxLeft(int personHitboxLeft)
 {
 	this->entityHitbox.left = personHitboxLeft;
 }

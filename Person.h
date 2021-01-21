@@ -9,7 +9,6 @@ class Person : public Entity
 private:
 	float speed;
 	sf::Vector2f offset;
-	float heightOfJump;
 	sf::Texture jumpTexture;
 	sf::Sprite jumpSprite;
 public:
@@ -19,11 +18,10 @@ public:
 	void update(float time, GameMap& map, Interface& i);
 	void isEdgeOfMap(const int screenWidth);
 	bool death(const int screenHeight);
-	void changeLife(const int parametr);
+	void changeModel(const int parametr);
 
 	float& getOffsetX();
 	float& getOffsetY();
-	int getLife();
 	bool isOnGround();
 	void clearOffSet();
 	void createJump(std::string pathToFile);
