@@ -18,12 +18,13 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 		return;
 	else
 	{
-		while (!fin.eof())
-		{
+		//while (!fin.eof())
+		//{
 			std::string tmp;
 			fin >> tmp;
 			if (tmp == "Gumba")
 			{
+				gumbas.clear();
 				int count;
 				fin >> count;
 				std::string pathToSprite;
@@ -52,10 +53,12 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					fin >> coordY;
 					gumbas.push_back(Gumba(speed, sf::FloatRect(coordX, coordY, size, size), gravity));
 					gumbas[i].setAnimationSettings(sf::Vector2i(size, size), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
+					gumbas[i].setSpriteSheet(pathToSprite);
 				}
 			}
 			if (tmp == "Turtle")
 			{
+				turtle.clear();
 				int count;
 				fin >> count;
 				std::string pathToSprite;
@@ -88,10 +91,12 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					fin >> coordY;
 					turtle.push_back(Turtle(speed, sf::FloatRect(coordX, coordY, sizeX, sizeY), gravity, jump));
 					turtle[i].setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
+					turtle[i].setSpriteSheet(pathToSprite);
 				}
 			}
 			if (tmp == "Bonus")
 			{
+				bonus.clear();
 				int count;
 				fin >> count;
 				std::string pathToSprite;
@@ -120,10 +125,13 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					fin >> coordY;
 					bonus.push_back(BonusMushroom(speed, sf::FloatRect(coordX, coordY, size, size), gravity));
 				    bonus[i].setAnimationSettings(sf::Vector2i(size, size), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
+					bonus[i].setSpriteSheet(pathToSprite);
 				}
 			}
 			if (tmp == "Bg")
 			{
+				bg.clearBg();
+				bg.clearOffSet();
 				fin >> tmp;
 				if (tmp == "Textures")
 				{
@@ -150,7 +158,32 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 			}
 			if (tmp == "tileMap")
 			{
-				
+				//sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable, bool bonus, bool money
+				tileMap.clear();
+				tiles.clear();
+				int count;
+				fin >> count;
+				for (int i = 0; i < count; i++) 
+				{
+					char symbol;
+					fin >> symbol;
+					int size;
+					fin >> size;
+					bool hardness;
+					fin >> hardness;
+					std::string pathToTexture;
+					fin >> pathToTexture;
+					bool lethality;
+					fin >> lethality;
+					bool breakable;
+					fin >> breakable;
+					bool bonus;
+					fin >> bonus;
+					bool money;
+					fin >> money;
+					tiles.push_back(Tile(sf::Vector2i(size, size), hardness, pathToTexture, lethality, breakable, bonus, money));
+					tileMap.insert(std::pair<char,Tile>(symbol, tiles[i]));
+				}
 			}
 			if (tmp == "gameMap")
 			{
@@ -164,6 +197,6 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 				map.loadFromFile(path, tileMap);
 			}
 
-		}
+		//}
 	}
 }
