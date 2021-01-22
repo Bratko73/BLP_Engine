@@ -98,7 +98,7 @@ s 16 1 sourses/sprites/orangestone.png 0 0 0 0
 S 16 0 sourses/sprites/orangestone.png 0 0 0 0
 L 16 1 sourses/sprites/tubeTopLeft.png 0 0 0 0
 l 16 1 sourses/sprites/tubeLeft.png 0 0 0 0
-R 16 1 sourses/sprites/tubeTopRight 0 0 0 0
+R 16 1 sourses/sprites/tubeTopRight.png 0 0 0 0
 r 16 1 sourses/sprites/tubeRight.png 0 0 0 0
 Z 16 1 sourses/sprites/TubeTopUp.png 0 0 0 0
 X 16 0 sourses/sprites/TubeTopDown.png 0 0 0 0
