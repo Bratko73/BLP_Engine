@@ -27,5 +27,6 @@ public:
 	sf::Sprite& Get_Sprite();
 	void Set_Position(float xPos, float yPos);
 	bool& Get_Hardness();
+	void setSprite(std::string path);
 };
 
