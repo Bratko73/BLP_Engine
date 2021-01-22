@@ -225,6 +225,7 @@ void FileSystem::loadLevel(Person& Player, std::vector <Gumba>& gumbas, std::vec
 					tiles.push_back(Tile(sf::Vector2i(size, size), hardness, pathToTexture, lethality, breakable, bonus, money));
 					tileMap.insert(std::pair<char,Tile>(symbol, tiles[i]));
 				}
+				tileMap.insert(std::pair<char, Tile>(' ', Tile()));
 			}
 			fin >> tmp;
 			if (tmp == "gameMap")
