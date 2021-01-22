@@ -15,7 +15,7 @@ public:
 	Person();
 	Person(const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox);
 	~Person();
-	void move();
+	void move(int flag = 0);
 	void update(float time);
 	void isEdgeOfMap(const int screenWidth);
 	bool death(const int screenHeight);

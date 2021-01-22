@@ -33,15 +33,15 @@ Person::Person( const float speed, const float gravitation, const float heightOf
 Person::~Person()
 {}
 
-void Person::move()
+void Person::move(int flag)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (flag == 1)
 		velocity.x = -speed;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (flag == -1)
 		velocity.x = speed;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (flag == 2)
 		if (onGround) {
 			velocity.y = -heightOfJump;
 			onGround = false;
