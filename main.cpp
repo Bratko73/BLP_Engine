@@ -643,7 +643,8 @@ int main()
 	bool isBlackScreen = true;
 	bool reconfigLevel = true;
 	bool isMainMenu = true;
-
+	fileSys.changeFile("sourses/level_" + std::to_string(level) + "_sourses.txt");
+	fileSys.loadLevel(Player, gumba, turtle, bonus, tiles, bg, tileMap, map);
 
 	sf::Event event;
 	while (window.isOpen())

@@ -25,7 +25,7 @@ Turtle
 1
 sourses/sprites/Turtle.png
 0.05 17 27 0.0005 0.27 3 387 239 0 0.005
-2032 180
+300 180
 Bonus
 1
 sourses/sprites/BonusMushrom.png
