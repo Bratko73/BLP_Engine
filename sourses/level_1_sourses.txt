@@ -30,7 +30,7 @@ Bonus
 1
 sourses/sprites/BonusMushrom.png
 0.03 4 16 0.0005 3 16 0 2 0.005
-376 160
+376 158
 Bg Textures
 8
 10 sourses/sprites/cloudS.png

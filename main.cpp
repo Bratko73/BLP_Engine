@@ -207,7 +207,7 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 
 	
 }*/
-
+/*
 void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
 	GameMap map(240, 17);
 	background Bg("sourses/fonts/19783.ttf");
@@ -255,7 +255,7 @@ void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, st
 		interface.draw(window);
 		window.display();
 	}
-}
+}*/
 
 void handleCollision(Person& player, BonusMushroom* bonus, Enemy* enemy, Interface& i) {
 	const int tileSize = 16;
@@ -377,7 +377,7 @@ bool mapCollision(Entity* e, GameMap& map, bool flag, Interface& interface) {
 		}
 	return false;
 }
-
+/*
 void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::map<char, Tile>& TileMap, bool& isLevelPassed,bool& isBonusLevel) {
 	int level = 1;
 	GameMap map(240, 17);
@@ -445,7 +445,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 	//int gumbaCoordY[16]{ 200,200,64,64,200,200,200,200,200,200,200,200,200,200,200,176 };
 	for (int i = 0; i < 1; i++)
 		gumba.push_back(Gumba(0.05, sf::FloatRect(gumbaCoordX[i], gumbaCoordY[i], 16, 16), 0.0005));
-	/*const int countOfGumbas = 16;
+	const int countOfGumbas = 16;
 	Gumba gumba[countOfGumbas]
 	{
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(368, 200, 16, 16), 0.0005),
@@ -464,7 +464,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2000, 200, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2688, 200, 16, 16), 0.0005),
 		Gumba("sourses/sprites/Mario_tileset.png", 0.05, sf::FloatRect(2800, 176, 16, 16), 0.0005)
-	};*/
+	};
 	for (int i = 0; i < bonus.size(); i++) {
 		bonus[i].setAnimationSettings(sf::Vector2i(4, 16), sf::Vector2i(16, 0), 3, 2, 0.005);
 		bonus[i].setSpriteSheet("sourses/sprites/BonusMushrom.png");
@@ -592,7 +592,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		interface.draw(window);
 		window.display();
 	}
-}
+}*/
 
 
 
@@ -642,7 +642,8 @@ int main()
 	bool isBonusLevel = false;
 	bool isBlackScreen = true;
 	bool reconfigLevel = true;
-	MainMenu(window);
+	bool isMainMenu = true;
+
 
 	sf::Event event;
 	while (window.isOpen())
@@ -654,9 +655,12 @@ int main()
 			fileSys.loadLevel(Player,gumba, turtle, bonus, tiles, bg, tileMap, map);
 		}
 		if (lives > 0) {
+			if (isMainMenu) {
+				MainMenu(window);
+				isMainMenu = false;
+			}
 			if (isBlackScreen)
 				BlackScreen(window, lives, 50, isBlackScreen);
-			//level_1(window, lives, interface, TileMap, isLevelPassed_1, isBonusLevel);
 			interface.updateTime(clock.getElapsedTime().asSeconds());
 			float time = clock.getElapsedTime().asMicroseconds();
 			clock.restart();
@@ -730,6 +734,10 @@ int main()
 				//music.stop();
 				if (Player.death(window.getSize().y)) {
 					lives--;
+					reconfigLevel = true;
+					isBlackScreen = true;
+					interface.RestartMoney();
+					interface.RestartScore();
 					Player.increaseLife();
 					isLevelPassed = false;
 					continue;
@@ -755,7 +763,7 @@ int main()
 			if (isBonusLevel && !isTriggered)
 			{
 				isBlackScreen = true;
-				//level_Bonus(window, lives, interface, TileMap, isBonusLevel); Reconfig to bonus
+				//reconfig level
 				isTriggered = true;
 			}
 		}
@@ -763,7 +771,7 @@ int main()
 		{
 			interface.RestartTime();
 			LoseScreen(window, 50);
-			MainMenu(window);
+			isMainMenu = true;
 			lives = 3;
 			isLevelPassed = false;
 		}

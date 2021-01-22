@@ -170,7 +170,7 @@ void GameMap::loadFromFile(const std::string& filePath, std::map<char, Tile>& di
 		{
 			for (int x = 0; x < Size.x; ++x)
 			{
-				//assert(dictionary.find(str[x]) != dictionary.end());
+				assert(dictionary.find(str[x]) != dictionary.end());
 				Map[x][y] = dictionary[str[x]];
 				Map[x][y].Set_Position(float(x) * 16, float(y) * 16);
 			}
