@@ -22,7 +22,7 @@ public:
 	sf::FloatRect getEntityHitbox();
 	int getLife();
 	float getHeightOfJump();
-	~Entity();
+	 ~Entity();
 	void setVelocity(float velocityX, float velocityY);
 	void loseLife();
 	void increaseLife();
@@ -30,4 +30,5 @@ public:
 	void setEntityHitboxLeft(int personHitboxLeft);
 	void setEntityHitboxTop(int personHitboxTop);
 	void setSpriteSheet(std::string pathToFile);
+
 };
