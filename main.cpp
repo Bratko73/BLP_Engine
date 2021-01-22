@@ -25,11 +25,11 @@ void MainMenu(sf::RenderWindow& window) {
 	menuTitle.setPosition(0, 0);
 	menuStart.setPosition(180, 100);
 	menuExit.setPosition(180, 150);
-	sf::Music music;
-	music.openFromFile("sourses/sounds/narwhal.ogg");
-	music.setLoop(true);
-	music.setVolume(50);
-	music.play();
+	//sf::Music music;
+	//music.openFromFile("sourses/sounds/narwhal.ogg");
+	//music.setLoop(true);
+	//music.setVolume(50);
+	//music.play();
 	while (window.isOpen())
 	{
 		window.clear();
@@ -70,7 +70,7 @@ void MainMenu(sf::RenderWindow& window) {
 				window.close();
 				return;
 			}
-			music.pause();
+			//music.pause();
 		}
 		window.draw(menuBg);
 		window.draw(menuTitle);
