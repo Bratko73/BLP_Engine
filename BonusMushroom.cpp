@@ -19,10 +19,10 @@ void BonusMushroom::update(float time, Person& p)
 {
 	if (life != 2) {
 		entityHitbox.left += velocity.x * time;
-		if (!onGround)
-			velocity.y += gravitation * time;
-		entityHitbox.top += velocity.y * time;
-		onGround = false;
+	if (!onGround)
+		velocity.y += gravitation * time;
+	entityHitbox.top += velocity.y * time;
+	onGround = false;
 
 		if (life == 0)
 			animation.makeInvisible();
@@ -37,9 +37,9 @@ BonusMushroom::~BonusMushroom()
 {
 }
 
-void BonusMushroom::setMushroomHitboxWidth(float hitBoxWidth)
+void BonusMushroom::setMushroomHitboxLeft(float hitBoxLeft)
 {
-	entityHitbox.width = hitBoxWidth;
+	entityHitbox.left = hitBoxLeft;
 }
 
 float BonusMushroom::getSpeed()

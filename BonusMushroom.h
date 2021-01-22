@@ -11,6 +11,6 @@ public:
 	BonusMushroom(const float gravitation, const sf::FloatRect personHitbox, float speed);
 	void update(float time, Person& p);
 	~BonusMushroom();
-	void setMushroomHitboxWidth(float hitBoxWidth);
+	void setMushroomHitboxLeft(float hitBoxLeft);
 	float getSpeed();
 };

@@ -314,7 +314,7 @@ void handleCollision(Person& player, BonusMushroom* bonus, Enemy* enemy, Interfa
 		if (player.getEntityHitbox().intersects(bonus->getEntityHitbox()))
 			if (bonus->getLife() == 2) {
 				bonus->setEntityHitboxTop(bonus->getEntityHitbox().top - tileSize);
-				bonus->setMushroomHitboxWidth(bonus->getEntityHitbox().width - tileSize);
+				bonus->setMushroomHitboxLeft(bonus->getEntityHitbox().left);
 				bonus->setVelocity(bonus->getSpeed(), bonus->getYvelocity());
 				bonus->loseLife();
 			}

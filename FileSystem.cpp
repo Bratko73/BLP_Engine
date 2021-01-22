@@ -162,7 +162,7 @@ void FileSystem::loadLevel(Person& Player, std::vector <Gumba>& gumbas, std::vec
 				{
 					fin >> coordX;
 					fin >> coordY;
-					bonus.push_back(BonusMushroom(speed, sf::FloatRect(coordX, coordY, sizeX, sizeY), gravity));
+					bonus.push_back(BonusMushroom(gravity, sf::FloatRect(coordX, coordY, sizeX, sizeY), speed));
 				    bonus[i].setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, rangeBetweenFrames, animationSpeed);
 					bonus[i].setSpriteSheet(pathToSprite);
 				}

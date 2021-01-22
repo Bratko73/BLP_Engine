@@ -25,12 +25,12 @@ Turtle
 1
 sourses/sprites/Turtle.png
 0.05 17 27 0.0005 0.27 3 387 239 0 0.005
-300 180
+2032 180
 Bonus
 1
 sourses/sprites/BonusMushrom.png
 0.03 4 16 0.0005 3 16 0 2 0.005
-376 158
+376 156
 Bg Textures
 8
 10 sourses/sprites/cloudS.png
