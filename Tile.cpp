@@ -108,3 +108,9 @@ bool& Tile::Get_Hardness()
 {
 	return this->hardness;
 }
+
+void Tile::setSprite(std::string path)
+{
+	this->texture.loadFromFile(path);
+	this->sprite.setTexture(this->texture);
+}
