@@ -164,49 +164,7 @@ void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(6, sf::Vector2f(135, 20));
 	interface.setTitlePosition(7, sf::Vector2f(125, 2));
 }
-/*
-void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
-	map.ClearMap();
-	Bg.clearBg();
-	Bg.clearOffSet();
-	int countOfRepeats = 5;
-	switch (level)
-	{
-	case 1:
-		map.loadFromFile("sourses/levels/level_1.txt", TileMap);
-		Bg.addTexture("cloudS","sourses/sprites/cloudS.png");
-		Bg.addTexture("cloudXL", "sourses/sprites/cloudXL.png");
-		Bg.addTexture("cloudXXL","sourses/sprites/cloudXXL.png");
-		Bg.addTexture("shrubS", "sourses/sprites/shrubS.png");
-		Bg.addTexture("shrubXL", "sourses/sprites/shrubXL.png");
-		Bg.addTexture("shrubXXL", "sourses/sprites/shrubXXL.png");
-		Bg.addTexture("holm","sourses/sprites/holm.png");
-		Bg.addTexture("castle","sourses/sprites/castle.png");
 
-		for (int i = 0; i < countOfRepeats; i++) {
-			Bg.addImageObj("cloudS", sf::Vector2f(160 + 800 * i, 60));
-			Bg.addImageObj("cloudS", sf::Vector2f(300 + 800 * i, 32));
-			Bg.addImageObj("cloudXL", sf::Vector2f(608 + 800 * i, 48));
-			Bg.addImageObj("cloudXXL", sf::Vector2f(450 + 800 * i, 20));
-			Bg.addImageObj("shrubS", sf::Vector2f(384 + 770 * i, 186));
-			Bg.addImageObj("shrubXL", sf::Vector2f(656 + 770 * i, 186));
-			Bg.addImageObj("shrubXXL", sf::Vector2f(185 + 770 * i, 186));
-			Bg.addImageObj("holm", sf::Vector2f(0 + 775 * i, 175));
-			Bg.addImageObj("holm", sf::Vector2f(256 + 770 * i, 190));
-		}
-		Bg.addImageObj("castle", sf::Vector2f(3219,105));
-		Bg.SetBgColor(sf::Color(100, 100, 255));		
-		break;
-	case 0:
-		map.loadFromFile("sourses/levels/level_Bonus.txt", TileMap);
-		Bg.SetBgColor(sf::Color::Black);
-		Bg.addTextObj(15, "The money has not been realized,", sf::Vector2f(30, 60));
-		Bg.addTextObj(15, "but the account now has + 19 coins", sf::Vector2f(30, 70));
-		break;
-	}
-
-	
-}*/
 /*
 void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
 	GameMap map(240, 17);
