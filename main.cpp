@@ -614,7 +614,7 @@ int main()
 	std::vector<Turtle> turtle;
 	std::vector<BonusMushroom> bonus;
 	background bg;
-	GameMap map;
+	GameMap map(240,17);
 /*
 	sf::Music music;
 	music.openFromFile("sourses/sounds/moonlight.ogg");

@@ -235,7 +235,7 @@ void FileSystem::loadLevel(Person& Player, std::vector <Gumba>& gumbas, std::vec
 				fin >> sizeY;
 				std::string path;
 				fin >> path;
-				map = GameMap(sf::Vector2i(sizeX, sizeY));
+				//map = GameMap(sf::Vector2i(sizeX, sizeY));
 				map.loadFromFile(path, tileMap);
 			}
 
