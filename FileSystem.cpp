@@ -50,8 +50,9 @@ void FileSystem::loadLevel(Person& Player, std::vector <Gumba>& gumbas, std::vec
 				int coordY;
 				fin >> coordX;
 				fin >> coordY;
-				Player = Person(pathToSprite, speed, gravity, heightOfJump, sf::FloatRect(coordX, coordY, sizeX, sizeY));
-				Player.setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, animationSpeed);
+				Player = Person(speed, gravity, heightOfJump, sf::FloatRect(coordX, coordY, sizeX, sizeY));
+				Player.setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames,rangeBetweenFrames, animationSpeed);
+				Player.setSpriteSheet(pathToSprite);
 			}
 			fin >> tmp;
 			if (tmp == "Gumba")

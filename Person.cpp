@@ -15,7 +15,7 @@ Person::Person()
 	life = 0;
 }
 
-Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox)
+Person::Person( const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox)
 {
 	this->heightOfJump = heightOfJump;
 	this->gravitation = gravitation;
@@ -26,7 +26,6 @@ Person::Person(std::string pathToFile, const float speed, const float gravitatio
 	animation.setPosition(velocity);
 	offset.x = 0;
 	offset.y = 0;
-	animation.setSpriteSheet(pathToFile);
 	onGround = 0;
 	life = 1;
 }
