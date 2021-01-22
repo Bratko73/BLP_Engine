@@ -12,6 +12,7 @@ private:
 	sf::Texture jumpTexture;
 	sf::Sprite jumpSprite;
 public:
+	Person();
 	Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox);
 	~Person();
 	void move();

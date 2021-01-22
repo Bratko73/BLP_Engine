@@ -15,6 +15,6 @@ class FileSystem
 public:
 	FileSystem(std::string path);
 	void changeFile(std::string newPath);
-	void loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& turtle, std::vector <BonusMushroom>& bonus, std::vector <Tile>& tiles, background& bg, std::map <char, Tile>& tileMap, GameMap& map);
+	void loadLevel(Person& Player,std::vector <Gumba>& gumbas, std::vector <Turtle>& turtle, std::vector <BonusMushroom>& bonus, std::vector <Tile>& tiles, background& bg, std::map <char, Tile>& tileMap, GameMap& map);
 };
 

@@ -1,6 +1,20 @@
 #include "Person.h"
 #include "Collision.h"
 
+Person::Person()
+{
+	this->heightOfJump = 0;
+	this->gravitation = 0;
+	this->speed = 0;
+	velocity.x = 0;
+	velocity.y = 0;
+	this->entityHitbox = sf::FloatRect();
+	offset.x = 0;
+	offset.y = 0;
+	onGround = 0;
+	life = 0;
+}
+
 Person::Person(std::string pathToFile, const float speed, const float gravitation, const float heightOfJump, const sf::FloatRect personHitbox)
 {
 	this->heightOfJump = heightOfJump;

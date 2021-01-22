@@ -10,6 +10,7 @@
 #include <map>
 #include "BonusMushroom.h"
 #include "Collision.h"
+#include "FileSystem.h"
 #include <list>
 
 void MainMenu(sf::RenderWindow& window) {
@@ -79,7 +80,7 @@ void MainMenu(sf::RenderWindow& window) {
 	}
 }
 
-void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
+void BlackScreen(sf::RenderWindow& window,int& lives, float time, bool& isBlackScreen) {
 	background Bg("sourses/fonts/19783.ttf");
 	Bg.addTextObj(15, "X", sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2 - 5));
 	Bg.addTextObj(30, std::to_string(lives), sf::Vector2f(window.getSize().x / 2 + 16, window.getSize().y / 2 - 16));
@@ -87,7 +88,7 @@ void BlackScreen(sf::RenderWindow& window,int& lives, float time) {
 	Bg.addTexture("Zefir", "sourses/sprites/zefir.png");
 	Bg.addImageObj("Zefir", sf::Vector2f(window.getSize().x / 2 - 26, window.getSize().y / 2));
 	sf::Clock clock;
-
+	isBlackScreen = false;
 	while (window.isOpen())
 	{
 		time -= clock.getElapsedTime().asSeconds();
@@ -136,7 +137,7 @@ void WinScreen(sf::RenderWindow& window) {
 	sf::Music music;
 	music.openFromFile("sourses/sounds/WhalShark.ogg");
 	music.setLoop(true);
-	music.setVolume(30);
+	music.setVolume(5);
 	music.play();
 	while (window.isOpen())
 	{
@@ -163,6 +164,7 @@ void InterfaceInit(Interface& interface) {
 	interface.setTitlePosition(6, sf::Vector2f(135, 20));
 	interface.setTitlePosition(7, sf::Vector2f(125, 2));
 }
+/*
 void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& TileMap) {
 	map.ClearMap();
 	Bg.clearBg();
@@ -204,7 +206,7 @@ void level_init(int level, background& Bg, GameMap& map, std::map<char, Tile>& T
 	}
 
 	
-}
+}*/
 
 void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, std::map<char, Tile>& TileMap, bool& isBonusLevel) {
 	GameMap map(240, 17);
@@ -218,7 +220,7 @@ void level_Bonus(sf::RenderWindow& window, int& lives,  Interface& interface, st
 	Player.setEntityHitboxTop(40);
 	Player.clearOffSet();
 	interface.increaceMoney(19);
-	level_init(level, Bg, map, TileMap);
+	//level_init(level, Bg, map, TileMap);
 	sf::Event event;
 	sf::Clock clock;
 	while (window.isOpen())
@@ -397,7 +399,7 @@ void level_1(sf::RenderWindow& window, int& lives, Interface& interface, std::ma
 		Player.setEntityHitboxTop(176);
 		isBonusLevel = false;
 	}
-	level_init(level, Bg, map, TileMap);
+	//level_init(level, Bg, map, TileMap);
 
 
 	std::vector<BonusMushroom> bonus;
@@ -601,9 +603,174 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(windowSize.x,windowSize.y), "Fuk yea!");
 	window.setFramerateLimit(60);
 	int lives = 3;
+	int level = 1;
+	Person Player;
 	Interface interface("sourses/fonts/19783.ttf");
 	InterfaceInit(interface);
-	Tile GBricks(sf::Vector2i(16, 16), 1, "sourses/sprites/greenbrick.png");
+
+	std::vector<Tile> tiles;
+	std::map<char, Tile> tileMap;
+	std::vector<Gumba> gumba;
+	std::vector<Turtle> turtle;
+	std::vector<BonusMushroom> bonus;
+	background bg;
+	GameMap map;
+/*
+	sf::Music music;
+	music.openFromFile("sourses/sounds/moonlight.ogg");
+	music.setLoop(true);
+	music.setVolume(10);
+	music.play();
+	static sf::Music death;
+	death.openFromFile("sourses/sounds/death1.ogg");
+	death.setLoop(false);
+	death.setVolume(20);
+	death.play();
+	static sf::Music LastDeath;
+	LastDeath.openFromFile("sourses/sounds/LastlifeLost.ogg");
+	LastDeath.setLoop(false);
+	LastDeath.setVolume(10);
+*/
+	FileSystem fileSys(" ");
+
+	sf::Font font;
+	sf::Clock clock;
+	bool Islevel = true;
+	bool isTriggered = false;
+	bool isFirsttime = true;
+	bool isLevelPassed = false;
+	bool isBonusLevel = false;
+	bool isBlackScreen = true;
+	bool reconfigLevel = true;
+	MainMenu(window);
+
+	sf::Event event;
+	while (window.isOpen())
+	{
+		if (reconfigLevel)
+		{
+			reconfigLevel = false;
+			fileSys.changeFile("sourses/level_" + std::to_string(level) + "_sourses.txt");
+			fileSys.loadLevel(Player,gumba, turtle, bonus, tiles, bg, tileMap, map);
+		}
+		if (lives > 0) {
+			if (isBlackScreen)
+				BlackScreen(window, lives, 50, isBlackScreen);
+			//level_1(window, lives, interface, TileMap, isLevelPassed_1, isBonusLevel);
+			interface.updateTime(clock.getElapsedTime().asSeconds());
+			float time = clock.getElapsedTime().asMicroseconds();
+			clock.restart();
+
+			time = time / 800;
+
+			if (time > 20)
+				time = 20;
+			if (interface.getTime() == 0) {
+				lives = 0;
+				continue;
+				}
+
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+				if (event.key.code == sf::Keyboard::Down)
+					if (Player.getEntityHitbox().left > 912 && Player.getEntityHitbox().left < 928) {
+						isBonusLevel = true;
+					}
+			}
+			if (Player.getEntityHitbox().left > 3260 && Player.getEntityHitbox().left < 3265 && Player.getEntityHitbox().top > 160) {
+				isLevelPassed = true;
+				continue;
+			}
+
+			if (Player.getLife() > 0) {
+				Player.move();
+				Player.setEntityHitboxLeft(Player.getEntityHitbox().left + Player.getXvelocity() * time);
+				mapCollision(&Player, map, 0, interface);
+				if (!Player.getOnGround())
+					Player.setVelocity(Player.getXvelocity(), Player.getYvelocity() + Player.getGravitation() * time);
+				Player.setEntityHitboxTop(Player.getEntityHitbox().top + Player.getYvelocity() * time);
+				Player.setOnGround(false);
+				mapCollision(&Player, map, 1, interface);
+				Player.update(time);
+				Player.isEdgeOfMap(window.getSize().x);
+				for (int i = 0; i < bonus.size(); i++) {
+					if (Collision::collision(Player.getEntityHitbox(), bonus[i].getEntityHitbox()))
+						handleCollision(Player, &bonus[i], NULL, interface);
+					bonus[i].update(time, Player);
+					mapCollision(&bonus[i], map, 1, interface);
+					mapCollision(&bonus[i], map, 0, interface);
+				}
+				for (int i = 0; i < gumba.size(); i++) {
+					if (Collision::collision(Player.getEntityHitbox(), gumba[i].getEntityHitbox()))
+						handleCollision(Player, NULL, &gumba[i], interface);
+					gumba[i].move(map);
+					gumba[i].update(time, Player);
+					mapCollision(&gumba[i], map, 1, interface);
+					mapCollision(&gumba[i], map, 0, interface);
+				}
+				for (int i = 0; i < turtle.size(); i++) {
+					if (Collision::collision(Player.getEntityHitbox(), turtle[i].getEntityHitbox()))
+						handleCollision(Player, NULL, &turtle[i], interface);
+					turtle[i].move(map);
+					turtle[i].update(time, Player);
+					mapCollision(&turtle[i], map, 1, interface);
+					mapCollision(&turtle[i], map, 0, interface);
+				}
+				//if (lives > 1)
+				//	death.play();
+				//else
+				//{
+				//	death.stop();
+				//	LastDeath.play();
+				//}
+			}
+			else {
+				//music.stop();
+				if (Player.death(window.getSize().y)) {
+					lives--;
+					Player.increaseLife();
+					isLevelPassed = false;
+					continue;
+				}
+			}
+			bg.drawBackground(window, Player.getOffsetX());
+			map.DrawMap(window, Player.getOffsetX());
+			for (int i = 0; i < bonus.size(); i++)
+				bonus[i].draw(window);
+			for (int i = 0; i < gumba.size(); i++)
+				gumba[i].draw(window);
+			for (int i = 0; i < turtle.size(); i++)
+				turtle[i].draw(window);
+			Player.draw(window);
+			interface.draw(window);
+			window.display();
+			
+			
+			if (isLevelPassed) {
+				WinScreen(window);
+				isLevelPassed = false;
+			}
+			if (isBonusLevel && !isTriggered)
+			{
+				isBlackScreen = true;
+				//level_Bonus(window, lives, interface, TileMap, isBonusLevel); Reconfig to bonus
+				isTriggered = true;
+			}
+		}
+		else
+		{
+			interface.RestartTime();
+			LoseScreen(window, 50);
+			MainMenu(window);
+			lives = 3;
+			isLevelPassed = false;
+		}
+
+	}
+
+	/*Tile GBricks(sf::Vector2i(16, 16), 1, "sourses/sprites/greenbrick.png");
 	Tile GStone(sf::Vector2i(16, 16), 1, "sourses/sprites/greenstone.png");
 	Tile Bricks(sf::Vector2i(16,16), 1, "sourses/sprites/bricks.png",0,1);
 	Tile Block(sf::Vector2i(16, 16), 1, "sourses/sprites/block.png");
@@ -674,6 +841,7 @@ int main()
 			isLevelPassed_1 = false;
 		}
 
-	}
+	}*/
+
     return 0;
 }

@@ -10,7 +10,7 @@ void FileSystem::changeFile(std::string newPath)
 	this->path = newPath;
 }
 
-void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& turtle, std::vector <BonusMushroom>& bonus, std::vector <Tile>& tiles, background& bg, std::map <char, Tile>& tileMap, GameMap& map)
+void FileSystem::loadLevel(Person& Player, std::vector <Gumba>& gumbas, std::vector <Turtle>& turtle, std::vector <BonusMushroom>& bonus, std::vector <Tile>& tiles, background& bg, std::map <char, Tile>& tileMap, GameMap& map)
 {
 	std::ifstream fin;
 	fin.open(path);
@@ -21,6 +21,38 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 		//while (!fin.eof())
 		//{
 			std::string tmp;
+			fin >> tmp;
+			if (tmp == "Player")
+			{
+				std::string pathToSprite;
+				fin >> pathToSprite;
+				float speed;
+				fin >> speed;
+				int sizeX;
+				fin >> sizeX;
+				int sizeY;
+				fin >> sizeY;
+				float gravity;
+				fin >> gravity;
+				float heightOfJump;
+				fin >> heightOfJump;
+				int countOfFrames;
+				fin >> countOfFrames;
+				int firstFrameX;
+				fin >> firstFrameX;
+				int firstFrameY;
+				fin >> firstFrameY;
+				int rangeBetweenFrames;
+				fin >> rangeBetweenFrames;
+				float animationSpeed;
+				fin >> animationSpeed;
+				int coordX;//Pizdec.txt
+				int coordY;
+				fin >> coordX;
+				fin >> coordY;
+				Player = Person(pathToSprite, speed, gravity, heightOfJump, sf::FloatRect(coordX, coordY, sizeX, sizeY));
+				Player.setAnimationSettings(sf::Vector2i(sizeX, sizeY), sf::Vector2i(firstFrameX, firstFrameY), countOfFrames, animationSpeed);
+			}
 			fin >> tmp;
 			if (tmp == "Gumba")
 			{
@@ -58,6 +90,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					gumbas[i].setSpriteSheet(pathToSprite);
 				}
 			}
+			fin >> tmp;
 			if (tmp == "Turtle")
 			{
 				turtle.clear();
@@ -96,6 +129,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					turtle[i].setSpriteSheet(pathToSprite);
 				}
 			}
+			fin >> tmp;
 			if (tmp == "Bonus")
 			{
 				bonus.clear();
@@ -132,10 +166,12 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					bonus[i].setSpriteSheet(pathToSprite);
 				}
 			}
+			fin >> tmp;
 			if (tmp == "Bg")
 			{
 				bg.clearBg();
 				bg.clearOffSet();
+				bg.SetBgColor(sf::Color(100, 100, 255));
 				fin >> tmp;
 				if (tmp == "Textures")
 				{
@@ -160,6 +196,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					}
 				}
 			}
+			fin >> tmp;
 			if (tmp == "tileMap")
 			{
 				//sf::Vector2i size, bool hardness, std::string path_to_texture, bool lethality, bool breakable, bool bonus, bool money
@@ -189,6 +226,7 @@ void FileSystem::loadLevel(std::vector <Gumba>& gumbas, std::vector <Turtle>& tu
 					tileMap.insert(std::pair<char,Tile>(symbol, tiles[i]));
 				}
 			}
+			fin >> tmp;
 			if (tmp == "gameMap")
 			{
 				int sizeX;

@@ -1,5 +1,9 @@
+Player
+sourses/sprites/Mario_tileset.png
+0.1 16 16 0.0005 0.27 4 80 144 15 0.005
+100 180
 Gumba
-16
+15
 sourses/sprites/Mario_tileset.png
 0.05 17 16 0.0005 3 0 0 2 0.005
 368 200
@@ -20,14 +24,14 @@ sourses/sprites/Mario_tileset.png
 Turtle
 1
 sourses/sprites/Turtle.png
-0.05 17 27 0.0005 3 387 239 0 0.005
+0.05 17 27 0.0005 0.27 3 387 239 0 0.005
 2032 180
 Bonus
 1
 sourses/sprites/BonusMushrom.png
 0.03 4 16 0.0005 3 16 0 2 0.005
 376 160
-Bg
+Bg Textures
 8
 10 sourses/sprites/cloudS.png
 160 60
